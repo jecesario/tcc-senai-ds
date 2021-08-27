@@ -26,13 +26,14 @@ namespace backend.Controllers
             usuario.Email = email;
             usuario.Senha = senha;
             Console.WriteLine("HomeController: " + usuario.entrar());
-            if(usuario.entrar() != null)
+            var usuarioLogado = usuario.entrar();
+            if(usuarioLogado != null)
             {
                 Console.WriteLine("HomeController: Id = " + usuario.entrar().Id);
                 Console.WriteLine("HomeController: Nome = " + usuario.entrar().Nome);
                 Console.WriteLine("HomeController: Email = " + usuario.entrar().Email);
                 Console.WriteLine("HomeController: Senha = " + usuario.entrar().Senha);
-                
+                Session["usuario"] = usuarioLogado;
                 return RedirectToAction("Index", "Curso");
             }
             return RedirectToAction("Entrar");

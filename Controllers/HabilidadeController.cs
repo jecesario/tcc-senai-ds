@@ -10,6 +10,13 @@ namespace backend.Controllers
     public class HabilidadeController : Controller
     {
         public ActionResult Index() {
+            if(Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if(usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
             var habilidades = Habilidade.listar();
             if (habilidades == null || habilidades.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhuma habilidade cadastrada!";
