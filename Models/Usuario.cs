@@ -1,13 +1,15 @@
 ﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
 namespace backend.Models {
     public class Usuario {
         // private const string dbConfig = "Server=esn509vmysql;Port=3306;Database=senai_curriculos;Uid=aluno;Pwd=Senai1234";
-        private const string dbConfig = "Server=soloid.com.br;Port=3306;Database=soloid_learn;Uid=soloid_learn;Pwd=MacacoNaoMataMacaco";
+        //private const string dbConfig = "Server=soloid.com.br;Port=3306;Database=soloid_learn;Uid=soloid_learn;Pwd=MacacoNaoMataMacaco";
+        private static string dbConfig = ConfigurationManager.ConnectionStrings["dbConfigSenai"].ConnectionString;
         public int Id { get; set; }
         public String Nome { get; set; }
         public String Email { get; set; }
