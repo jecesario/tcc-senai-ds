@@ -16,6 +16,7 @@ namespace backend.Controllers
 
         public ActionResult Entrar()
         {
+            Session.Clear();
             return View();
         }
 
@@ -25,16 +26,12 @@ namespace backend.Controllers
             var usuario = new Usuario();
             usuario.Email = email;
             usuario.Senha = senha;
-            Console.WriteLine("HomeController: " + usuario.entrar());
             var usuarioLogado = usuario.entrar();
             if(usuarioLogado != null)
             {
-                Console.WriteLine("HomeController: Id = " + usuario.entrar().Id);
-                Console.WriteLine("HomeController: Nome = " + usuario.entrar().Nome);
-                Console.WriteLine("HomeController: Email = " + usuario.entrar().Email);
-                Console.WriteLine("HomeController: Senha = " + usuario.entrar().Senha);
                 Session["usuario"] = usuarioLogado;
-                return RedirectToAction("Index", "Curso");
+                
+                return RedirectToAction("Index", "Curriculo");
             }
             return RedirectToAction("Entrar");
         }

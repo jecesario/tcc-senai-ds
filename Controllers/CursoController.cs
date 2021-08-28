@@ -10,6 +10,15 @@ namespace backend.Controllers
     public class CursoController : Controller
     {
         public ActionResult Index() {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             var cursos = Curso.listar();
             if (cursos == null || cursos.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
@@ -18,6 +27,15 @@ namespace backend.Controllers
         }
 
         public ActionResult Cadastrar() {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             return View();
         }
 
@@ -34,6 +52,15 @@ namespace backend.Controllers
             return RedirectToAction("Index");
         }
         public ActionResult Editar(int id) {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             var curso = new Curso();
             curso.Id = id;
 
@@ -57,6 +84,15 @@ namespace backend.Controllers
             return RedirectToAction("Index");
         }
         public ActionResult Apagar(int id) {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             var curso = new Curso();
             curso.Id = id;
             if (curso.apagar()) {

@@ -24,6 +24,15 @@ namespace backend.Controllers
             return View(habilidades);
         }
         public ActionResult Cadastrar() {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             return View();
         }
 
@@ -40,6 +49,15 @@ namespace backend.Controllers
             return RedirectToAction("Index");
         }
         public ActionResult Editar(int id) {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             var habilidade = new Habilidade();
             habilidade.Id = id;
 
@@ -63,6 +81,15 @@ namespace backend.Controllers
             return RedirectToAction("Index");
         }
         public ActionResult Apagar(int id) {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
             var habilidade = new Habilidade();
             habilidade.Id = id;
             if (habilidade.apagar()) {

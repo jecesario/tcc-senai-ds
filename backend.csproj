@@ -110,12 +110,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CurriculoController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HabilidadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Curriculo.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Habilidade.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -134,6 +136,7 @@
     <Content Include="Views\Habilidade\Index.cshtml" />
     <Content Include="Views\Habilidade\Cadastrar.cshtml" />
     <Content Include="Views\Habilidade\Editar.cshtml" />
+    <Content Include="Views\Curriculo\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

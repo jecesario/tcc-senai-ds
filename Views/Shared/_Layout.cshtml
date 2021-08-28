@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        @Html.ActionLink("Currículos", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Currículos", "Index", "Curriculo", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Usuários", "Index", "Usuario", new { area = "" }, new { @class = "nav-link" })
@@ -30,6 +30,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="listarVagas.html">Vagas</a>
+                    </li>
+                    <li>
+                        Olá @ViewData["usuario"]
                     </li>
                 </ul>
             </div>
