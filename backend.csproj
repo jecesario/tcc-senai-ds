@@ -114,6 +114,7 @@
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HabilidadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,6 +138,7 @@
     <Content Include="Views\Habilidade\Cadastrar.cshtml" />
     <Content Include="Views\Habilidade\Editar.cshtml" />
     <Content Include="Views\Curriculo\Index.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
