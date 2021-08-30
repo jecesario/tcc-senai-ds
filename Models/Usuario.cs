@@ -126,5 +126,33 @@ namespace backend.Models {
 
             return usuarios;
         }
+
+        public bool apagar()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "DELETE FROM usuarios WHERE id = @id";
+                query.Parameters.AddWithValue("@id", Id);
+                query.ExecuteNonQuery();
+                resp = true;
+                Console.WriteLine("Usuario deletado com sucesso!");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erro ao deletar Usuario " + e.Message);
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
     }
 }

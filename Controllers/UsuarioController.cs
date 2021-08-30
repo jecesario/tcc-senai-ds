@@ -29,6 +29,28 @@ namespace backend.Controllers
             return View(usuarios);
         }
 
-        
+        public ActionResult Apagar(int id)
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var oUsuario = new Usuario();
+            oUsuario.Id = id;
+            if (oUsuario.apagar())
+            {
+                TempData["alertSucesso"] = "Usuário apagado com sucesso!";
+            }
+            else
+            {
+                TempData["alertErro"] = "Ocorreu um erro ao deletar Usuário!";
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
