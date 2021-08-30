@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿
+@{
+    var usuario = (backend.Models.Usuario)Session["usuario"];
+}
+<!doctype html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
@@ -16,23 +20,48 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        @Html.ActionLink("Currículos", "Index", "Curriculo", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Usuários", "Index", "Usuario", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Cursos", "Index", "Curso", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Habilidades", "Index", "Habilidade", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="listarVagas.html">Vagas</a>
-                    </li>
-                    <li>
-                        Olá @ViewData["usuario"]
+
+                    @if (@usuario.Tipo == 1)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Currículos", "Index", "Curriculo", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Usuários", "Index", "Usuario", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Cursos", "Index", "Curso", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Habilidades", "Index", "Habilidade", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Vagas", "Index", "Vaga", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Meu Curriculo", "Editar", "Curriculo", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Vagas", "Index", "Vaga", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Olá, @usuario.Nome
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                @Html.ActionLink("Editar Perfil", "Editar", "Usuario", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Sair", "Sair", "Home", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

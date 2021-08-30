@@ -55,5 +55,11 @@ namespace backend.Controllers
             }
             return RedirectToAction("Cadastrar");
         }
+
+        public ActionResult Sair()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
     }
 }
