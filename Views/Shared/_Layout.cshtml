@@ -56,7 +56,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                @Html.ActionLink("Editar Perfil", "Editar", "Usuario", new { area = "" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Editar Perfil", "Editar", "Usuario", new { id = usuario.Id }, new { @class = "nav-link" })
                             </li>
                             <li>
                                 @Html.ActionLink("Sair", "Sair", "Home", new { area = "" }, new { @class = "nav-link" })

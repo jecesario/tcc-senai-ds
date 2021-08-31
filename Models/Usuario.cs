@@ -154,5 +154,73 @@ namespace backend.Models {
 
             return resp;
         }
+
+        public bool editar()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha, tipo = @tipo WHERE id = @id";
+                query.Parameters.AddWithValue("@nome", Nome);
+                query.Parameters.AddWithValue("@email", Email);
+                query.Parameters.AddWithValue("@senha", Senha);
+                query.Parameters.AddWithValue("@tipo", Tipo);
+                query.Parameters.AddWithValue("@id", Id);
+                query.ExecuteNonQuery();
+                Console.WriteLine("Usuario editado com sucesso!");
+                resp = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erro ao editar Usuario! " + e.Message);
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
+
+        public Usuario buscarPorId()
+        {
+            var con = new MySqlConnection(dbConfig);
+            var usuario = new Usuario();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM usuarios WHERE id = @id";
+                query.Parameters.AddWithValue("@id", Id);
+                var dados = query.ExecuteReader();
+
+                while (dados.Read())
+                {
+                    usuario.Id = int.Parse(dados["id"].ToString());
+                    usuario.Nome = dados["nome"].ToString();
+                    usuario.Email = dados["email"].ToString();
+                    usuario.Senha = dados["senha"].ToString();
+                    usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                }
+                Console.WriteLine("Sucesso ao buscar Usuario por ID");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erro ao buscar Usuario por Id" + e.Message);
+                usuario = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return usuario;
+        }
     }
 }
