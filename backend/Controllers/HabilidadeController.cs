@@ -59,8 +59,6 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var habilidade = new Habilidade();
-            habilidade.Id = id;
-
             return View(habilidade.buscarPorId());
         }
 
