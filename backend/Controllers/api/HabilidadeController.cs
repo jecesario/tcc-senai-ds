@@ -20,9 +20,7 @@ namespace backend.Controllers.api
         // ok Jean
         public HttpResponseMessage Post([FromBody] Habilidade habilidade)
         {
-            var newHabilidade = habilidade;
-
-            if (newHabilidade.cadastrar())
+            if (habilidade.cadastrar())
             {
                 return Request.CreateResponse(HttpStatusCode.Created);
             }

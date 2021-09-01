@@ -20,11 +20,12 @@ namespace backend.Models {
                 var query = con.CreateCommand();
                 query.CommandText = "INSERT INTO cursos (nome) VALUES (@nome)";
                 query.Parameters.AddWithValue("@nome", Nome);
-                query.ExecuteNonQuery();
-                resp = true;
-                Console.WriteLine("Curso cadastrado com sucesso!");
+                
+                if(query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
             } catch (Exception e) {
-                Console.WriteLine("Erro ao cadastrar curso " + e.Message);
                 resp = false;
             } finally {
                 con.Close();
