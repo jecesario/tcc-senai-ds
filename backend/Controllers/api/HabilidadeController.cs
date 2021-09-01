@@ -15,8 +15,7 @@ namespace backend.Controllers.api
         // ok Jean
         public List<Habilidade> Get()
         {
-            var habilidades = Habilidade.listar();
-            return habilidades;
+            return Habilidade.listar();
         }
         // ok Jean
         public HttpResponseMessage Post([FromBody] Habilidade habilidade)

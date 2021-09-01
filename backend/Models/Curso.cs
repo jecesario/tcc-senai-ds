@@ -7,7 +7,6 @@ using System.Web;
 
 namespace backend.Models {
     public class Curso {
-        //private const string dbConfig = "Server=soloid.com.br;Port=3306;Database=soloid_learn;Uid=soloid_learn;Pwd=MacacoNaoMataMacaco";
         private static string dbConfig = ConfigurationManager.ConnectionStrings["dbConfigSenai"].ConnectionString;
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -115,15 +114,18 @@ namespace backend.Models {
                 query.CommandText = "SELECT * FROM cursos";
                 var dados = query.ExecuteReader();
 
-                while (dados.Read()) {
-                    var curso = new Curso();
-                    curso.Id = int.Parse(dados["id"].ToString());
-                    curso.Nome = dados["nome"].ToString();
-                    cursos.Add(curso);
+                if(dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        var curso = new Curso();
+                        curso.Id = int.Parse(dados["id"].ToString());
+                        curso.Nome = dados["nome"].ToString();
+                        cursos.Add(curso);
+                    }
                 }
-                Console.WriteLine("Sucesso ao listar todos os cursos!");
+                
             } catch (Exception e) {
-                Console.WriteLine("Erro ao listar os cursos!" + e.Message);
                 cursos = null;
             } finally {
                 con.Close();
