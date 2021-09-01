@@ -43,11 +43,11 @@ namespace backend.Models {
                 var query = con.CreateCommand();
                 query.CommandText = "DELETE FROM cursos WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
-                query.ExecuteNonQuery();
-                resp = true;
-                Console.WriteLine("Curso deletado com sucesso!");
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
             } catch (Exception e) {
-                Console.WriteLine("Erro ao deletar Cursos " + e.Message);
                 resp = false;
             } finally {
                 con.Close();
@@ -66,11 +66,11 @@ namespace backend.Models {
                 query.CommandText = "UPDATE cursos SET nome = @nome WHERE id = @id";
                 query.Parameters.AddWithValue("@nome", Nome);
                 query.Parameters.AddWithValue("@id", Id);
-                query.ExecuteNonQuery();
-                Console.WriteLine("Curso editado com sucesso!");
-                resp = true;
+                if(query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
             } catch (Exception e) {
-                Console.WriteLine("Erro ao editar Curso! " + e.Message);
                 resp = false;
             } finally {
                 con.Close();
