@@ -12,12 +12,10 @@ namespace backend.Models {
         //private const string dbConfig = "Server=soloid.com.br;Port=3306;Database=soloid_learn;Uid=soloid_learn;Pwd=MacacoNaoMataMacaco";
         private static string dbConfig = ConfigurationManager.ConnectionStrings["dbConfigSenai"].ConnectionString;
         public int Id { get; set; }
-        public String Nome { get; set; }
-        public String Email { get; set; }
-        public String Senha { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
         public int Tipo { get; set; }
-
-        public Curso Curso { get; set; }
 
         public Usuario entrar()
         {
@@ -102,21 +100,25 @@ namespace backend.Models {
                 query.CommandText = "SELECT * FROM usuarios";
                 var dados = query.ExecuteReader();
 
-                while (dados.Read())
+                if(dados.HasRows)
                 {
-                    var usuario = new Usuario();
-                    usuario.Id = int.Parse(dados["id"].ToString());
-                    usuario.Nome = dados["nome"].ToString();
-                    usuario.Email = dados["email"].ToString();
-                    usuario.Senha = dados["senha"].ToString();
-                    usuario.Tipo = int.Parse(dados["tipo"].ToString());
-                    usuarios.Add(usuario);
-                    Console.WriteLine("Usuários listados com sucesso!");
+                    while (dados.Read())
+                    {
+                        var usuario = new Usuario();
+                        usuario.Id = int.Parse(dados["id"].ToString());
+                        usuario.Nome = dados["nome"].ToString();
+                        usuario.Email = dados["email"].ToString();
+                        usuario.Senha = dados["senha"].ToString();
+                        usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                        usuarios.Add(usuario);
+                    }
+                } else
+                {
+                    usuarios = null;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro ao tentar listar usuários!" + e.Message);
                 usuarios = null;
             }
             finally
