@@ -130,8 +130,12 @@ namespace backend.Models {
                     {
                         habilidade.Id = int.Parse(dados["id"].ToString());
                         habilidade.Nome = dados["nome"].ToString();
-                    }
-                } 
+                    } 
+                }
+                else
+                {
+                    habilidade = null;
+                }
             } catch (Exception e) {
                 habilidade = null;
             } finally {

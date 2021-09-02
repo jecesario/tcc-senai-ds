@@ -90,13 +90,17 @@ namespace backend.Models {
                 query.Parameters.AddWithValue("@id", Id);
                 var dados = query.ExecuteReader();
 
-                while (dados.Read()) {
-                    curso.Id = int.Parse(dados["id"].ToString());
-                    curso.Nome = dados["nome"].ToString();
+                if(dados.HasRows){
+                    while (dados.Read()) {
+                        curso.Id = int.Parse(dados["id"].ToString());
+                        curso.Nome = dados["nome"].ToString();
+                    }
+                } else
+                {
+                    curso = null;
                 }
-                Console.WriteLine("Sucesso ao buscar curso por ID");
+                
             } catch (Exception e) {
-                Console.WriteLine("Erro ao buscar curso por Id" + e.Message);
                 curso = null;
             } finally {
                 con.Close();

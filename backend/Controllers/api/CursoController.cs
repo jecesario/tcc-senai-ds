@@ -49,10 +49,22 @@ namespace backend.Controllers.api
                     return Request.CreateResponse(HttpStatusCode.OK, newCurso);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "msg " + newCurso);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
             return Request.CreateResponse(HttpStatusCode.NotFound, "Curso " + curso.Id + " não encontrado");
 
+        }
+
+        public HttpResponseMessage GetCurso([FromUri] int id)
+        {
+            var curso = new Habilidade();
+            curso.Id = id;
+            if (curso.buscarPorId() != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, curso.buscarPorId());
+
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Curso " + curso.Id + " não encontrado");
         }
 
     }
