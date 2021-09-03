@@ -167,8 +167,7 @@ namespace backend.Models {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
-            if(buscarPorEmail() == null)
-            {
+            
                 try
                 {
                     con.Open();
@@ -179,20 +178,23 @@ namespace backend.Models {
                     query.Parameters.AddWithValue("@senha", Senha);
                     query.Parameters.AddWithValue("@tipo", Tipo);
                     query.Parameters.AddWithValue("@id", Id);
-                    query.ExecuteNonQuery();
-                    Console.WriteLine("Usuario editado com sucesso!");
-                    resp = true;
+                    
+                    if(query.ExecuteNonQuery() > 0)
+                    {
+                        resp = true;
+                    } 
+                    
+                    
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Erro ao editar Usuario! " + e.Message);
                     resp = false;
                 }
                 finally
                 {
                     con.Close();
                 }
-            }
+          
 
             return resp;
         }
@@ -209,20 +211,24 @@ namespace backend.Models {
                 query.CommandText = "SELECT * FROM usuarios WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
                 var dados = query.ExecuteReader();
-
-                while (dados.Read())
+                if(dados.HasRows)
                 {
-                    usuario.Id = int.Parse(dados["id"].ToString());
-                    usuario.Nome = dados["nome"].ToString();
-                    usuario.Email = dados["email"].ToString();
-                    usuario.Senha = dados["senha"].ToString();
-                    usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                    while (dados.Read())
+                    {
+                        usuario.Id = int.Parse(dados["id"].ToString());
+                        usuario.Nome = dados["nome"].ToString();
+                        usuario.Email = dados["email"].ToString();
+                        usuario.Senha = dados["senha"].ToString();
+                        usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                    }
+                } else
+                {
+                    usuario = null;
                 }
-                Console.WriteLine("Sucesso ao buscar Usuario por ID");
+                
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro ao buscar Usuario por Id" + e.Message);
                 usuario = null;
             }
             finally

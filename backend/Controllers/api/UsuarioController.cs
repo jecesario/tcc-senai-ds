@@ -19,7 +19,7 @@ namespace backend.Controllers.api
 
         public HttpResponseMessage Post([FromBody] Usuario usuario)
         {
-            if(usuario.buscarPorEmail() == null)
+            if (usuario.buscarPorEmail() == null)
             {
                 if (usuario.cadastrar())
                 {
@@ -42,5 +42,30 @@ namespace backend.Controllers.api
             }
             return Request.CreateResponse(HttpStatusCode.NotFound, "Usuário " + id + " não encontrado");
         }
+
+        public HttpResponseMessage Put([FromBody] Usuario usuario)
+        {
+            var newUsuario = usuario.buscarPorId();
+
+            if (newUsuario == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Usuário " + usuario.Id + " não encontrado");
+            }
+
+            if (newUsuario.buscarPorEmail().Email == usuario.Email || usuario.buscarPorEmail() == null)
+            {
+                if (usuario.editar())
+                {
+                    newUsuario = usuario.buscarPorId();
+                    return Request.CreateResponse(HttpStatusCode.OK, newUsuario);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Não editou");
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Usuário com E-mail: " + usuario.Email + " já cadastrado");
+
+
+            
+        }
     }
+    
 }
