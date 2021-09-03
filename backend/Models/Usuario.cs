@@ -144,13 +144,14 @@ namespace backend.Models {
                 var query = con.CreateCommand();
                 query.CommandText = "DELETE FROM usuarios WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
-                query.ExecuteNonQuery();
-                resp = true;
-                Console.WriteLine("Usuario deletado com sucesso!");
+                
+                if(query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }                
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro ao deletar Usuario " + e.Message);
                 resp = false;
             }
             finally

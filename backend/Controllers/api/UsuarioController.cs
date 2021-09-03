@@ -31,5 +31,16 @@ namespace backend.Controllers.api
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, "E-mail " + usuario.Email + " já cadastrado!");
         }
+
+        public HttpResponseMessage Delete([FromUri] int id)
+        {
+            var usuario = new Usuario();
+            usuario.Id = id;
+            if (usuario.apagar())
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Usuário " + id + " não encontrado");
+        }
     }
 }
