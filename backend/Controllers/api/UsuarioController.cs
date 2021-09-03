@@ -62,9 +62,18 @@ namespace backend.Controllers.api
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Não editou");
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Usuário com E-mail: " + usuario.Email + " já cadastrado");
+        }
 
+        public HttpResponseMessage GetUsuario([FromUri] int id)
+        {
+            var usuario = new Usuario();
+            usuario.Id = id;
+            if (usuario.buscarPorId() != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, usuario.buscarPorId());
 
-            
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Curso " + usuario.Id + " não encontrado");
         }
     }
     
