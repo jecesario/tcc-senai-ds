@@ -63,7 +63,7 @@ namespace backend.Controllers.api
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Usuário com E-mail: " + usuario.Email + " já cadastrado");
         }
-
+        [System.Web.Http.Authorize]
         public HttpResponseMessage GetUsuario([FromUri] int id)
         {
             var usuario = new Usuario();
@@ -73,7 +73,7 @@ namespace backend.Controllers.api
                 return Request.CreateResponse(HttpStatusCode.OK, usuario.buscarPorId());
 
             }
-            return Request.CreateResponse(HttpStatusCode.NotFound, "Curso " + usuario.Id + " não encontrado");
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Usuario " + usuario.Id + " não encontrado");
         }
     }
     

@@ -40,9 +40,9 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(string nome) {
+        public ActionResult CadastrarAction() {
             var curso = new Curso();
-            curso.Nome = nome;
+            curso.Nome = Request.Form["nome"];
             if (curso.cadastrar()) {
                 TempData["alertSucesso"] = "Curso cadastrado com sucesso!";
             } else {
@@ -68,7 +68,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar() {
+        public ActionResult EditarAction() {
             var nome = Request.Form["nome"];
             var id = int.Parse(Request.Form["id"]);
 

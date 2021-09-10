@@ -10,14 +10,12 @@
 
 <div class="row">
     <div class="col-md-6">
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-
+        <form action="/Habilidade/CadastrarAction" method="post">
             <div class="mb-3">
-                @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-label" } })
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                <label for="nome" class="form-label">Nome da Habilidade</label>
+                <input name="nome" type="text" class="form-control" id="nome">
             </div>
-            <button type="submit" class="btn btn-success">Cadastrar</button>
-        }
+            <button type="submit" class="btn btn-success">Cadastrar Habilidade</button>
+        </form>
     </div>
 </div>

@@ -21,11 +21,11 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Entrar(string email, string senha)
+        public ActionResult EntrarAction()
         {
             var usuario = new Usuario();
-            usuario.Email = email;
-            usuario.Senha = senha;
+            usuario.Email = Request.Form["email"];
+            usuario.Senha = Request.Form["senha"];
             var usuarioLogado = usuario.entrar();
             if(usuarioLogado != null)
             {
@@ -33,6 +33,7 @@ namespace backend.Controllers
                 
                 return RedirectToAction("Index", "Curriculo");
             }
+            TempData["alertErro"] = "Usuário e/ou Senha inváidos";
             return RedirectToAction("Entrar");
         }
 
@@ -42,15 +43,16 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(string nome, string email, string senha)
+        public ActionResult CadastrarAction()
         {
             var usuario = new Usuario();
-            usuario.Nome = nome;
-            usuario.Email = email;
-            usuario.Senha = senha;
+            usuario.Nome = Request.Form["nome"];
+            usuario.Email = Request.Form["email"];
+            usuario.Senha = Request.Form["senha"];
             usuario.Tipo = 0;
             if (usuario.cadastrar())
             {
+                TempData["alertSucesso"] = "Usuário cadastrado. Efetue login abaixo";
                 return RedirectToAction("Entrar");
             }
             return RedirectToAction("Cadastrar");

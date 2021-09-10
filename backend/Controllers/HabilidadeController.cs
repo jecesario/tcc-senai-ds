@@ -37,9 +37,9 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(string nome) {
+        public ActionResult CadastrarAction() {
             var habilidade = new Habilidade();
-            habilidade.Nome = nome;
+            habilidade.Nome = Request.Form["nome"];
             if (habilidade.cadastrar()) {
                 TempData["alertSucesso"] = "Habilidade cadastrada com sucesso!";
             } else {
@@ -59,11 +59,12 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var habilidade = new Habilidade();
+            habilidade.Id = id;
             return View(habilidade.buscarPorId());
         }
 
         [HttpPost]
-        public ActionResult Editar() {
+        public ActionResult EditarAction() {
             var nome = Request.Form["nome"];
             var id = int.Parse(Request.Form["id"]);
 

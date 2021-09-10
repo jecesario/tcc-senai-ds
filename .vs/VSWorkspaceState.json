@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\backend",
+    "\\backend\\Controllers\\api",
+    "\\backend\\Views",
+    "\\backend\\Views\\Shared"
   ],
   "SelectedNode": "\\backend.sln",
   "PreviewInSolutionExplorer": false
