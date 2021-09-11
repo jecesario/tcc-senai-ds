@@ -57,7 +57,7 @@ namespace backend.Controllers.api
 
         public HttpResponseMessage GetCurso([FromUri] int id)
         {
-            var curso = new Habilidade();
+            var curso = new Curso();
             curso.Id = id;
             if (curso.buscarPorId() != null)
             {
@@ -65,6 +65,15 @@ namespace backend.Controllers.api
 
             }
             return Request.CreateResponse(HttpStatusCode.NotFound, "Curso " + curso.Id + " não encontrado");
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/Curso/Buscar/{nome}")]
+        public HttpResponseMessage Buscar([FromUri] string nome)
+        {
+            var curso = new Curso();
+            var cursos = curso.buscarPorNome(nome);
+            return Request.CreateResponse(HttpStatusCode.OK, cursos);
         }
 
     }

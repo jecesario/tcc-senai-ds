@@ -138,5 +138,47 @@ namespace backend.Models {
 
             return cursos;
         }
+
+        public List<Curso> buscarPorNome(string nome)
+        {
+            var con = new MySqlConnection(dbConfig);
+            var cursos = new List<Curso>();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM cursos WHERE nome LIKE @nome";
+                query.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        var curso = new Curso();
+                        curso.Id = int.Parse(dados["id"].ToString());
+                        curso.Nome = dados["nome"].ToString();
+                        cursos.Add(curso);
+                        Console.WriteLine(curso.Nome);
+                    }
+                }
+                else
+                {
+                    cursos = null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                cursos = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return cursos;
+        }
     }
 }

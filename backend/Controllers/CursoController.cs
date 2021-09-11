@@ -102,5 +102,24 @@ namespace backend.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public ActionResult Buscar(string nome)
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var curso = new Curso();
+            if(curso.buscarPorNome(nome) == null)
+            {
+                TempData["alertErro"] = "Tá vindo vaizo " + nome;
+            }
+            return View(curso.buscarPorNome(nome));
+        }
     }
 }
