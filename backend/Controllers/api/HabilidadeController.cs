@@ -72,5 +72,14 @@ namespace backend.Controllers.api
             }
             return Request.CreateResponse(HttpStatusCode.NotFound, "Habilidade " + habilidade.Id + " não encontrada");
         }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/Habilidade/Buscar/{nome}")]
+        public HttpResponseMessage Buscar([FromUri] string nome)
+        {
+            var habilidade = new Habilidade();
+            var habilidades = habilidade.buscarPorNome(nome);
+            return Request.CreateResponse(HttpStatusCode.OK, habilidades);
+        }
     }
 }

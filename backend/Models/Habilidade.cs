@@ -144,5 +144,46 @@ namespace backend.Models {
 
             return habilidade;
         }
+
+        public List<Habilidade> buscarPorNome(string nome)
+        {
+            var con = new MySqlConnection(dbConfig);
+            var habilidades = new List<Habilidade>();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM habilidades WHERE nome LIKE @nome";
+                query.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        var habilidade = new Habilidade();
+                        habilidade.Id = int.Parse(dados["id"].ToString());
+                        habilidade.Nome = dados["nome"].ToString();
+                        habilidades.Add(habilidade);
+                    }
+                }
+                else
+                {
+                    habilidades = null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                habilidades = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return habilidades;
+        }
     }
 }

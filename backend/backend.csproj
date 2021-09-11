@@ -195,6 +195,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Curso\Buscar.cshtml" />
+    <Content Include="Views\Habilidade\Buscar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

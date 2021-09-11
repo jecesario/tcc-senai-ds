@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace backend.Controllers
 {
+    
     public class CursoController : Controller
     {
         public ActionResult Index() {

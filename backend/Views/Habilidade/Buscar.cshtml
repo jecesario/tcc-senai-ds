@@ -1,22 +1,25 @@
 ﻿@model IEnumerable<backend.Models.Habilidade>
 @{
-    ViewBag.Title = " Listar Habilidades";
+    ViewBag.Title = "Buscar Habilidade";
 }
 <div class="row my-3">
     <div class="col-md">
-        <h1>Listando todas as Habilidades</h1>
+        <h1>Listando todos os cursos</h1>
         <h4>Você pode utilizar a busca para filtrar por nome</h4>
-        @if (@TempData["alertInfo"] != null) {
+        @if (@TempData["alertInfo"] != null)
+        {
             <div class="alert alert-info" role="alert">
                 @TempData["alertInfo"]
             </div>
         }
-        @if (@TempData["alertSucesso"] != null) {
+        @if (@TempData["alertSucesso"] != null)
+        {
             <div class="alert alert-success" role="alert">
                 @TempData["alertSucesso"]
             </div>
         }
-        @if (@TempData["alertErro"] != null) {
+        @if (@TempData["alertErro"] != null)
+        {
             <div class="alert alert-danger" role="alert">
                 @TempData["alertErro"]
             </div>
@@ -49,7 +52,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var habilidade in Model) {
+                @foreach (var habilidade in Model)
+                {
                     <tr>
                         <th scope="row">@Html.DisplayFor(id => habilidade.Id)</th>
                         <td>@Html.DisplayFor(nome => habilidade.Nome)</td>
@@ -63,7 +67,7 @@
         </table>
     </div>
 </div>
-<div class="row">
+@*<div class="row">
     <div class="col-md">
         <nav aria-label="..." class="d-flex justify-content-center">
             <ul class="pagination">
@@ -81,5 +85,5 @@
             </ul>
         </nav>
     </div>
+</div>*@
 
-    </div>

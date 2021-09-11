@@ -160,7 +160,6 @@ namespace backend.Models {
                         curso.Id = int.Parse(dados["id"].ToString());
                         curso.Nome = dados["nome"].ToString();
                         cursos.Add(curso);
-                        Console.WriteLine(curso.Nome);
                     }
                 }
                 else
