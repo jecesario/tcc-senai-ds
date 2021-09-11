@@ -112,5 +112,21 @@ namespace backend.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Buscar(string nome)
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var oUsuario = new Usuario();
+            return View(oUsuario.buscarPorNome(nome));
+        }
     }
 }

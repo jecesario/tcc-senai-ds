@@ -8,8 +8,6 @@ using System.Web;
 namespace backend.Models {
     public class Usuario
     {
-        // private const string dbConfig = "Server=esn509vmysql;Port=3306;Database=senai_curriculos;Uid=aluno;Pwd=Senai1234";
-        //private const string dbConfig = "Server=soloid.com.br;Port=3306;Database=soloid_learn;Uid=soloid_learn;Pwd=MacacoNaoMataMacaco";
         private static string dbConfig = ConfigurationManager.ConnectionStrings["dbConfigSenai"].ConnectionString;
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -277,6 +275,46 @@ namespace backend.Models {
             }
 
             return usuario;
+        }
+        public List<Usuario> buscarPorNome(string nome)
+        {
+            var con = new MySqlConnection(dbConfig);
+            var usuarios = new List<Usuario>();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM usuarios WHERE nome LIKE @nome";
+                query.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        var usuario = new Usuario();
+                        usuario.Id = int.Parse(dados["id"].ToString());
+                        usuario.Nome = dados["nome"].ToString();
+                        usuarios.Add(usuario);
+                    }
+                }
+                else
+                {
+                    usuarios = null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                usuarios = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return usuarios;
         }
     }
 }

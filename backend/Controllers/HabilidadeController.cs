@@ -112,10 +112,6 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var habilidade = new Habilidade();
-            if (habilidade.buscarPorNome(nome) == null)
-            {
-                TempData["alertErro"] = "Tá vindo vaizo " + nome;
-            }
             return View(habilidade.buscarPorNome(nome));
         }
     }

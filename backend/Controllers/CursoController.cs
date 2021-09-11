@@ -116,10 +116,6 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var curso = new Curso();
-            if(curso.buscarPorNome(nome) == null)
-            {
-                TempData["alertErro"] = "Tá vindo vaizo " + nome;
-            }
             return View(curso.buscarPorNome(nome));
         }
     }
