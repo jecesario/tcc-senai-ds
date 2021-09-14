@@ -18,7 +18,7 @@ namespace backend.Models {
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "INSERT INTO cursos (nome) VALUES (@nome)";
+                query.CommandText = "INSERT INTO senai_cursos (nome) VALUES (@nome)";
                 query.Parameters.AddWithValue("@nome", Nome);
                 
                 if(query.ExecuteNonQuery() > 0)
@@ -41,7 +41,7 @@ namespace backend.Models {
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "DELETE FROM cursos WHERE id = @id";
+                query.CommandText = "DELETE FROM senai_cursos WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
                 if (query.ExecuteNonQuery() > 0)
                 {
@@ -63,7 +63,7 @@ namespace backend.Models {
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "UPDATE cursos SET nome = @nome WHERE id = @id";
+                query.CommandText = "UPDATE senai_cursos SET nome = @nome WHERE id = @id";
                 query.Parameters.AddWithValue("@nome", Nome);
                 query.Parameters.AddWithValue("@id", Id);
                 if(query.ExecuteNonQuery() > 0)
@@ -86,7 +86,7 @@ namespace backend.Models {
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM cursos WHERE id = @id";
+                query.CommandText = "SELECT * FROM senai_cursos WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
                 var dados = query.ExecuteReader();
 
@@ -116,7 +116,7 @@ namespace backend.Models {
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM cursos";
+                query.CommandText = "SELECT * FROM senai_cursos";
                 var dados = query.ExecuteReader();
 
                 if(dados.HasRows)
@@ -148,7 +148,7 @@ namespace backend.Models {
             {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM cursos WHERE nome LIKE @nome";
+                query.CommandText = "SELECT * FROM senai_cursos WHERE nome LIKE @nome";
                 query.Parameters.AddWithValue("@nome", "%" + nome + "%");
                 var dados = query.ExecuteReader();
 
