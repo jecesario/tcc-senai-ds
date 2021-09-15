@@ -197,6 +197,8 @@
     <Content Include="Views\Curso\Buscar.cshtml" />
     <Content Include="Views\Habilidade\Buscar.cshtml" />
     <Content Include="Views\Usuario\Buscar.cshtml" />
+    <Content Include="Views\Curriculo\MeuCurriculo.cshtml" />
+    <Content Include="Views\Curriculo\Cadastrar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

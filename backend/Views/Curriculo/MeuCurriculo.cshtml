@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Meu Curriculo";
+}
+
+<div class="p-5 my-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Sem currículo cadastrado!</h1>
+        <p class="col-md-8 fs-4">Parece que você não tem nenhum currículo cadastrado, você pode começar a cadastrar seu currículo na base de dados do Senai clicando no botão abaixo.</p>
+        @Html.ActionLink("Começar", "Cadastrar", "Curriculo", new { area = "" }, new { @class = "btn btn-primary btn-lg" })
+    </div>
+</div>
+

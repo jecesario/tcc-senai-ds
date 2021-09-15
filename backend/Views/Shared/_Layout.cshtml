@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    @if (@usuario.Tipo == 1)
+                    @if (true) //@usuario.Tipo == 1
                     {
                         <li class="nav-item">
                             @Html.ActionLink("Currículos", "Index", "Curriculo", new { area = "" }, new { @class = "nav-link" })
@@ -52,16 +52,16 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Olá, @usuario.Nome
+                            @*Olá, @usuario.Nome*@
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @*<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
                                 @Html.ActionLink("Editar Perfil", "Editar", "Usuario", new { id = usuario.Id }, new { @class = "nav-link" })
                             </li>
                             <li>
                                 @Html.ActionLink("Sair", "Sair", "Home", new { area = "" }, new { @class = "nav-link" })
                             </li>
-                        </ul>
+                        </ul>*@
                     </li>
                 </ul>
             </div>
