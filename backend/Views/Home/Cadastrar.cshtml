@@ -31,16 +31,6 @@
             letter-spacing: 0.05rem;
             padding: 0.75rem 1rem;
         }
-
-        .btn-google {
-            color: white !important;
-            background-color: #ea4335;
-        }
-
-        .btn-facebook {
-            color: white !important;
-            background-color: #3b5998;
-        }
     </style>
     <title>Cadastrar</title>
 </head>
@@ -55,17 +45,25 @@
                     <div class="card-body p-4 p-sm-5">
                         <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastro</h5>
                         <form action="/Home/CadastrarAction" method="post">
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input name="nome" type="text" class="form-control" id="nome" data-rules="required">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Fernando Ponte Preta">
+                                <label for="floatingInput">Nome</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input name="email" type="email" class="form-control" id="email" data-rules="required|email">
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="fernando@pontepreta.com.br">
+                                <label for="floatingInput">E-mail</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input name="senha" type="password" class="form-control" id="senha">
+                            <div class="form-floating mb-3">
+                                <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="********">
+                                <label for="floatingInput">Senha</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="turma" class="form-control" id="floatingInput" placeholder="1DSN">
+                                <label for="floatingInput">Turma</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="ano" class="form-control" id="floatingInput" placeholder="2021">
+                                <label for="floatingInput">Ano</label>
                             </div>
                             <button type="submit" class="btn btn-lg btn-primary btn-login fw-bold text-uppercase">Cadastrar</button>
                         </form>
