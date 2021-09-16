@@ -1,4 +1,4 @@
-﻿@model backend.Models.Usuario
+﻿@model IEnumerable<backend.Models.Curso>
 @{
     Layout = null;
 }
@@ -45,6 +45,24 @@
                     <div class="card-body p-4 p-sm-5">
                         <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastro</h5>
                         <form action="/Home/CadastrarAction" method="post">
+                            @if (@TempData["alertInfo"] != null)
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    @TempData["alertInfo"]
+                                </div>
+                            }
+                            @if (@TempData["alertSucesso"] != null)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    @TempData["alertSucesso"]
+                                </div>
+                            }
+                            @if (@TempData["alertErro"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @TempData["alertErro"]
+                                </div>
+                            }
                             <div class="form-floating mb-3">
                                 <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Fernando Ponte Preta">
                                 <label for="floatingInput">Nome</label>
@@ -56,6 +74,16 @@
                             <div class="form-floating mb-3">
                                 <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="********">
                                 <label for="floatingInput">Senha</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select name="curso" class="form-select" id="floatingSelectGrid" aria-label="Curso">
+                                    <option value="0" selected>Selecione um curso</option>
+                                    @foreach (var curso in Model)
+                                    {
+                                        <option value="@Html.DisplayFor(id => curso.Id)">@Html.DisplayFor(id => curso.Nome)</option>
+                                    }
+                                </select>
+                                <label for="floatingSelectGrid">Curso</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="text" name="turma" class="form-control" id="floatingInput" placeholder="1DSN">

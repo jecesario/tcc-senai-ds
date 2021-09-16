@@ -13,7 +13,10 @@ namespace backend.Models {
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public string Turma { get; set; }
+        public string Ano { get; set; }
         public int Tipo { get; set; }
+        public string CursoId { get; set; }
 
         public Usuario entrar()
         {
@@ -34,18 +37,19 @@ namespace backend.Models {
                     usuario.Nome = dados["nome"].ToString();
                     usuario.Email = dados["email"].ToString();
                     usuario.Senha = dados["senha"].ToString();
+                    usuario.Turma = dados["turma"].ToString();
+                    usuario.Ano = dados["ano"].ToString();
                     usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                    usuario.CursoId = dados["curso_id"].ToString();
                 }
                 else
                 {
                     usuario = null;
                 }
-                Console.WriteLine("Usuário logado com sucesso!");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Ocorreu um erro ao efeturar login" + e.Message);
-
+                usuario = null;
             }
             finally
             {
@@ -60,17 +64,25 @@ namespace backend.Models {
             bool resp = false;
             var con = new MySqlConnection(dbConfig);
 
+            if(CursoId.Equals("0"))
+            {
+                CursoId = null;
+            }
+
             if(buscarPorEmail() == null)
             {
                 try
                 {
                     con.Open();
                     var query = con.CreateCommand();
-                    query.CommandText = "INSERT INTO usuarios (nome, email, senha, tipo) VALUES (@nome, @email, @senha, @tipo)";
+                    query.CommandText = "INSERT INTO usuarios (nome, email, senha, turma, ano, tipo, curso_id) VALUES (@nome, @email, @senha, @turma, @ano, @tipo, @cursoId)";
                     query.Parameters.AddWithValue("@nome", Nome);
                     query.Parameters.AddWithValue("@email", Email);
                     query.Parameters.AddWithValue("@senha", Senha);
+                    query.Parameters.AddWithValue("@turma", Turma);
+                    query.Parameters.AddWithValue("@ano", Ano);
                     query.Parameters.AddWithValue("@tipo", Tipo);
+                    query.Parameters.AddWithValue("@cursoId", CursoId);
                     if (query.ExecuteNonQuery() > 0)
                     {
                         resp = true;
@@ -111,7 +123,10 @@ namespace backend.Models {
                         usuario.Nome = dados["nome"].ToString();
                         usuario.Email = dados["email"].ToString();
                         usuario.Senha = dados["senha"].ToString();
+                        usuario.Turma = dados["turma"].ToString();
+                        usuario.Ano = dados["ano"].ToString();
                         usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                        usuario.CursoId = dados["curso_id"].ToString();
                         usuarios.Add(usuario);
                     }
                 } else
@@ -174,7 +189,10 @@ namespace backend.Models {
                     query.Parameters.AddWithValue("@nome", Nome);
                     query.Parameters.AddWithValue("@email", Email);
                     query.Parameters.AddWithValue("@senha", Senha);
+                    query.Parameters.AddWithValue("@turma", Turma);
+                    query.Parameters.AddWithValue("@ano", Ano); 
                     query.Parameters.AddWithValue("@tipo", Tipo);
+                    query.Parameters.AddWithValue("@cursoId", CursoId);
                     query.Parameters.AddWithValue("@id", Id);
                     
                     if(query.ExecuteNonQuery() > 0)
@@ -217,7 +235,10 @@ namespace backend.Models {
                         usuario.Nome = dados["nome"].ToString();
                         usuario.Email = dados["email"].ToString();
                         usuario.Senha = dados["senha"].ToString();
+                        usuario.Turma = dados["turma"].ToString();
+                        usuario.Ano = dados["ano"].ToString();
                         usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                        usuario.CursoId = dados["curso_id"].ToString();
                     }
                 } else
                 {
@@ -258,7 +279,10 @@ namespace backend.Models {
                         usuario.Nome = dados["nome"].ToString();
                         usuario.Email = dados["email"].ToString();
                         usuario.Senha = dados["senha"].ToString();
+                        usuario.Turma = dados["turma"].ToString();
+                        usuario.Ano = dados["ano"].ToString();
                         usuario.Tipo = int.Parse(dados["tipo"].ToString());
+                        usuario.CursoId = dados["curso_id"].ToString();
                     }
                 } else
                 {
