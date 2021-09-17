@@ -30,29 +30,31 @@ namespace backend.Controllers
         }
 
         public ActionResult MeuCurriculo() {
-            //if (Session["usuario"] == null)
-            //{
-            //    return RedirectToAction("Entrar", "Home");
-            //}
-            //var usuario = Session["usuario"] as Usuario;
-            //if (usuario.Tipo != 1)
-            //{
-            //    return RedirectToAction("Index", "Curriculo");
-            //}
-            return View();
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            return View(curriculo.buscarPorUsuarioId());
         }
 
         public ActionResult Cadastrar()
         {
-            //if (Session["usuario"] == null)
-            //{
-            //    return RedirectToAction("Entrar", "Home");
-            //}
-            //var usuario = Session["usuario"] as Usuario;
-            //if (usuario.Tipo != 1)
-            //{
-            //    return RedirectToAction("Index", "Curriculo");
-            //}
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
             return View();
         }
     }

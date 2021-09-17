@@ -185,7 +185,7 @@ namespace backend.Models {
                 {
                     con.Open();
                     var query = con.CreateCommand();
-                    query.CommandText = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha, tipo = @tipo WHERE id = @id";
+                    query.CommandText = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha, turma = @turma, ano = @ano, tipo = @tipo, curso_id = @cursoId WHERE id = @id";
                     query.Parameters.AddWithValue("@nome", Nome);
                     query.Parameters.AddWithValue("@email", Email);
                     query.Parameters.AddWithValue("@senha", Senha);

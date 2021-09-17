@@ -40,10 +40,7 @@ namespace backend.Controllers
             {
                 var oUsuario = new Usuario();
                 oUsuario.Id = id;
-                List<SelectListItem> tipos = new List<SelectListItem>();
-                tipos.Add(new SelectListItem { Text = "Usuário", Value = "0" });
-                tipos.Add(new SelectListItem { Text = "Admin", Value = "1" });
-                ViewBag.Tipos = tipos;
+                ViewBag.Cursos = Curso.listar();
                 return View(oUsuario.buscarPorId()); 
                 
             }
@@ -53,39 +50,48 @@ namespace backend.Controllers
         [HttpPost]
         public ActionResult Editar()
         {
-            
-            var id = int.Parse(Request.Form["id"]);
-            var nome = Request.Form["nome"];
-            var email = Request.Form["email"];
-            var senha = Request.Form["senha"];
-            var tipo = int.Parse(Request.Form["tipo"]);
+
             var usuario = new Usuario();
-            usuario.Id = id;
-            usuario.Nome = nome;
-            usuario.Email = email;
-            usuario.Senha = senha;
-            usuario.Tipo = tipo;
-            if (usuario.editar())
+            usuario.Id = int.Parse(Request.Form["id"]);
+            usuario.Nome = Request.Form["nome"];
+            usuario.Email = Request.Form["email"];
+            usuario.Senha = Request.Form["senha"];
+            usuario.Turma = Request.Form["turma"];
+            usuario.Ano = Request.Form["ano"];
+            usuario.Tipo = int.Parse(Request.Form["tipo"]);
+            usuario.CursoId = Request.Form["curso"];
+            
+            if(usuario.editar())
             {
-                var logado = (Usuario)Session["usuario"];
-                if(logado.Tipo == 1)
-                {
-                    TempData["alertSucesso"] = "Usuário editado com sucesso!";
-                    if (logado.Id == usuario.Id)
-                    {
-                        return RedirectToAction("Sair", "Home");
-                    }
-                }
-                else 
-                {
-                    return RedirectToAction("Sair", "Home");
-                }
-            }
-            else
+                TempData["alertErro"] = Request.Form;
+            } else
             {
-                TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
+                TempData["alertErro"] = "Tá foda" + usuario.Turma + " - " + usuario.Ano;
             }
-            return RedirectToAction("Index");
+            
+            //if (usuario.editar())
+            //{
+            //    var logado = (Usuario)Session["usuario"];
+            //    if (logado.Tipo == 1)
+            //    {
+            //        TempData["alertSucesso"] = "Usuário editado com sucesso!";
+            //        if (logado.Id == usuario.Id)
+            //        {
+            //            return RedirectToAction("Sair", "Home");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        return RedirectToAction("Sair", "Home");
+            //    }
+
+            //    TempData["alertErro"] = Request.Form;
+            //}
+            //else
+            //{
+            //    TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
+            //}
+            return RedirectToAction("Editar", "Usuario");
 
         }
 
