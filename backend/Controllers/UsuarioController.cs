@@ -58,39 +58,32 @@ namespace backend.Controllers
             usuario.Senha = Request.Form["senha"];
             usuario.Turma = Request.Form["turma"];
             usuario.Ano = Request.Form["ano"];
-            usuario.Tipo = int.Parse(Request.Form["tipo"]);
+            usuario.Tipo = (Request.Form["tipo"] == null) ? 0 : int.Parse(Request.Form["tipo"]);
             usuario.CursoId = Request.Form["curso"];
-            
-            if(usuario.editar())
-            {
-                TempData["alertErro"] = Request.Form;
-            } else
-            {
-                TempData["alertErro"] = "Tá foda" + usuario.Turma + " - " + usuario.Ano;
-            }
-            
-            //if (usuario.editar())
-            //{
-            //    var logado = (Usuario)Session["usuario"];
-            //    if (logado.Tipo == 1)
-            //    {
-            //        TempData["alertSucesso"] = "Usuário editado com sucesso!";
-            //        if (logado.Id == usuario.Id)
-            //        {
-            //            return RedirectToAction("Sair", "Home");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        return RedirectToAction("Sair", "Home");
-            //    }
 
-            //    TempData["alertErro"] = Request.Form;
-            //}
-            //else
-            //{
-            //    TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
-            //}
+            if (usuario.editar())
+            {
+                var logado = (Usuario)Session["usuario"];
+                if (logado.Tipo == 1)
+                {
+                    TempData["alertSucesso"] = "Usuário editado com sucesso!";
+                    if (logado.Id == usuario.Id)
+                    {
+                        return RedirectToAction("Sair", "Home");
+                    }
+                }
+                else
+                {
+                    TempData["alertSucesso"] = "Usuário editado com sucesso! Efetue login abaixo.";
+                    return RedirectToAction("Sair", "Home");
+                }
+
+                TempData["alertErro"] = Request.Form;
+            }
+            else
+            {
+                TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
+            }
             return RedirectToAction("Editar", "Usuario");
 
         }

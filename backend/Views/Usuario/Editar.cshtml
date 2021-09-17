@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "Editar Usuario";
     var cursos = (List<backend.Models.Curso>)ViewData["cursos"];
+    var cursoId = 0;
+    if (!Model.CursoId.Equals(""))
+    {
+        cursoId = int.Parse(Model.CursoId);
+    }
 }
 
 <div class="row">
@@ -71,7 +76,7 @@
                     <option value="0">Selecione um curso</option>
                     @foreach (var curso in cursos)
                     {
-                        <option value="@Html.DisplayFor(id => curso.Id)" @(Model.CursoId.Equals(curso.Id) ? "selected" : "")>@Html.DisplayFor(nome => curso.Nome)</option>
+                        <option value="@Html.DisplayFor(id => curso.Id)" @(cursoId == curso.Id ? "selected" : "")>@Html.DisplayFor(nome => curso.Nome)</option>
                     }
                 </select>
                 <label for="floatingSelectGrid">Curso</label>
@@ -84,13 +89,16 @@
                 <input type="text" name="ano" class="form-control" id="floatingInput" placeholder="2021" value="@Model.Ano">
                 <label for="floatingInput">Ano</label>
             </div>
-            <div class="form-floating mb-3">
-                <select name="tipo" class="form-select" id="floatingSelectGrid" aria-label="Tipo de Usuário">
-                    <option value="0">Aluno</option>
-                    <option value="1">Administrador</option>
-                </select>
-                <label for="floatingSelectGrid">Tipo de Usuário</label>
-            </div>
+            @if (Model.Tipo == 1)
+            {
+                <div class="form-floating mb-3">
+                    <select name="tipo" class="form-select" id="floatingSelectGrid" aria-label="Tipo de Usuário">
+                        <option value="0" @(Model.Tipo == 0 ? "selected" : "")>Aluno</option>
+                        <option value="1" @(Model.Tipo == 1 ? "selected" : "")>Administrador</option>
+                    </select>
+                    <label for="floatingSelectGrid">Tipo de Usuário</label>
+                </div>
+            }
             <input type="hidden" name="id" value="@Model.Id" />
             <button type="submit" class="btn btn-success">Editar</button>
         </form>

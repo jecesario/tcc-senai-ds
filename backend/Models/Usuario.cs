@@ -180,6 +180,10 @@ namespace backend.Models {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
+            if (CursoId.Equals("0"))
+            {
+                CursoId = null;
+            }
             
                 try
                 {
@@ -204,6 +208,7 @@ namespace backend.Models {
                 }
                 catch (Exception e)
                 {
+                Console.Write("Erro ao atualizar usuario: " + e.StackTrace);
                     resp = false;
                 }
                 finally
