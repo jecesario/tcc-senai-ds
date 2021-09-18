@@ -55,7 +55,52 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Index", "Curriculo");
             }
+            var habilidades = Habilidade.listar();
+            ViewBag.Habilidades = habilidades;
+            //var habilidadeCurriculo = new HabilidadeCurriculo();
+            //habilidadeCurriculo.CurriculoId = 3;
+            //var resp = habilidadeCurriculo.cadastrar("1,2,3");
+            //if(resp)
+            //{
+            //    TempData["alertInfo"] = "É pra dar certo!";
+            //} else
+            //{
+            //    TempData["alertInfo"] = "Deu errado!";
+            //}
             return View();
+        }
+        [HttpPost]
+        public ActionResult CadastrarAction()
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
+            var curriculo = new Curriculo();
+            curriculo.Github = Request.Form["github"];
+            curriculo.Linkedin = Request.Form["linkedin"];
+            curriculo.Telefone = Request.Form["telefone"];
+            curriculo.Resumo = Request.Form["resumo"];
+            curriculo.Endereco = Request.Form["endereco"];
+            curriculo.Cidade = Request.Form["cidade"];
+            curriculo.Estado = Request.Form["estado"];
+            curriculo.UsuarioId = Request.Form["id"];
+            curriculo.cadastrar();
+            var curriculo2 = new Curriculo();
+            curriculo2.UsuarioId = usuario.Id+"";
+            curriculo2.buscarPorUsuarioId();
+            var checks = Request.Form["checks"];
+            var habilidadeCurriculo = new HabilidadeCurriculo();
+            habilidadeCurriculo.CurriculoId = curriculo2.Id;
+            habilidadeCurriculo.cadastrar(checks);
+            
+            TempData["alertInfo"] = "Tá chegando..." + Request.Form;
+            return RedirectToAction("Cadastrar", "Curriculo");
         }
     }
 }

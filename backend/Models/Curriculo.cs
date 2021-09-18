@@ -64,5 +64,41 @@ namespace backend.Models
 
             return curriculo;
         }
+
+        public bool cadastrar()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "INSERT INTO curriculos (github, linkedin, telefone, resumo, endereco, cidade, estado, usuario_id) VALUES (@github, @linkedin, @telefone, @resumo, @endereco, @cidade, @estado, @usuarioId)";
+                query.Parameters.AddWithValue("@github", Github);
+                query.Parameters.AddWithValue("@linkedin", Linkedin);
+                query.Parameters.AddWithValue("@telefone", Telefone);
+                query.Parameters.AddWithValue("@resumo", Resumo);
+                query.Parameters.AddWithValue("@endereco", Endereco);
+                query.Parameters.AddWithValue("@cidade", Cidade);
+                query.Parameters.AddWithValue("@estado", Estado);
+                query.Parameters.AddWithValue("@usuarioId", UsuarioId);
+
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
+            }
+            catch (Exception e)
+            {
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
     }
 }
