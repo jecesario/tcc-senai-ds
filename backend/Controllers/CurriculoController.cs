@@ -72,6 +72,7 @@ namespace backend.Controllers
         [HttpPost]
         public ActionResult CadastrarAction()
         {
+            // Vericação de usuário logado
             if (Session["usuario"] == null)
             {
                 return RedirectToAction("Entrar", "Home");
@@ -81,6 +82,8 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Index", "Curriculo");
             }
+
+            // Preenchendo os dados e cadastrando curriculo
             var curriculo = new Curriculo();
             curriculo.Github = Request.Form["github"];
             curriculo.Linkedin = Request.Form["linkedin"];
@@ -91,16 +94,14 @@ namespace backend.Controllers
             curriculo.Estado = Request.Form["estado"];
             curriculo.UsuarioId = Request.Form["id"];
             curriculo.cadastrar();
-            var curriculo2 = new Curriculo();
-            curriculo2.UsuarioId = usuario.Id+"";
-            curriculo2.buscarPorUsuarioId();
+            
+            // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
             var checks = Request.Form["checks"];
             var habilidadeCurriculo = new HabilidadeCurriculo();
-            habilidadeCurriculo.CurriculoId = curriculo2.Id;
+            habilidadeCurriculo.CurriculoId = curriculo.buscarPorUsuarioId().Id;
             habilidadeCurriculo.cadastrar(checks);
             
-            TempData["alertInfo"] = "Tá chegando..." + Request.Form;
-            return RedirectToAction("Cadastrar", "Curriculo");
+            return RedirectToAction("MeuCurriculo", "Curriculo");
         }
     }
 }

@@ -28,15 +28,13 @@ namespace backend.Models
                 {
                     var query = con.CreateCommand();
                     query.CommandText = "INSERT INTO habilidades_curriculos (curriculo_id, habilidade_id) VALUES (@curriculoId, @habilidadeId)";
-                query.Parameters.AddWithValue("@curriculoId", CurriculoId);
-                query.Parameters.AddWithValue("@habilidadeId", int.Parse(habilidade));
-                if (query.ExecuteNonQuery() > 0)
-                {
-                    resp = true;
+                    query.Parameters.AddWithValue("@curriculoId", CurriculoId);
+                    query.Parameters.AddWithValue("@habilidadeId", int.Parse(habilidade));
+                    if (query.ExecuteNonQuery() > 0)
+                    {
+                        resp = true;
+                    }
                 }
-                }
-
-                
             }
             catch (Exception e)
             {
