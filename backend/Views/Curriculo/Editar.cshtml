@@ -1,0 +1,183 @@
+﻿@model IEnumerable<backend.Models.Habilidade>
+@{
+    ViewBag.Title = "Editar Meu Curriculo";
+    var usuario = (backend.Models.Usuario)Session["usuario"];
+    var curriculo = (backend.Models.Curriculo)ViewData["curriculo"];
+    var habilidades = Model;
+    var marcadas = ViewData["marcadas"] as List<backend.Models.Habilidade>;
+}
+
+<style>
+    ul.ks-cboxtags {
+        list-style: none;
+        padding: 20px;
+    }
+
+        ul.ks-cboxtags li {
+            display: inline;
+        }
+
+            ul.ks-cboxtags li label {
+                display: inline-block;
+                background-color: rgba(255, 255, 255, .9);
+                border: 2px solid rgba(139, 139, 139, .3);
+                color: #adadad;
+                border-radius: 25px;
+                white-space: nowrap;
+                margin: 3px 0px;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+                transition: all .2s;
+            }
+
+            ul.ks-cboxtags li label {
+                padding: 8px 12px;
+                cursor: pointer;
+            }
+
+                ul.ks-cboxtags li label::before {
+                    display: inline-block;
+                    font-style: normal;
+                    font-variant: normal;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    font-size: 12px;
+                    padding: 2px 6px 2px 2px;
+                    content: "\f067";
+                    transition: transform .3s ease-in-out;
+                }
+
+            ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+                content: "\f00c";
+                transform: rotate(-360deg);
+                transition: transform .3s ease-in-out;
+            }
+
+            ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+                border: 2px solid #1bdbf8;
+                background-color: #12bbd4;
+                color: #fff;
+                transition: all .2s;
+            }
+
+            ul.ks-cboxtags li input[type="checkbox"] {
+                display: absolute;
+            }
+
+            ul.ks-cboxtags li input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+            }
+
+                ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+                    border: 2px solid #e9a1ff;
+                }
+</style>
+
+<div class="row my-4">
+    <div class="col-md">
+        <h1>Dados Iniciais</h1>
+        <h5>Aqui você vai preencher seus dados pessoais e falar um pouco sobre seu resumo profissional, além de poder selecionar algumas habilidades que serão de grande importância para que seu perfil seja filtrado pelos professores.</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md">
+        <form action="/Curriculo/CadastrarAction" method="post">
+            <div class="row">
+                @if (@TempData["alertInfo"] != null)
+                {
+                    <div class="alert alert-info" role="alert">
+                        @TempData["alertInfo"]
+                    </div>
+                }
+                @if (@TempData["alertSucesso"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["alertSucesso"]
+                    </div>
+                }
+                @if (@TempData["alertErro"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["alertErro"]
+                    </div>
+                }
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="telefone" class="form-control" id="floatingInput" placeholder="(19)99999-9999" value="@curriculo.Telefone">
+                        <label for="floatingInput">Telefone</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="linkedin" class="form-control" id="floatingInput" placeholder="Linkedin url" value="@curriculo.Linkedin">
+                        <label for="floatingInput">LinkedIn</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="github" class="form-control" id="floatingInput" placeholder="Github url" value="@curriculo.Github">
+                        <label for="floatingInput">GitHub</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="endereco" class="form-control" id="floatingInput" placeholder="Av. da Saudade, 125" value="@curriculo.Endereco">
+                        <label for="floatingInput">Endereço</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="cidade" class="form-control" id="floatingInput" placeholder="Campinas" value="@curriculo.Cidade">
+                        <label for="floatingInput">Cidade</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3">
+                        <select name="estado" class="form-select" id="floatingSelectGrid" aria-label="Estado">
+                            <option value="SP" selected>São Paulo</option>
+                        </select>
+                        <label for="floatingSelectGrid">Estado</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <textarea name="resumo" class="form-control" placeholder="Fale um pouco sobre você" id="floatingTextarea2" style="height: 200px" value="@curriculo.Resumo"></textarea>
+                        <label for="floatingTextarea2">Resumo Profissional</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <ul class="ks-cboxtags">
+                        <li>
+                            @foreach (var habilidade in habilidades)
+                            {
+                                <input name="checks" type="checkbox" id="@Html.DisplayFor(id => habilidade.Id)" value="@Html.DisplayFor(id => habilidade.Id)" @(marcadas.Contains(habilidade) ? "checked='checked'" : "disgraca")>
+                                <label for="@Html.DisplayFor(id => habilidade.Id)">@Html.DisplayFor(id => habilidade.Nome)</label>
+                            }
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <input type="hidden" name="id" value="@usuario.Id" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+        </form>
+    </div>
+</div>

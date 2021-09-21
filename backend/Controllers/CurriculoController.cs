@@ -132,5 +132,46 @@ namespace backend.Controllers
             
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
+
+        public ActionResult Editar(int id)
+        {
+            // Vericação de usuário logado
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
+
+            // Guardando dados do curriculo do usuário logado 
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            curriculo = curriculo.buscarPorUsuarioId();
+            ViewBag.Curriculo = curriculo;
+
+            // Guardando curso do usuário
+            var curso = new Curso();
+            curso.Id = int.Parse(usuario.CursoId);
+            ViewBag.Curso = curso.buscarPorId();
+
+            // Guardado habilidades do usuário logado
+            var habilidadeCurriculo = new HabilidadeCurriculo();
+            habilidadeCurriculo.CurriculoId = curriculo.Id;
+            var listaHabilidades = habilidadeCurriculo.buscarPorCurriculoId();
+
+            // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
+            var habilidadesMarcadas = new List<Habilidade>();
+            foreach (var i in listaHabilidades)
+            {
+                var habilidade = new Habilidade();
+                habilidade.Id = i.HabilidadeId;
+                habilidadesMarcadas.Add(habilidade.buscarPorId());
+            }
+            ViewBag.Marcadas = habilidadesMarcadas;
+            return View(Habilidade.listar());
+        }
     }
 }

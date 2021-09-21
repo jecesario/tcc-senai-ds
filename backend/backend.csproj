@@ -200,6 +200,7 @@
     <Content Include="Views\Usuario\Buscar.cshtml" />
     <Content Include="Views\Curriculo\MeuCurriculo.cshtml" />
     <Content Include="Views\Curriculo\Cadastrar.cshtml" />
+    <Content Include="Views\Curriculo\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
