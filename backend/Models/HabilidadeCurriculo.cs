@@ -48,5 +48,46 @@ namespace backend.Models
 
             return resp;
         }
+
+        public List<HabilidadeCurriculo> buscarPorCurriculoId()
+        {
+            var con = new MySqlConnection(dbConfig);
+            var habilidades = new List<HabilidadeCurriculo>();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM habilidades_curriculos WHERE curriculo_id = @curriculoId";
+                query.Parameters.AddWithValue("@curriculoId", CurriculoId);
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        var habilidade = new HabilidadeCurriculo();
+                        habilidade.Id = int.Parse(dados["id"].ToString());
+                        habilidade.HabilidadeId = int.Parse(dados["habilidade_id"].ToString());
+                        habilidades.Add(habilidade);
+                    }
+                }
+                else
+                {
+                    habilidades = null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                habilidades = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return habilidades;
+        }
     }
 }

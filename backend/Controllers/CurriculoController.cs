@@ -39,9 +39,38 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Index", "Curriculo");
             }
+            // Guardando dados do curriculo do usuário logado 
             var curriculo = new Curriculo();
             curriculo.UsuarioId = usuario.Id.ToString();
-            return View(curriculo.buscarPorUsuarioId());
+            curriculo = curriculo.buscarPorUsuarioId();
+            ViewBag.Curriculo = curriculo;
+
+            // Se o usuário ainda não tiver cadastrado um currículo, redireciona para a tela que pede para ele cadastrar um currículo
+            if (curriculo == null)
+            {
+                return View();
+            }
+
+            // Guardando curso do usuário
+            var curso = new Curso();
+            curso.Id = int.Parse(usuario.CursoId);
+            ViewBag.Curso = curso.buscarPorId();
+
+            // Guardado habilidades do usuário logado
+            var habilidadeCurriculo = new HabilidadeCurriculo();
+            habilidadeCurriculo.CurriculoId = curriculo.Id;
+            var listaHabilidades = habilidadeCurriculo.buscarPorCurriculoId();
+
+            // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
+            var habilidades = new List<Habilidade>();
+            foreach(var i in listaHabilidades)
+            {
+                var habilidade = new Habilidade();
+                habilidade.Id = i.HabilidadeId;
+                habilidades.Add(habilidade.buscarPorId());
+            }
+
+            return View(habilidades);
         }
 
         public ActionResult Cadastrar()
