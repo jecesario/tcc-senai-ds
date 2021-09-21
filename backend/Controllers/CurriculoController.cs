@@ -163,12 +163,12 @@ namespace backend.Controllers
             var listaHabilidades = habilidadeCurriculo.buscarPorCurriculoId();
 
             // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
-            var habilidadesMarcadas = new List<Habilidade>();
+            var habilidadesMarcadas = new List<string>();
             foreach (var i in listaHabilidades)
             {
                 var habilidade = new Habilidade();
                 habilidade.Id = i.HabilidadeId;
-                habilidadesMarcadas.Add(habilidade.buscarPorId());
+                habilidadesMarcadas.Add(habilidade.buscarPorId().Id.ToString());
             }
             ViewBag.Marcadas = habilidadesMarcadas;
             return View(Habilidade.listar());

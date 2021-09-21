@@ -4,7 +4,7 @@
     var usuario = (backend.Models.Usuario)Session["usuario"];
     var curriculo = (backend.Models.Curriculo)ViewData["curriculo"];
     var habilidades = Model;
-    var marcadas = ViewData["marcadas"] as List<backend.Models.Habilidade>;
+    var marcadas = ViewData["marcadas"] as List<string>;
 }
 
 <style>
@@ -153,7 +153,7 @@
             <div class="row">
                 <div class="col-md">
                     <div class="form-floating mb-3">
-                        <textarea name="resumo" class="form-control" placeholder="Fale um pouco sobre você" id="floatingTextarea2" style="height: 200px" value="@curriculo.Resumo"></textarea>
+                        <textarea name="resumo" class="form-control" placeholder="Fale um pouco sobre você" id="floatingTextarea2" style="height: 200px">@curriculo.Resumo</textarea>
                         <label for="floatingTextarea2">Resumo Profissional</label>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
                         <li>
                             @foreach (var habilidade in habilidades)
                             {
-                                <input name="checks" type="checkbox" id="@Html.DisplayFor(id => habilidade.Id)" value="@Html.DisplayFor(id => habilidade.Id)" @(marcadas.Contains(habilidade) ? "checked='checked'" : "disgraca")>
+                                <input name="checks" type="checkbox" id="@Html.DisplayFor(id => habilidade.Id)" value="@Html.DisplayFor(id => habilidade.Id)" @(marcadas.Contains(habilidade.Id.ToString()) ? "checked='checked'" : "disgraca")>
                                 <label for="@Html.DisplayFor(id => habilidade.Id)">@Html.DisplayFor(id => habilidade.Nome)</label>
                             }
                         </li>
@@ -177,7 +177,7 @@
                     <input type="hidden" name="id" value="@usuario.Id" />
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="submit" class="btn btn-success">Editar Curriculo</button>
         </form>
     </div>
 </div>
