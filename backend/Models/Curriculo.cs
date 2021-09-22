@@ -40,7 +40,7 @@ namespace backend.Models
                         curriculo.Id = int.Parse(dados["id"].ToString());
                         curriculo.Github = dados["github"].ToString();
                         curriculo.Linkedin = dados["linkedin"].ToString();
-                        curriculo.Telefone = dados["linkedin"].ToString();
+                        curriculo.Telefone = dados["telefone"].ToString();
                         curriculo.Resumo = dados["resumo"].ToString();
                         curriculo.Endereco = dados["endereco"].ToString();
                         curriculo.Cidade = dados["cidade"].ToString();
@@ -84,6 +84,42 @@ namespace backend.Models
                 query.Parameters.AddWithValue("@estado", Estado);
                 query.Parameters.AddWithValue("@usuarioId", UsuarioId);
 
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
+            }
+            catch (Exception e)
+            {
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
+
+        public bool editar()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "UPDATE curriculos SET github = @github, linkedin = @linkedin, telefone = @telefone, resumo = @resumo, endereco = @endereco, cidade = @cidade, estado = @estado, usuario_id = @usuarioId WHERE id = @id";
+                query.Parameters.AddWithValue("@github", Github);
+                query.Parameters.AddWithValue("@linkedin", Linkedin);
+                query.Parameters.AddWithValue("@telefone", Telefone);
+                query.Parameters.AddWithValue("@resumo", Resumo);
+                query.Parameters.AddWithValue("@endereco", Endereco);
+                query.Parameters.AddWithValue("@cidade", Cidade);
+                query.Parameters.AddWithValue("@estado", Estado);
+                query.Parameters.AddWithValue("@usuarioId", UsuarioId);
+                query.Parameters.AddWithValue("@id", Id);
                 if (query.ExecuteNonQuery() > 0)
                 {
                     resp = true;

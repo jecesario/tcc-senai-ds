@@ -32,6 +32,24 @@ else
         <h1 class="mb-3">Meu currículo</h1>
         <div class="p-5 my-4 bg-light rounded-3">
             <div class="container-fluid">
+                @if (@TempData["alertInfo"] != null)
+                {
+                    <div class="alert alert-info" role="alert">
+                        @TempData["alertInfo"]
+                    </div>
+                }
+                @if (@TempData["alertSucesso"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["alertSucesso"]
+                    </div>
+                }
+                @if (@TempData["alertErro"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["alertErro"]
+                    </div>
+                }
                 <div class="row">
                     <div class="col-md d-flex justify-content-end">
                         @Html.ActionLink("Editar Perfil", "Editar", "Usuario", new { id = usuario.Id }, new { @class = "btn btn-warning mx-2" })

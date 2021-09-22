@@ -173,5 +173,41 @@ namespace backend.Controllers
             ViewBag.Marcadas = habilidadesMarcadas;
             return View(Habilidade.listar());
         }
+
+        [HttpPost]
+        public ActionResult EditarAction()
+        {
+            // Vericação de usuário logado
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
+
+            // Preenchendo os dados e cadastrando curriculo
+            var curriculo = new Curriculo();
+            curriculo.Id = int.Parse(Request.Form["id"]);
+            curriculo.Github = Request.Form["github"];
+            curriculo.Linkedin = Request.Form["linkedin"];
+            curriculo.Telefone = Request.Form["telefone"];
+            curriculo.Resumo = Request.Form["resumo"];
+            curriculo.Endereco = Request.Form["endereco"];
+            curriculo.Cidade = Request.Form["cidade"];
+            curriculo.Estado = Request.Form["estado"];
+            curriculo.UsuarioId = Request.Form["usuarioId"];
+            curriculo.editar();
+
+            // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
+            var checks = Request.Form["checks"];
+            var habilidadeCurriculo = new HabilidadeCurriculo();
+            habilidadeCurriculo.CurriculoId = curriculo.buscarPorUsuarioId().Id;
+            habilidadeCurriculo.editar(checks);
+            TempData["alertSucesso"] = "Curriculo editado com sucesso!";
+            return RedirectToAction("MeuCurriculo", "Curriculo");
+        }
     }
 }

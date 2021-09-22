@@ -38,7 +38,69 @@ namespace backend.Models
             }
             catch (Exception e)
             {
-                Console.WriteLine("Deu ruimmmmmmmmmm " + e.Message);
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
+
+        public bool editar(string habilidades)
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            apagarPorCurriculoId();
+
+            try
+            {
+                con.Open();
+                string[] lista = habilidades.Split(',');
+                foreach (var habilidade in lista)
+                {
+                    var query = con.CreateCommand();
+                    query.CommandText = "INSERT INTO habilidades_curriculos (curriculo_id, habilidade_id) VALUES (@curriculoId, @habilidadeId)";
+                    query.Parameters.AddWithValue("@curriculoId", CurriculoId);
+                    query.Parameters.AddWithValue("@habilidadeId", int.Parse(habilidade));
+                    if (query.ExecuteNonQuery() > 0)
+                    {
+                        resp = true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
+
+        private bool apagarPorCurriculoId()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "DELETE FROM habilidades_curriculos WHERE curriculo_id = @curriculoId";
+                query.Parameters.AddWithValue("@curriculoId", CurriculoId);
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
+            }
+            catch (Exception e)
+            {
                 resp = false;
             }
             finally
