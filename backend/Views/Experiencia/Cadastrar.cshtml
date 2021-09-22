@@ -1,0 +1,37 @@
+﻿@model backend.Models.Experiencia
+@{
+    ViewBag.Title = "Cadastrar Nova Experiencia";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1>Cadastrar Nova Experiencia</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/Experiencia/CadastrarAction" method="post">
+            <div class="mb-3">
+                <label for="cargo" class="form-label">Cargo</label>
+                <input name="cargo" type="text" class="form-control" id="cargo">
+            </div>
+            <div class="mb-3">
+                <label for="empregador" class="form-label">Empregador</label>
+                <input name="empregador" type="text" class="form-control" id="empregador">
+            </div>
+            <div class="form-floating mb-3">
+                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px"></textarea>
+                <label for="floatingTextarea2">Resumo das atividades</label>
+            </div>
+            <div class="mb-3">
+                <label for="admissao" class="form-label">Admissao</label>
+                <input name="admissao" type="text" class="form-control" id="admissao">
+            </div>
+            <div class="mb-3">
+                <label for="demissao" class="form-label">Demissao</label>
+                <input name="demissao" type="text" class="form-control" id="demissao">
+            </div>
+            <button type="submit" class="btn btn-success">Cadastrar Experiência</button>
+        </form>
+    </div>
+</div>
