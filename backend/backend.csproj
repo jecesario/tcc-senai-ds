@@ -209,6 +209,7 @@
     <Content Include="Views\Experiencia\Cadastrar.cshtml" />
     <Content Include="Views\Experiencia\Editar.cshtml" />
     <Content Include="Views\Formacao\Cadastrar.cshtml" />
+    <Content Include="Views\Formacao\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
