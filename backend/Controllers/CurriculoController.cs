@@ -70,6 +70,12 @@ namespace backend.Controllers
                 habilidades.Add(habilidade.buscarPorId());
             }
 
+            // Guardando as experiencias do usuário baseadas pelo id do curriculo
+            var experiencia = new Experiencia();
+            experiencia.CurriculoId = curriculo.Id;
+            ViewBag.Experiencias = experiencia.buscarPorCurriculoId();
+
+
             return View(habilidades);
         }
 

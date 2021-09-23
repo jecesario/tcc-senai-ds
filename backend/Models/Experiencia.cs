@@ -16,6 +16,8 @@ namespace backend.Models
         public string Resumo { get; set; }
         public string Admissao { get; set; }
         public string Demissao { get; set; }
+        public DateTime Admissao2 { get; set; }
+        public DateTime Demissao2 { get; set; }
         public int CurriculoId { get; set; }
 
         public bool cadastrar()
@@ -50,5 +52,51 @@ namespace backend.Models
 
             return resp;
         }
+
+        public List<Experiencia> buscarPorCurriculoId()
+        {
+            var con = new MySqlConnection(dbConfig);
+            var experiencias = new List<Experiencia>();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM experiencias WHERE curriculo_id = @curriculoId";
+                query.Parameters.AddWithValue("@curriculoId", CurriculoId);
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        var experiencia = new Experiencia();
+                        experiencia.Id = dados.GetInt32("id");
+                        experiencia.Cargo = dados.GetString("cargo");
+                        experiencia.Empregador = dados.GetString("empregador");
+                        experiencia.Resumo = dados.GetString("resumo");
+                        experiencia.Admissao = dados.GetDateTime("admissao").ToString("dd/MM/yyyy");
+                        experiencia.Demissao = dados.GetDateTime("demissao").ToString("dd/MM/yyyy");
+                        experiencias.Add(experiencia);
+                    }
+                }
+                else
+                {
+                    experiencias = null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                experiencias = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return experiencias;
+        }
+
     }
 }
