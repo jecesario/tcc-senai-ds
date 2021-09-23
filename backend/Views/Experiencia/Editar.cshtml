@@ -1,0 +1,39 @@
+﻿@model backend.Models.Experiencia
+@{
+    ViewBag.Title = "Editar Experiencia";
+    var experiencia = Model;
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1>Editar Experiencia</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/Experiencia/EditarAction" method="post">
+            <div class="mb-3">
+                <label for="cargo" class="form-label">Cargo</label>
+                <input name="cargo" type="text" class="form-control" id="cargo" value="@experiencia.Cargo">
+            </div>
+            <div class="mb-3">
+                <label for="empregador" class="form-label">Empregador</label>
+                <input name="empregador" type="text" class="form-control" id="empregador" value="@experiencia.Empregador">
+            </div>
+            <div class="form-floating mb-3">
+                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px"> @experiencia.Resumo</textarea>
+                <label for="floatingTextarea2">Resumo das atividades</label>
+            </div>
+            <div class="mb-3">
+                <label for="admissao" class="form-label">Admissao</label>
+                <input name="admissao" type="text" class="form-control" id="admissao"  value="@experiencia.Admissao">
+            </div>
+            <div class="mb-3">
+                <label for="demissao" class="form-label">Demissao</label>
+                <input name="demissao" type="text" class="form-control" id="demissao" value="@experiencia.Demissao">
+            </div>
+            <input type="hidden" name="id" value="@experiencia.Id" />
+            <button type="submit" class="btn btn-success">Editar Experiência</button>
+        </form>
+    </div>
+</div>

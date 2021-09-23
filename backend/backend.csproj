@@ -204,6 +204,7 @@
     <Content Include="Views\Curriculo\Cadastrar.cshtml" />
     <Content Include="Views\Curriculo\Editar.cshtml" />
     <Content Include="Views\Experiencia\Cadastrar.cshtml" />
+    <Content Include="Views\Experiencia\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
