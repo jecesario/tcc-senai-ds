@@ -50,11 +50,11 @@ namespace backend.Controllers
             experiencia.CurriculoId = curriculo.Id;
             if (experiencia.cadastrar())
             {
-                TempData["alertSucesso"] = "Experiencia editada com sucesso!";
+                TempData["alertSucesso"] = "Experiencia cadastrada com sucesso!";
             }
             else
             {
-                TempData["alertErro"] = "Ocorreu um erro ao editar Experiencia!";
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrada Experiencia!";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }

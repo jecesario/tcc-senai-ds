@@ -75,6 +75,11 @@ namespace backend.Controllers
             experiencia.CurriculoId = curriculo.Id;
             ViewBag.Experiencias = experiencia.buscarPorCurriculoId();
 
+            // Guardando as formações do usuário baseadas pelo id do curriculo
+            var formacao = new Formacao();
+            formacao.CurriculoId = curriculo.Id;
+            ViewBag.Formacoes = formacao.buscarPorCurriculoId();
+
 
             return View(habilidades);
         }

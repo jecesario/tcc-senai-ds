@@ -5,6 +5,7 @@
     var curriculo = (backend.Models.Curriculo)ViewData["curriculo"]; ;
     var curso = (backend.Models.Curso)ViewData["curso"];
     var experiencias = ViewData["experiencias"] as List<backend.Models.Experiencia>;
+    var formacoes = ViewData["formacoes"] as List<backend.Models.Formacao>;
     var habilidades = Model;
 }
 @*
@@ -69,12 +70,12 @@ else
                     </div>
                 }
 
-                @if (true)
+                @if (formacoes == null)
                 {
                     <div class="alert alert-info mt-4" role="alert">
                         <p class="mb-0">Epa, peraí! Parece que você não preencheu nenhuma formação.</p>
                         <p class="mb-0">Dica: Você pode preencher com cursos profissionalizantes, online, faculdade ou o próprio curso que você faz no Senai.</p>
-                        @Html.ActionLink("Adicionar Formação", "Cadastrar", "Formação", new { area = "" }, new { @class = "btn btn-warning mt-3" })
+                        @Html.ActionLink("Adicionar Formação", "Cadastrar", "Formacao", new { area = "" }, new { @class = "btn btn-warning mt-3" })
                     </div>
                 }
                 <div class="row">
@@ -146,27 +147,69 @@ else
                     <div class="col-md">
                         @foreach (var experiencia in experiencias)
                         {
-                        <div class="row">
-                            <div class="col-md">
-                                Empregador: @experiencia.Empregador
+                            <div class="row">
+                                <div class="col-md">
+                                    Empregador: @experiencia.Empregador
+                                </div>
+                                <div class="col-md">
+                                    Cargo: @experiencia.Cargo
+                                </div>
+                                <div class="col-md">
+                                    Admissão: @experiencia.Admissao
+                                </div>
+                                <div class="col-md">
+                                    Demissão: @experiencia.Demissao
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.ActionLink(" ", "Editar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-warning far fa-edit" })
+                                    @Html.ActionLink(" ", "Apagar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+                                </div>
                             </div>
-                            <div class="col-md">
-                                Cargo: @experiencia.Cargo
-                            </div>
-                            <div class="col-md">
-                                Admissão: @experiencia.Admissao
-                            </div>
-                            <div class="col-md">
-                                Demissão: @experiencia.Demissao
-                            </div>
-                            <div class="col-md-2">
-                                @Html.ActionLink(" ", "Editar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-warning far fa-edit" })
-                                @Html.ActionLink(" ", "Apagar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
-                            </div>
-                        </div>
                             <div class="row mb-4">
                                 <div class="col-md">
                                     Resumo: @experiencia.Resumo
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="p-5 my-4 bg-light rounded-3">
+            <div class="container-fluid">
+                <div class="row mb-5">
+                    <div class="col-md d-flex justify-content-between align-items-center">
+                        <h4>Formações</h4>
+                        @Html.ActionLink("Adicionar Formação", "Cadastrar", "Formacao", new { area = "" }, new { @class = "btn btn-warning mt-3" })
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md">
+                        @foreach (var formacao in formacoes)
+                        {
+                            <div class="row">
+                                <div class="col-md">
+                                    Curso: @formacao.Nome
+                                </div>
+                                <div class="col-md">
+                                    Instituição: @formacao.Instituicao
+                                </div>
+                                <div class="col-md">
+                                    Inicio: @formacao.Inicio
+                                </div>
+                                <div class="col-md">
+                                    Conclusão: @formacao.Conclusao
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.ActionLink(" ", "Editar", "Formacao", new { id = formacao.Id }, new { @class = "btn btn-warning far fa-edit" })
+                                    @Html.ActionLink(" ", "Apagar", "Formacao", new { id = formacao.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md">
+                                    Resumo: @formacao.Resumo
                                 </div>
                             </div>
                         }

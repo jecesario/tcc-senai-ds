@@ -150,6 +150,7 @@
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\api\HabilidadeController.cs" />
     <Compile Include="Controllers\ExperienciaController.cs" />
+    <Compile Include="Controllers\FormacaoController.cs" />
     <Compile Include="Controllers\HabilidadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -159,8 +160,10 @@
     <Compile Include="Models\Curriculo.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Experiencia.cs" />
+    <Compile Include="Models\Formacao.cs" />
     <Compile Include="Models\Habilidade.cs" />
     <Compile Include="Models\HabilidadeCurriculo.cs" />
+    <Compile Include="Models\TiposFormacao.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -205,6 +208,7 @@
     <Content Include="Views\Curriculo\Editar.cshtml" />
     <Content Include="Views\Experiencia\Cadastrar.cshtml" />
     <Content Include="Views\Experiencia\Editar.cshtml" />
+    <Content Include="Views\Formacao\Cadastrar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
