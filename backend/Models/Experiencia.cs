@@ -23,6 +23,9 @@ namespace backend.Models
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
+            Admissao = DateTime.Parse(Admissao).ToString("yyyy-MM-dd");
+            Demissao = DateTime.Parse(Demissao).ToString("yyyy-MM-dd");
+
             try
             {
                 con.Open();
@@ -129,6 +132,8 @@ namespace backend.Models
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
+            Admissao = DateTime.Parse(Admissao).ToString("yyyy-MM-dd");
+            Demissao = DateTime.Parse(Demissao).ToString("yyyy-MM-dd");
             try
             {
                 con.Open();

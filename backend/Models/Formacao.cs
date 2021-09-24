@@ -24,6 +24,9 @@ namespace backend.Models
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
+            Inicio = DateTime.Parse(Inicio).ToString("yyyy-MM-dd");
+            Conclusao = DateTime.Parse(Conclusao).ToString("yyyy-MM-dd");
+
             try
             {
                 con.Open();
@@ -131,7 +134,8 @@ namespace backend.Models
         {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
-
+            Inicio = DateTime.Parse(Inicio).ToString("yyyy-MM-dd");
+            Conclusao = DateTime.Parse(Conclusao).ToString("yyyy-MM-dd");
             try
             {
                 con.Open();
