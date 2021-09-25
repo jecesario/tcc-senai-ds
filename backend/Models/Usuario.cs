@@ -207,8 +207,7 @@ namespace backend.Models {
                     
                 }
                 catch (Exception e)
-                {
-                Console.Write("Erro ao atualizar usuario: " + e.StackTrace);
+                { 
                     resp = false;
                 }
                 finally

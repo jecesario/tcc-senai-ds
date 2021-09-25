@@ -60,30 +60,38 @@ namespace backend.Controllers
             usuario.Ano = Request.Form["ano"];
             usuario.Tipo = (Request.Form["tipo"] == null) ? 0 : int.Parse(Request.Form["tipo"]);
             usuario.CursoId = Request.Form["curso"];
-
-            if (usuario.editar())
+            var logado = (Usuario)Session["usuario"];
+            if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == logado.Email)
             {
-                var logado = (Usuario)Session["usuario"];
-                if (logado.Tipo == 1)
+                if (usuario.editar())
                 {
-                    TempData["alertSucesso"] = "Usuário editado com sucesso!";
-                    if (logado.Id == usuario.Id)
+                    
+                    if (logado.Tipo == 1)
                     {
+                        TempData["alertSucesso"] = "Usuário editado com sucesso!";
+                        if (logado.Id == usuario.Id)
+                        {
+                            return RedirectToAction("Sair", "Home");
+                        }
+                        return RedirectToAction("Index", "Usuario");
+                    }
+                    else
+                    {
+                        TempData["alertSucesso"] = "Usuário editado com sucesso! Efetue login abaixo.";
                         return RedirectToAction("Sair", "Home");
                     }
+
                 }
                 else
                 {
-                    TempData["alertSucesso"] = "Usuário editado com sucesso! Efetue login abaixo.";
-                    return RedirectToAction("Sair", "Home");
+                    TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
                 }
-
-                TempData["alertErro"] = Request.Form;
             }
             else
             {
-                TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
+                TempData["alertErro"] = "E-mail já cadastrado por outro usuário!";
             }
+
             return RedirectToAction("Editar", "Usuario");
 
         }
