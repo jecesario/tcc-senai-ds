@@ -50,7 +50,7 @@ namespace backend.Controllers
         [HttpPost]
         public ActionResult Editar()
         {
-
+            // Pegando informações do form
             var usuario = new Usuario();
             usuario.Id = int.Parse(Request.Form["id"]);
             usuario.Nome = Request.Form["nome"];
@@ -61,38 +61,63 @@ namespace backend.Controllers
             usuario.Tipo = (Request.Form["tipo"] == null) ? 0 : int.Parse(Request.Form["tipo"]);
             usuario.CursoId = Request.Form["curso"];
             var logado = (Usuario)Session["usuario"];
-            if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == logado.Email)
-            {
-                if (usuario.editar())
+            var emailAntigo = usuario.buscarPorId().Email;
+
+            // Verificando se é o próprio usuário se editando ou se é um admin
+            //if(usuario.Id == logado.Id)
+            //{
+                if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo)
                 {
-                    
-                    if (logado.Tipo == 1)
+                    if (usuario.editar())
                     {
-                        TempData["alertSucesso"] = "Usuário editado com sucesso!";
-                        if (logado.Id == usuario.Id)
+
+                        if (logado.Tipo == 1)
                         {
+                            TempData["alertSucesso"] = "Usuário editado com sucesso!";
+                            if (logado.Id == usuario.Id)
+                            {
+                                return RedirectToAction("Sair", "Home");
+                            }
+                            return RedirectToAction("Index", "Usuario");
+                        }
+                        else
+                        {
+                            TempData["alertSucesso"] = "Usuário editado com sucesso! Efetue login abaixo.";
                             return RedirectToAction("Sair", "Home");
                         }
-                        return RedirectToAction("Index", "Usuario");
+
                     }
                     else
                     {
-                        TempData["alertSucesso"] = "Usuário editado com sucesso! Efetue login abaixo.";
-                        return RedirectToAction("Sair", "Home");
+                        TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
                     }
-
                 }
                 else
                 {
-                    TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
+                    TempData["alertErro"] = "E-mail já cadastrado por outro usuário!";
                 }
-            }
-            else
-            {
-                TempData["alertErro"] = "E-mail já cadastrado por outro usuário!";
-            }
+            //} else
+            //{
+            //    if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo)
+            //    {
+            //        if (usuario.editar())
+            //        {
+            //            TempData["alertSucesso"] = "Usuário editado com sucesso!";
+            //            return RedirectToAction("Index", "Usuario");
 
-            return RedirectToAction("Editar", "Usuario");
+            //        }
+            //        else
+            //        {
+            //            TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        TempData["alertErro"] = "E-mail já cadastrado por outro usuário!";
+            //    }
+            //}
+
+            return RedirectToAction("Editar/"+usuario.Id, "Usuario");
 
         }
 
