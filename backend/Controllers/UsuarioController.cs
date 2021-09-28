@@ -70,23 +70,22 @@ namespace backend.Controllers
                 {
                     if (usuario.editar())
                     {
-
-                        if (logado.Tipo == 1)
-                        {
-                            TempData["alertSucesso"] = "Usuário editado com sucesso!";
-                            if (logado.Id == usuario.Id)
-                            {
-                                return RedirectToAction("Sair", "Home");
-                            }
+                    TempData["alertSucesso"] = "Usuário editado com sucesso!";
+                    if (logado.Tipo == 1)
+                    {
+                        
+                            //if (logado.Id == usuario.Id)
+                            //{
+                            //    return RedirectToAction("Sair", "Home");
+                            //}
                             return RedirectToAction("Index", "Usuario");
-                        }
-                        else
-                        {
-                            TempData["alertSucesso"] = "Usuário editado com sucesso! Efetue login abaixo.";
-                            return RedirectToAction("Sair", "Home");
-                        }
-
                     }
+                    else
+                    {
+                        return RedirectToAction("MeuCurriculo", "Curriculo");
+                    }
+
+                }
                     else
                     {
                         TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
