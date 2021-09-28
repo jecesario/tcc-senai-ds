@@ -1,51 +1,82 @@
-﻿//let loginValidator = {
-//    handleSubmit: (e) => {
-//        e.preventDefault();
-//        let send = false;
+﻿let jValidator = {
+    handleSubmit: (e) => {
+        e.preventDefault();
+        let send = true;
 
-//        let inputs = formLogin.querySelectorAll('input');
-//        for (let i = 0; i < inputs.length; i++) {
-//            let input = inputs[i];
-//            let check = loginValidator.checkInput(input);
-//            if (check !== true) {
-//                send = false;
-//                loginValidator.showError(input, check)
-//            }
-//        }
+        let inputs = form.querySelectorAll('input');
 
-//        if (send) {
-//            formLogin.submit();
-//        }
-//    },
-//    checkInput: (input) => {
-//        let rules = input.getAttribute('data-rules');
-//        if (rules !== null) {
-//            rules = rules.split('/');
-//            for (let k in rules) {
-//                let ruleDetails = rules[k].split(':');
-//                switch (ruleDetails[0]) {
-//                    case 'required':
-//                        if (input.value == '') {
-//                            return 'Não pode ser vazio'
-//                        }
-//                        break;
-//                    case 'min':
+        jValidator.clearErrors();
 
-//                        break;
+        for (let i = 0; i < inputs.length; i++) {
+            let input = inputs[i];
+            let check = jValidator.checkInput(input);
+            if (check !== true) {
+                send = false;
+                jValidator.showError(input, check);
+            }
+        }
+        if (send) {
+            form.submit();
+        }
+    },
+    checkInput: (input) => {
+        let rules = input.getAttribute('data-rules');
+        if (rules !== null) {
+            rules = rules.split('|');
+            for (let k in rules) {
+                let rulesDetails = rules[k].split(':');
+                switch (rulesDetails[0]) {
+                    case 'required':
+                        if (input.value == '') {
+                            return 'Não pode ser vazio'
+                        }
+                        break;
+                    case 'min':
+                        if (input.value.length < rulesDetails[1]) {
+                            return 'O campo precisa ter pelo menos ' + rulesDetails[1] + ' caracteres';
+                        }
+                        break;
+                    case 'max':
+                        if (input.value.length > rulesDetails[1]) {
+                            return 'O campo precisa ter no máximo ' + rulesDetails[1] + ' caracteres';
+                        }
+                        break;
+                    case 'email':
+                        if (input.value != '') {
+                            let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            if (!regex.test(input.value.toLowerCase())) {
+                                return 'O campo precisa ser preenchido com um email válido';
+                            }
+                        }
+                        break;
 
-//                }
-//            }
-//        }
-//        return true;
-//    },
-//    showError: (input, error) => {
-//        input.style.borderColor = '#FF0000';
-//        let errorElement = document.createElement('div');
-//        errorElement.classList.add('error');
-//        errorElement.innerHTML = error;
-//        input.parseElement.insertBefore(errorElement, input.elementSibling);
-//    }
-//};
+                }
+            }
+        }
+        return true;
+    },
+    showError: (input, error) => {
 
-//let formLogin = document.querySelector('.login-form');
-//formLogin.addEventListener('submit', loginValidator.handleSubmit);
+        input.classList.add('is-invalid');
+
+        let errorElement = document.createElement('div');
+        errorElement.classList.add('invalid-feedback');
+        errorElement.innerHTML = error;
+
+        input.parentElement.insertBefore(errorElement, input.ElementSibling);
+    },
+    clearErrors: () => {
+        let errorElements = document.querySelectorAll('.invalid-feedback');
+        for (let i = 0; i < errorElements.length; i++) {
+            errorElements[i].remove();
+        }
+
+        let errorInputs = document.querySelectorAll('.is-invalid');
+        for (let i = 0; i < errorInputs.length; i++) {
+            errorInputs[i].classList.remove('is-invalid');
+        }
+    }
+};
+
+let form = document.querySelector('.jValidator');
+form.addEventListener('submit', jValidator.handleSubmit);

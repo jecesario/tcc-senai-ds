@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-body p-4 p-sm-5">
                         <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastro</h5>
-                        <form action="/Home/CadastrarAction" method="post">
+                        <form action="/Home/CadastrarAction" method="post" class="jValidator">
                             @if (@TempData["alertInfo"] != null)
                             {
                                 <div class="alert alert-info" role="alert">
@@ -64,15 +64,15 @@
                                 </div>
                             }
                             <div class="form-floating mb-3">
-                                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Fernando Ponte Preta">
+                                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Fernando Ponte Preta" data-rules="required|min:2">
                                 <label for="floatingInput">Nome</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="fernando@pontepreta.com.br">
+                                <input type="text" name="email" class="form-control" id="floatingInput" placeholder="fernando@pontepreta.com.br" data-rules="required|email">
                                 <label for="floatingInput">E-mail</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="********">
+                                <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="********"  data-rules="required|min:8|max:20">
                                 <label for="floatingInput">Senha</label>
                             </div>
                             <div class="form-floating mb-3">

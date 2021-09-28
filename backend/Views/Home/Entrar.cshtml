@@ -58,14 +58,14 @@
                                 @TempData["alertErro"]
                             </div>
                         }
-                        <form action="/Home/EntrarAction" method="post" class="login-form">
+                        <form action="/Home/EntrarAction" method="post" class="login-form jValidator">
                             <div class="mb-3">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input name="email" type="email" class="form-control" id="email" data-rules="required|email">
+                                <input name="email" type="text" class="form-control" id="email" data-rules="required|email">
                             </div>
                             <div class="mb-3">
                                 <label for="senha" class="form-label">Senha</label>
-                                <input name="senha" type="password" class="form-control" id="senha">
+                                <input name="senha" type="password" class="form-control" id="senha" data-rules="required">
                             </div>
                             <button type="submit" class="btn btn-lg btn-primary btn-login fw-bold text-uppercase">Entrar</button>
                         </form>
@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="~/Scripts/validator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
