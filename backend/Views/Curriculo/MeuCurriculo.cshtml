@@ -149,24 +149,33 @@ else
                         <div class="col-md">
                             @foreach (var experiencia in experiencias)
                             {
-                                <div class="row">
-                                    <div class="col-md">
-                                        Empregador: @experiencia.Empregador
-                                    </div>
-                                    <div class="col-md">
-                                        Cargo: @experiencia.Cargo
-                                    </div>
-                                    <div class="col-md">
-                                        Admissão: @experiencia.Admissao
-                                    </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    Empregador: @experiencia.Empregador
+                                </div>
+                                <div class="col-md">
+                                    Cargo: @experiencia.Cargo
+                                </div>
+                                <div class="col-md">
+                                    Admissão: @experiencia.Admissao
+                                </div>
+                                @if (!@experiencia.Admissao.Equals(@experiencia.Demissao))
+                                {
                                     <div class="col-md">
                                         Demissão: @experiencia.Demissao
                                     </div>
-                                    <div class="col-md-2">
-                                        @Html.ActionLink(" ", "Editar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-warning far fa-edit" })
-                                        @Html.ActionLink(" ", "Apagar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+                                }
+                                else
+                                {
+                                    <div class="col-md">
+                                        Emprego Atual
                                     </div>
+                                }
+                                <div class="col-md-2">
+                                    @Html.ActionLink(" ", "Editar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-warning far fa-edit" })
+                                    @Html.ActionLink(" ", "Apagar", "Experiencia", new { id = experiencia.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
                                 </div>
+                            </div>
                                 <div class="row mb-4">
                                     <div class="col-md">
                                         Resumo: @experiencia.Resumo

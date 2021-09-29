@@ -15,6 +15,18 @@
                 jValidator.showError(input, check);
             }
         }
+        // verifica se o check tá on e chama o método
+        if (checkbox) {
+            checkToggle();
+        }
+
+        // caso seja o form de experiencia profissional
+        if (document.querySelector('#admissao')) {
+            jValidator.checkProfessionalExperienceDate();
+        }
+
+        
+
         if (send) {
             form.submit();
         }
@@ -27,22 +39,22 @@
                 let rulesDetails = rules[k].split(':');
                 switch (rulesDetails[0]) {
                     case 'required':
-                        if (input.value == '') {
-                            return 'Não pode ser vazio'
+                        if (input.value.trim() == '') {
+                            return 'O campo não pode ser vazio'
                         }
                         break;
                     case 'min':
-                        if (input.value.length < rulesDetails[1]) {
+                        if (input.value.trim().length < rulesDetails[1]) {
                             return 'O campo precisa ter pelo menos ' + rulesDetails[1] + ' caracteres';
                         }
                         break;
                     case 'max':
-                        if (input.value.length > rulesDetails[1]) {
+                        if (input.value.trim().length > rulesDetails[1]) {
                             return 'O campo precisa ter no máximo ' + rulesDetails[1] + ' caracteres';
                         }
                         break;
                     case 'email':
-                        if (input.value != '') {
+                        if (input.value.trim() != '') {
                             let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                             if (!regex.test(input.value.toLowerCase())) {
                                 return 'O campo precisa ser preenchido com um email válido';
@@ -75,8 +87,39 @@
         for (let i = 0; i < errorInputs.length; i++) {
             errorInputs[i].classList.remove('is-invalid');
         }
+    },
+    checkProfessionalExperienceDate: () => {
+        let admissionDate = document.querySelector('#admissao');
+        let resignationDate = document.querySelector('#demissao');
+        console.log(resignationDate.value < admissionDate.value)
+        console.log(admissionDate.value)
+        console.log(resignationDate.value)
+        if (resignationDate.value < admissionDate.value) {
+            jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão')
+        }
     }
 };
 
 let form = document.querySelector('.jValidator');
 form.addEventListener('submit', jValidator.handleSubmit);
+
+
+// Bloqueando o campo de demissão caso seja emprego atual
+
+let checkbox = document.querySelector('#empregoAtual');
+let demissao = document.querySelector('#demissao');
+let admissao = document.querySelector('#admissao');
+
+checkbox.addEventListener('change', checkToggle());
+
+function checkToggle() {
+    if (checkbox.checked) {
+        demissao.setAttribute('disabled', 'disabled');
+        demissao.removeAttribute('data-rules', 'required');
+        demissao.value = admissao.value;
+        jValidator.clearErrors();
+    } else {
+        demissao.removeAttribute('disabled', 'disabled');
+        demissao.setAttribute('data-rules', 'required');
+    }
+}

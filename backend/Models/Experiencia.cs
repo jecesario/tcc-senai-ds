@@ -184,8 +184,8 @@ namespace backend.Models
                         experiencia.Cargo = dados.GetString("cargo");
                         experiencia.Empregador = dados.GetString("empregador");
                         experiencia.Resumo = dados.GetString("resumo");
-                        experiencia.Admissao = dados.GetDateTime("admissao").ToString("dd/MM/yyyy");
-                        experiencia.Demissao = dados.GetDateTime("demissao").ToString("dd/MM/yyyy");
+                        experiencia.Admissao = dados.GetDateTime("admissao").ToString("yyyy-MM-dd");
+                        experiencia.Demissao = dados.GetDateTime("demissao").ToString("yyyy-MM-dd");
                     }
                 }
                 else
