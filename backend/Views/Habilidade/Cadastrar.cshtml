@@ -10,12 +10,13 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form action="/Habilidade/CadastrarAction" method="post">
+        <form action="/Habilidade/CadastrarAction" method="post" class="jValidator">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome da Habilidade</label>
-                <input name="nome" type="text" class="form-control" id="nome">
+                <input name="nome" type="text" class="form-control" id="nome" data-rules="required|min:3|max:50">
             </div>
             <button type="submit" class="btn btn-success">Cadastrar Habilidade</button>
         </form>
     </div>
 </div>
+<script src="~/Scripts/validator.js"></script>

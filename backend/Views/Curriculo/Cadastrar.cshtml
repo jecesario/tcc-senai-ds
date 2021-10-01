@@ -87,7 +87,7 @@
 
 <div class="row">
     <div class="col-md">
-        <form action="/Curriculo/CadastrarAction" method="post">
+        <form action="/Curriculo/CadastrarAction" method="post" class="jValidator">
             <div class="row">
                 @if (@TempData["alertInfo"] != null)
                 {
@@ -109,19 +109,19 @@
                 }
                 <div class="col-md">
                     <div class="form-floating mb-3">
-                        <input type="text" name="telefone" class="form-control" id="floatingInput" placeholder="(19)99999-9999">
+                        <input type="text" name="telefone" class="form-control" id="floatingInput" placeholder="(19)99999-9999" data-rules="required|min:11|max:11">
                         <label for="floatingInput">Telefone</label>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-floating mb-3">
-                        <input type="text" name="linkedin" class="form-control" id="floatingInput" placeholder="Linkedin url">
+                        <input type="text" name="linkedin" class="form-control" id="floatingInput" placeholder="Linkedin url" data-rules="required">
                         <label for="floatingInput">LinkedIn</label>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-floating mb-3">
-                        <input type="text" name="github" class="form-control" id="floatingInput" placeholder="Github url">
+                        <input type="text" name="github" class="form-control" id="floatingInput" placeholder="Github url" data-rules="required">
                         <label for="floatingInput">GitHub</label>
                     </div>
                 </div>
@@ -129,19 +129,19 @@
             <div class="row">
                 <div class="col-md">
                     <div class="form-floating mb-3">
-                        <input type="text" name="endereco" class="form-control" id="floatingInput" placeholder="Av. da Saudade, 125">
+                        <input type="text" name="endereco" class="form-control" id="floatingInput" placeholder="Av. da Saudade, 125" data-rules="required|min:10">
                         <label for="floatingInput">Endereço</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input type="text" name="cidade" class="form-control" id="floatingInput" placeholder="Campinas">
+                        <input type="text" name="cidade" class="form-control" id="floatingInput" placeholder="Campinas" data-rules="required|max:50">
                         <label for="floatingInput">Cidade</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <select name="estado" class="form-select" id="floatingSelectGrid" aria-label="Estado">
+                        <select name="estado" class="form-select" id="floatingSelectGrid" aria-label="Estado" data-rules="pick">
                             <option selected>Selecione um estado</option>
                             <option value="SP">São Paulo</option>
                         </select>
@@ -152,7 +152,7 @@
             <div class="row">
                 <div class="col-md">
                     <div class="form-floating mb-3">
-                        <textarea name="resumo" class="form-control" placeholder="Fale um pouco sobre você" id="floatingTextarea2" style="height: 200px"></textarea>
+                        <textarea name="resumo" class="form-control" placeholder="Fale um pouco sobre você" id="floatingTextarea2" style="height: 200px" data-rules="required|min:50"></textarea>
                         <label for="floatingTextarea2">Resumo Profissional</label>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
     "",
     "\\backend",
     "\\backend\\Controllers",
+    "\\backend\\Scripts",
     "\\backend\\Views",
     "\\backend\\Views\\Curriculo"
   ],

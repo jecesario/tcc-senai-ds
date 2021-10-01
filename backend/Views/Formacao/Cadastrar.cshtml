@@ -10,38 +10,39 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form action="/Formacao/CadastrarAction" method="post">
+        <form action="/Formacao/CadastrarAction" method="post" class="jValidator">
             <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input name="nome" type="text" class="form-control" id="nome">
+                <label for="nome" class="form-label">Nome *</label>
+                <input name="nome" type="text" class="form-control" id="nome" data-rules="required|min:3|max:100">
             </div>
             <div class="mb-3">
-                <label for="instituicao" class="form-label">Instituição</label>
-                <input name="instituicao" type="text" class="form-control" id="instituicao">
+                <label for="instituicao" class="form-label">Instituição *</label>
+                <input name="instituicao" type="text" class="form-control" id="instituicao" data-rules="required|min:3|max:100">
             </div>
             <div class="mb-3">
-                <label for="inicio" class="form-label">Inicio</label>
-                <input name="inicio" type="text" class="form-control" id="inicio">
+                <label for="inicio" class="form-label">Inicio *</label>
+                <input name="inicio" type="date" class="form-control" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" id="inicio" data-rules="required">
             </div>
             <div class="mb-3">
-                <label for="conclusao" class="form-label">Conclusão</label>
-                <input name="conclusao" type="text" class="form-control" id="conclusao">
+                <label for="conclusao" class="form-label">Conclusão *</label>
+                <input name="conclusao" type="date" class="form-control" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" id="conclusao" data-rules="required">
             </div>
             <div class="form-floating mb-3">
-                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px"></textarea>
-                <label for="floatingTextarea2">Resumo das atividades</label>
+                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px" data-rules="required|min:50|max:1000"></textarea>
+                <label for="floatingTextarea2">Resumo das atividades *</label>
             </div>
             <div class="form-floating mb-3">
-                <select name="tipoFormacao" class="form-select" id="floatingSelectGrid" aria-label="Curso">
-                    <option value="0" selected>Selecione um tipo de formação</option>
+                <select name="tipoFormacao" class="form-select" id="floatingSelectGrid" aria-label="Tipo de Formação" data-rules="required">
+                    <option value="" selected>Selecione um tipo de formação</option>
                     @foreach (var tipoFormacao in Model)
                     {
                         <option value="@Html.DisplayFor(id => tipoFormacao.Id)">@Html.DisplayFor(id => tipoFormacao.Nome)</option>
                     }
                 </select>
-                <label for="floatingSelectGrid">Tipo de Formação</label>
+                <label for="floatingSelectGrid">Tipo de Formação *</label>
             </div>
             <button type="submit" class="btn btn-success">Cadastrar Formação</button>
         </form>
     </div>
 </div>
+<script src="~/Scripts/validator.js"></script>

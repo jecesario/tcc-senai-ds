@@ -4,17 +4,44 @@
         let send = true;
 
         let inputs = form.querySelectorAll('input');
+        let selects = form.querySelectorAll('select');
+        let textareas = form.querySelectorAll('textarea');
 
         jValidator.clearErrors();
 
-        for (let i = 0; i < inputs.length; i++) {
-            let input = inputs[i];
-            let check = jValidator.checkInput(input);
-            if (check !== true) {
-                send = false;
-                jValidator.showError(input, check);
+        if (inputs) {
+            for (let i = 0; i < inputs.length; i++) {
+                let input = inputs[i];
+                let check = jValidator.checkInput(input);
+                if (check !== true) {
+                    send = false;
+                    jValidator.showError(input, check);
+                }
             }
         }
+
+        if (textareas) {
+            for (let i = 0; i < textareas.length; i++) {
+                let textarea = textareas[i];
+                let check = jValidator.checkInput(textarea);
+                if (check !== true) {
+                    send = false;
+                    jValidator.showError(textarea, check);
+                }
+            }
+        }
+
+        if (selects) {
+            for (let i = 0; i < selects.length; i++) {
+                let select = selects[i];
+                let check = jValidator.checkInput(select);
+                if (check !== true) {
+                    send = false;
+                    jValidator.showError(select, check);
+                }
+            }
+        }
+
         // verifica se o check tá on e chama o método
         if (checkbox) {
             checkToggle();
@@ -24,8 +51,6 @@
         if (document.querySelector('#admissao')) {
             jValidator.checkProfessionalExperienceDate();
         }
-
-        
 
         if (send) {
             form.submit();
@@ -61,7 +86,11 @@
                             }
                         }
                         break;
-
+                    case 'pick':
+                        if (input.value.trim() == '') {
+                            return 'Selecione uma opção válida';
+                        }
+                        break;
                 }
             }
         }
@@ -95,7 +124,7 @@
         console.log(admissionDate.value)
         console.log(resignationDate.value)
         if (resignationDate.value < admissionDate.value) {
-            jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão')
+            jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
         }
     }
 };
@@ -110,7 +139,9 @@ let checkbox = document.querySelector('#empregoAtual');
 let demissao = document.querySelector('#demissao');
 let admissao = document.querySelector('#admissao');
 
-checkbox.addEventListener('change', checkToggle());
+if (checkbox) {
+    checkbox.addEventListener('change', checkToggle());
+}
 
 function checkToggle() {
     if (checkbox.checked) {

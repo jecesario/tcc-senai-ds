@@ -97,7 +97,7 @@ namespace backend.Controllers
             experiencia.Empregador = Request.Form["empregador"];
             experiencia.Resumo = Request.Form["resumo"];
             experiencia.Admissao = Request.Form["admissao"];
-            experiencia.Demissao = Request.Form["demissao"];
+            experiencia.Demissao = Request.Form["demissao"] == null ? experiencia.Admissao : Request.Form["demissao"];
             experiencia.CurriculoId = curriculo.Id;
             experiencia.Id = int.Parse(Request.Form["id"]);
             if(experiencia.editar())

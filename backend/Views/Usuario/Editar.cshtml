@@ -17,30 +17,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        @*@using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="mb-3">
-                @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-label" } })
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="mb-3">
-                @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "form-label" } })
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="mb-3">
-                @Html.LabelFor(model => model.Senha, new { htmlAttributes = new { @class = "form-label" } })
-                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-            <div class="mb-3">
-                @Html.LabelFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-label" } })
-                @Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
-                <span>0 para usuário normal - 1 para usuário administrador</span>
-            </div>
-            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @style = "display: none;" } })
-            <button type="submit" class="btn btn-success">Editar</button>
-        }*@
-        <form action="/Usuario/Editar/22" method="post">
+        <form action="/Usuario/Editar/22" method="post" class="jValidator">
             @if (@TempData["alertInfo"] != null)
             {
                 <div class="alert alert-info" role="alert">
@@ -60,34 +37,34 @@
                 </div>
             }
             <div class="form-floating mb-3">
-                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Fernando Ponte Preta" value="@Model.Nome">
-                <label for="floatingInput">Nome</label>
+                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Nome" value="@Model.Nome" data-rules="required|min:2">
+                <label for="floatingInput">Nome *</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="fernando@pontepreta.com.br" value="@Model.Email">
-                <label for="floatingInput">E-mail</label>
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="E-mail" value="@Model.Email" data-rules="required|email">
+                <label for="floatingInput">E-mail *</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="********" value="@Model.Senha">
-                <label for="floatingInput">Senha</label>
+                <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="Senha" value="@Model.Senha" data-rules="required|min:2|max:20">
+                <label for="floatingInput">Senha *</label>
             </div>
             <div class="form-floating mb-3">
-                <select name="curso" class="form-select" id="floatingSelectGrid" aria-label="Curso">
-                    <option value="0">Selecione um curso</option>
+                <select name="curso" class="form-select" id="floatingSelectGrid" aria-label="Curso" data-rules="pick">
+                    <option value="">Selecione um curso</option>
                     @foreach (var curso in cursos)
                     {
                         <option value="@Html.DisplayFor(id => curso.Id)" @(cursoId == curso.Id ? "selected" : "")>@Html.DisplayFor(nome => curso.Nome)</option>
                     }
                 </select>
-                <label for="floatingSelectGrid">Curso</label>
+                <label for="floatingSelectGrid">Curso *</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" name="turma" class="form-control" id="floatingInput" placeholder="1DSN" value="@Model.Turma">
-                <label for="floatingInput">Turma</label>
+                <input type="text" name="turma" class="form-control" id="floatingInput" placeholder="Turma" value="@Model.Turma" data-rules="required|min:2|max:15">
+                <label for="floatingInput">Turma *</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" name="ano" class="form-control" id="floatingInput" placeholder="2021" value="@Model.Ano">
-                <label for="floatingInput">Ano</label>
+                <input type="number" name="ano" class="form-control" id="floatingInput" placeholder="Ano" value="@Model.Ano" data-rules="required|min:4|max:4">
+                <label for="floatingInput">Ano *</label>
             </div>
             @if (Model.Tipo == 1)
             {
@@ -104,3 +81,4 @@
         </form>
     </div>
 </div>
+<script src="~/Scripts/validator.js"></script>

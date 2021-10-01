@@ -13,23 +13,27 @@
     <div class="col-md-6">
         <form action="/Experiencia/EditarAction" method="post" class="jValidator">
             <div class="mb-3">
-                <label for="cargo" class="form-label">Cargo</label>
+                <label for="cargo" class="form-label">Cargo *</label>
                 <input name="cargo" type="text" class="form-control" id="cargo" value="@experiencia.Cargo" data-rules="required|min:3|max:50">
             </div>
             <div class="mb-3">
-                <label for="empregador" class="form-label">Empregador</label>
+                <label for="empregador" class="form-label">Empregador *</label>
                 <input name="empregador" type="text" class="form-control" id="empregador" value="@experiencia.Empregador" data-rules="required|min:3|max:100">
             </div>
             <div class="form-floating mb-3">
-                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px"> @experiencia.Resumo</textarea>
-                <label for="floatingTextarea2">Resumo das atividades</label>
+                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px" data-rules="required|min:20|max:1000"> @experiencia.Resumo</textarea>
+                <label for="floatingTextarea2">Resumo das atividades *</label>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="checkbox" class="btn-check" id="empregoAtual" autocomplete="off" onchange="checkToggle()">
+                <label class="btn btn-outline-primary" for="empregoAtual">Emprego Atual</label>
             </div>
             <div class="mb-3">
-                <label for="admissao" class="form-label">Admissao</label>
+                <label for="admissao" class="form-label">Admissao *</label>
                 <input name="admissao" type="date" class="form-control" id="admissao" value="@experiencia.Admissao" data-rules="required">
             </div>
             <div class="mb-3">
-                <label for="demissao" class="form-label">Demissao</label>
+                <label for="demissao" class="form-label">Demissao *</label>
                 <input name="demissao" type="date" class="form-control" id="demissao" value="@experiencia.Demissao" data-rules="required">
             </div>
             <input type="hidden" name="id" value="@experiencia.Id" />
