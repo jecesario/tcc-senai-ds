@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using backend.Models.Dtos;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,36 @@ namespace backend.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string UsuarioId { get; set; }
+
+        public static List<CurriculoResponse> listar()
+        {
+            var con = new MySqlConnection(dbConfig);
+            var curriculos = new List<CurriculoResponse>();
+
+            con.Open();
+            var query = con.CreateCommand();
+            query.CommandText = "SELECT curriculos.id, telefone, cidade, usuarios.nome, GROUP_CONCAT(habilidades.nome SEPARATOR ', ') AS habilidades FROM curriculos INNER JOIN usuarios ON usuario_id = usuarios.id INNER JOIN habilidades_curriculos ON curriculos.id = habilidades_curriculos.curriculo_id INNER JOIN habilidades ON habilidades.id = habilidades_curriculos.habilidade_id GROUP BY usuario_id;";
+            var dados = query.ExecuteReader();
+
+            if (dados.HasRows)
+            {
+                while (dados.Read())
+                {
+                    var curriculo = new CurriculoResponse();
+                    curriculo.Nome = dados["nome"].ToString();
+                    curriculo.Telefone = dados["telefone"].ToString();
+                    curriculo.Cidade = dados["cidade"].ToString();
+                    curriculo.Habilidades = dados["habilidades"].ToString();
+                    curriculos.Add(curriculo);
+                }
+            }
+            else
+            {
+                curriculos = null;
+            }
+            con.Close();
+        return curriculos;
+        }
 
         public Curriculo buscarPorUsuarioId()
         {

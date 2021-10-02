@@ -21,12 +21,12 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
-            //var curriculos = Curriculo.listar();
-            //if (curriculos == null || curriculos.Count == 0)
-            //{
-            //    TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
-            //}
-            return View();
+            var curriculos = Curriculo.listar();
+            if (curriculos == null || curriculos.Count == 0)
+            {
+                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
+            }
+            return View(curriculos);
         }
 
         public ActionResult MeuCurriculo() {
