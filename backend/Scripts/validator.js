@@ -49,7 +49,10 @@
 
         // caso seja o form de experiencia profissional
         if (document.querySelector('#admissao')) {
-            jValidator.checkProfessionalExperienceDate();
+            let check = jValidator.checkProfessionalExperienceDate();
+            if (check) {
+                send = false;
+            }
         }
 
         if (send) {
@@ -103,7 +106,6 @@
         let errorElement = document.createElement('div');
         errorElement.classList.add('invalid-feedback');
         errorElement.innerHTML = error;
-
         input.parentElement.insertBefore(errorElement, input.ElementSibling);
     },
     clearErrors: () => {
@@ -120,11 +122,9 @@
     checkProfessionalExperienceDate: () => {
         let admissionDate = document.querySelector('#admissao');
         let resignationDate = document.querySelector('#demissao');
-        console.log(resignationDate.value < admissionDate.value)
-        console.log(admissionDate.value)
-        console.log(resignationDate.value)
         if (resignationDate.value < admissionDate.value) {
             jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
+            return true;
         }
     }
 };
@@ -137,18 +137,12 @@ form.addEventListener('submit', jValidator.handleSubmit);
 
 let checkbox = document.querySelector('#empregoAtual');
 let demissao = document.querySelector('#demissao');
-let admissao = document.querySelector('#admissao');
-
-if (checkbox) {
-    checkbox.addEventListener('change', checkToggle());
-}
 
 function checkToggle() {
     if (checkbox.checked) {
         demissao.setAttribute('disabled', 'disabled');
         demissao.removeAttribute('data-rules', 'required');
         demissao.value = admissao.value;
-        jValidator.clearErrors();
     } else {
         demissao.removeAttribute('disabled', 'disabled');
         demissao.setAttribute('data-rules', 'required');
