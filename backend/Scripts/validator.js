@@ -55,6 +55,14 @@
             }
         }
 
+        // caso seja o form de formação
+        if (document.querySelector('#inicio')) {
+            let check = jValidator.checkStartConclusionFormationDate();
+            if (check) {
+                send = false;
+            }
+        }
+
         if (send) {
             form.submit();
         }
@@ -124,6 +132,14 @@
         let resignationDate = document.querySelector('#demissao');
         if (resignationDate.value < admissionDate.value) {
             jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
+            return true;
+        }
+    },
+    checkStartConclusionFormationDate: () => {
+        let startDate = document.querySelector('#inicio');
+        let conclusionDate = document.querySelector('#conclusao');
+        if (conclusionDate.value < startDate.value) {
+            jValidator.showError(conclusionDate, 'A data de conclusão não pode ser anterior a data de inicio');
             return true;
         }
     }
