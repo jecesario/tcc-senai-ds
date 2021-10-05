@@ -82,6 +82,7 @@ namespace backend.Controllers
                     }
                     else
                     {
+                        Session["usuario"] = usuario;
                         return RedirectToAction("MeuCurriculo", "Curriculo");
                     }
 
