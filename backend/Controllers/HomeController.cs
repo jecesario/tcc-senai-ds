@@ -57,6 +57,9 @@ namespace backend.Controllers
             {
                 TempData["alertSucesso"] = "Usuário cadastrado. Efetue login abaixo";
                 return RedirectToAction("Entrar");
+            } else
+            {
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar usuário!";
             }
             return RedirectToAction("Cadastrar");
         }
