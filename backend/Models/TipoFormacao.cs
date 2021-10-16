@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 
 namespace backend.Models {
-    public class TiposFormacao {
+    public class TipoFormacao {
         private static string dbConfig = ConfigurationManager.ConnectionStrings["dbConfigSenai"].ConnectionString;
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -82,9 +82,9 @@ namespace backend.Models {
             return resp;
         }
 
-        public TiposFormacao buscarPorId() {
+        public TipoFormacao buscarPorId() {
             var con = new MySqlConnection(dbConfig);
-            var tiposFormacao = new TiposFormacao();
+            var tiposFormacao = new TipoFormacao();
 
             try {
                 con.Open();
@@ -114,9 +114,9 @@ namespace backend.Models {
             return tiposFormacao;
         }
 
-        public static List<TiposFormacao> listar() {
+        public static List<TipoFormacao> listar() {
             var con = new MySqlConnection(dbConfig);
-            var tiposFormacaoList = new List<TiposFormacao>();
+            var tiposFormacaoList = new List<TipoFormacao>();
 
             try {
                 con.Open();
@@ -126,7 +126,7 @@ namespace backend.Models {
 
                 if (dados.HasRows) {
                     while (dados.Read()) {
-                        var tiposFormacao = new TiposFormacao();
+                        var tiposFormacao = new TipoFormacao();
                         tiposFormacao.Id = int.Parse(dados["id"].ToString());
                         tiposFormacao.Nome = dados["nome"].ToString();
                         tiposFormacaoList.Add(tiposFormacao);

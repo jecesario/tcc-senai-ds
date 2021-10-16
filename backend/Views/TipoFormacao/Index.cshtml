@@ -1,10 +1,10 @@
-﻿@model IEnumerable<backend.Models.Curso>
+﻿@model IEnumerable<backend.Models.TipoFormacao>
 @{
-    ViewBag.Title = "Listar Cursos";
+    ViewBag.Title = "Listar Tipos de Formação";
 }
 <div class="row my-3">
     <div class="col-md">
-        <h1>Listando todos os cursos</h1>
+        <h1>Listando todos os tipos de formação</h1>
         <h4>Você pode utilizar a busca para filtrar por nome</h4>
         @if (@TempData["alertInfo"] != null) {
             <div class="alert alert-info" role="alert">
@@ -25,12 +25,12 @@
 </div>
 <div class="row mb-4">
     <div class="col-md">
-        @Html.ActionLink("Cadastrar Novo Curso", "Cadastrar", "Curso", new { area = "" }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Cadastrar Novo Tipo de Formação", "Cadastrar", "TipoFormacao", new { area = "" }, new { @class = "btn btn-success" })
     </div>
 </div>
 <div class="row">
     <div class="col-md">
-        <form action="/Curso/Buscar" method="get">
+        <form action="/TipoFormacao/Buscar" method="get">
             <div class="input-group mb-3">
                 <input name="nome" type="text" class="form-control" placeholder="Ex: Panificação" aria-label="Ex: Panificação" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
@@ -54,8 +54,8 @@
                         <th scope="row">@Html.DisplayFor(id => curso.Id)</th>
                         <td>@Html.DisplayFor(nome => curso.Nome)</td>
                         <td>
-                            @Html.ActionLink(" ", "Editar", "Curso", new { id = curso.Id }, new { @class = "btn btn-warning far fa-edit" })
-                            @Html.ActionLink(" ", "Apagar", "Curso", new { id = curso.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+                            @Html.ActionLink(" ", "Editar", "TipoFormacao", new { id = curso.Id }, new { @class = "btn btn-warning far fa-edit" })
+                            @Html.ActionLink(" ", "Apagar", "TipoFormacao", new { id = curso.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
                         </td>
                     </tr>
                 }

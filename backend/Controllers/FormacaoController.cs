@@ -21,7 +21,7 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
-            return View(TiposFormacao.listar());
+            return View(TipoFormacao.listar());
         }
 
         public ActionResult CadastrarAction()
@@ -74,7 +74,7 @@ namespace backend.Controllers
             var formacao = new Formacao();
             formacao.Id = id;
             ViewBag.Formacao = formacao.buscarPorId();
-            return View(TiposFormacao.listar());
+            return View(TipoFormacao.listar());
         }
 
         public ActionResult EditarAction()
