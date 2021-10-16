@@ -20,14 +20,15 @@ namespace backend.Models {
                 var query = con.CreateCommand();
                 query.CommandText = "INSERT INTO senai_cursos (nome) VALUES (@nome)";
                 query.Parameters.AddWithValue("@nome", Nome);
-                
-                if(query.ExecuteNonQuery() > 0)
-                {
+
+                if (query.ExecuteNonQuery() > 0) {
                     resp = true;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 resp = false;
-            } finally {
+            }
+            finally {
                 con.Close();
             }
 
@@ -43,13 +44,14 @@ namespace backend.Models {
                 var query = con.CreateCommand();
                 query.CommandText = "DELETE FROM senai_cursos WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
-                if (query.ExecuteNonQuery() > 0)
-                {
+                if (query.ExecuteNonQuery() > 0) {
                     resp = true;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 resp = false;
-            } finally {
+            }
+            finally {
                 con.Close();
             }
 
@@ -66,13 +68,14 @@ namespace backend.Models {
                 query.CommandText = "UPDATE senai_cursos SET nome = @nome WHERE id = @id";
                 query.Parameters.AddWithValue("@nome", Nome);
                 query.Parameters.AddWithValue("@id", Id);
-                if(query.ExecuteNonQuery() > 0)
-                {
+                if (query.ExecuteNonQuery() > 0) {
                     resp = true;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 resp = false;
-            } finally {
+            }
+            finally {
                 con.Close();
             }
 
@@ -90,19 +93,21 @@ namespace backend.Models {
                 query.Parameters.AddWithValue("@id", Id);
                 var dados = query.ExecuteReader();
 
-                if(dados.HasRows){
+                if (dados.HasRows) {
                     while (dados.Read()) {
                         curso.Id = int.Parse(dados["id"].ToString());
                         curso.Nome = dados["nome"].ToString();
                     }
-                } else
-                {
+                }
+                else {
                     curso = null;
                 }
-                
-            } catch (Exception e) {
+
+            }
+            catch (Exception e) {
                 curso = null;
-            } finally {
+            }
+            finally {
                 con.Close();
             }
 
@@ -119,61 +124,54 @@ namespace backend.Models {
                 query.CommandText = "SELECT * FROM senai_cursos";
                 var dados = query.ExecuteReader();
 
-                if(dados.HasRows)
-                {
-                    while (dados.Read())
-                    {
+                if (dados.HasRows) {
+                    while (dados.Read()) {
                         var curso = new Curso();
                         curso.Id = int.Parse(dados["id"].ToString());
                         curso.Nome = dados["nome"].ToString();
                         cursos.Add(curso);
                     }
                 }
-                
-            } catch (Exception e) {
+
+            }
+            catch (Exception e) {
                 cursos = null;
-            } finally {
+            }
+            finally {
                 con.Close();
             }
 
             return cursos;
         }
 
-        public List<Curso> buscarPorNome(string nome)
-        {
+        public List<Curso> buscarPorNome(string nome) {
             var con = new MySqlConnection(dbConfig);
             var cursos = new List<Curso>();
 
-            try
-            {
+            try {
                 con.Open();
                 var query = con.CreateCommand();
                 query.CommandText = "SELECT * FROM senai_cursos WHERE nome LIKE @nome";
                 query.Parameters.AddWithValue("@nome", "%" + nome + "%");
                 var dados = query.ExecuteReader();
 
-                if (dados.HasRows)
-                {
-                    while (dados.Read())
-                    {
+                if (dados.HasRows) {
+                    while (dados.Read()) {
                         var curso = new Curso();
                         curso.Id = int.Parse(dados["id"].ToString());
                         curso.Nome = dados["nome"].ToString();
                         cursos.Add(curso);
                     }
                 }
-                else
-                {
+                else {
                     cursos = null;
                 }
 
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 cursos = null;
             }
-            finally
-            {
+            finally {
                 con.Close();
             }
 
