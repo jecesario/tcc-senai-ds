@@ -81,5 +81,37 @@ namespace backend.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Apagar(int id) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var tipoFormacao = new TipoFormacao();
+            tipoFormacao.Id = id;
+            if (tipoFormacao.apagar()) {
+                TempData["alertSucesso"] = "Tipo de formação apagado com sucesso!";
+            }
+            else {
+                TempData["alertErro"] = "Ocorreu um erro ao deletar tipo de formação!";
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Buscar(string nome) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var tipoFormacao = new TipoFormacao();
+            return View(tipoFormacao.buscarPorNome(nome));
+        }
     }
 }

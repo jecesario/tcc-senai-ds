@@ -143,5 +143,39 @@ namespace backend.Models {
 
             return tiposFormacaoList;
         }
+
+        public List<TipoFormacao> buscarPorNome(string nome) {
+            var con = new MySqlConnection(dbConfig);
+            var tiposFormacao = new List<TipoFormacao>();
+
+            try {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM tipos_formacao WHERE nome LIKE @nome";
+                query.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows) {
+                    while (dados.Read()) {
+                        var tipoFormacao = new TipoFormacao();
+                        tipoFormacao.Id = int.Parse(dados["id"].ToString());
+                        tipoFormacao.Nome = dados["nome"].ToString();
+                        tiposFormacao.Add(tipoFormacao);
+                    }
+                }
+                else {
+                    tiposFormacao = null;
+                }
+
+            }
+            catch (Exception e) {
+                tiposFormacao = null;
+            }
+            finally {
+                con.Close();
+            }
+
+            return tiposFormacao;
+        }
     }
 }

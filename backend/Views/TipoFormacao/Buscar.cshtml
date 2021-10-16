@@ -1,25 +1,22 @@
-﻿@model IEnumerable<backend.Models.Curso>
+﻿@model IEnumerable<backend.Models.TipoFormacao>
 @{
-    ViewBag.Title = "Buscar Curso";
+    ViewBag.Title = "Buscar tipo de formação";
 }
 <div class="row my-3">
     <div class="col-md">
         <h1>Listando todos os cursos</h1>
         <h4>Você pode utilizar a busca para filtrar por nome</h4>
-        @if (@TempData["alertInfo"] != null)
-        {
+        @if (@TempData["alertInfo"] != null) {
             <div class="alert alert-info" role="alert">
                 @TempData["alertInfo"]
             </div>
         }
-        @if (@TempData["alertSucesso"] != null)
-        {
+        @if (@TempData["alertSucesso"] != null) {
             <div class="alert alert-success" role="alert">
                 @TempData["alertSucesso"]
             </div>
         }
-        @if (@TempData["alertErro"] != null)
-        {
+        @if (@TempData["alertErro"] != null) {
             <div class="alert alert-danger" role="alert">
                 @TempData["alertErro"]
             </div>
@@ -28,14 +25,14 @@
 </div>
 <div class="row mb-4">
     <div class="col-md">
-        @Html.ActionLink("Cadastrar Novo Curso", "Cadastrar", "Curso", new { area = "" }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Cadastrar Novo Tipo de Formação", "Cadastrar", "TipoFormacao", new { area = "" }, new { @class = "btn btn-success" })
     </div>
 </div>
 <div class="row">
     <div class="col-md">
-        <form action="/Curso/Buscar" method="get">
+        <form action="/TipoFormacao/Buscar" method="get">
             <div class="input-group mb-3">
-                <input name="nome" type="text" class="form-control" placeholder="Ex: Panificação" aria-label="Ex: Panificação" aria-describedby="button-addon2">
+                <input name="nome" type="text" class="form-control" placeholder="Ex: Graduação" aria-label="Ex: Graduação" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
             </div>
         </form>
@@ -52,14 +49,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var curso in Model)
-                {
+                @foreach (var tipoFormacao in Model) {
                     <tr>
-                        <th scope="row">@Html.DisplayFor(id => curso.Id)</th>
-                        <td>@Html.DisplayFor(nome => curso.Nome)</td>
+                        <th scope="row">@Html.DisplayFor(id => tipoFormacao.Id)</th>
+                        <td>@Html.DisplayFor(nome => tipoFormacao.Nome)</td>
                         <td>
-                            @Html.ActionLink(" ", "Editar", "Curso", new { id = curso.Id }, new { @class = "btn btn-warning far fa-edit" })
-                            @Html.ActionLink(" ", "Apagar", "Curso", new { id = curso.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+                            @Html.ActionLink(" ", "Editar", "TipoFormacao", new { id = tipoFormacao.Id }, new { @class = "btn btn-warning far fa-edit" })
+                            @Html.ActionLink(" ", "Apagar", "TipoFormacao", new { id = tipoFormacao.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
                         </td>
                     </tr>
                 }
