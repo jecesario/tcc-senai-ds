@@ -1,0 +1,24 @@
+﻿@model backend.Models.TipoFormacao
+@{
+    ViewBag.Title = "Editar tipo de formação";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Editar  tipo de formação</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/TipoFormacao/EditarAction" method="post" class="jValidator">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome do tipo de formação</label>
+                <input name="nome" type="text" class="form-control" id="nome" value="@Model.Nome" data-rules="required|min:3|max:50">
+                <input name="id" type="hidden" class="form-control" id="id" value="@Model.Id">
+            </div>
+            <button type="submit" class="btn btn-success">Editar tipo de formação</button>
+        </form>
+    </div>
+</div>
+<script src="~/Scripts/validator.js"></script>

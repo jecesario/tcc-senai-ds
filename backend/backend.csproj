@@ -215,6 +215,8 @@
     <Content Include="Views\Formacao\Cadastrar.cshtml" />
     <Content Include="Views\Formacao\Editar.cshtml" />
     <Content Include="Views\TipoFormacao\Index.cshtml" />
+    <Content Include="Views\TipoFormacao\Cadastrar.cshtml" />
+    <Content Include="Views\TipoFormacao\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
