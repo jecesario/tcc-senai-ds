@@ -49,5 +49,36 @@ namespace backend.Controllers.admin.vagas
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Editar(int id) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var vagaTipo = new VagaTipo();
+            vagaTipo.Id = id;
+
+            return View(vagaTipo.buscarPorId());
+        }
+
+        [HttpPost]
+        public ActionResult EditarAction() {
+            var descricao = Request.Form["descricao"];
+            var id = int.Parse(Request.Form["id"]);
+
+            var vagaTipo = new VagaTipo();
+            vagaTipo.Id = id;
+            vagaTipo.Descricao = descricao;
+            if (vagaTipo.editar()) {
+                TempData["alertSucesso"] = "Tipo de Vaga editada com sucesso!";
+            } else {
+                TempData["alertErro"] = "Ocorreu um erro ao editar Tipo de Vaga!";
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

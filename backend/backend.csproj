@@ -222,6 +222,7 @@
     <Content Include="Views\TipoFormacao\Buscar.cshtml" />
     <Content Include="Views\VagaTipo\Index.cshtml" />
     <Content Include="Views\VagaTipo\Cadastrar.cshtml" />
+    <Content Include="Views\VagaTipo\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
