@@ -25,5 +25,29 @@ namespace backend.Controllers.admin.vagas
             }
             return View(tipoVagas);
         }
+
+        public ActionResult Cadastrar() {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarAction() {
+            var vagaTipo = new VagaTipo();
+            vagaTipo.Descricao = Request.Form["descricao"];
+            if (vagaTipo.cadastrar()) {
+                TempData["alertSucesso"] = "Tipo de Vaga cadastrada com sucesso!";
+            } else {
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Tipo de Vaga!";
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

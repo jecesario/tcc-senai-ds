@@ -1,0 +1,24 @@
+﻿@model backend.Models.Curso
+@{
+    ViewBag.Title = "Cadastrar Tipo de Vaga";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Cadastrar novo Tipo de Vaga</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/VagaTipo/CadastrarAction" method="post" class="jValidator">
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <input name="descricao" type="text" class="form-control" id="descricao" data-rules="required|min:3|max:50">
+            </div>
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+        </form>
+    </div>
+</div>
+<script src="~/Scripts/validator.js"></script>
+
