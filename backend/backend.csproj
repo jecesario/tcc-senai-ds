@@ -170,6 +170,7 @@
     <Compile Include="Models\HabilidadeCurriculo.cs" />
     <Compile Include="Models\TipoFormacao.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\VagaTipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +220,7 @@
     <Content Include="Views\TipoFormacao\Cadastrar.cshtml" />
     <Content Include="Views\TipoFormacao\Editar.cshtml" />
     <Content Include="Views\TipoFormacao\Buscar.cshtml" />
+    <Content Include="Views\VagaTipo\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\VagaTipo\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
