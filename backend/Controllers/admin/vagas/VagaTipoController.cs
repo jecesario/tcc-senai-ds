@@ -98,5 +98,18 @@ namespace backend.Controllers.admin.vagas
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Buscar(string descricao) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var vagaTipo = new VagaTipo();
+            return View(vagaTipo.buscarPorDescricao(descricao));
+        }
     }
 }
