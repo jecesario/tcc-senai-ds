@@ -24,5 +24,29 @@ namespace backend.Controllers.admin.vagas
             }
             return View(vagaJornadas);
         }
+
+        public ActionResult Cadastrar() {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarAction() {
+            var vagaJornada = new VagaJornada();
+            vagaJornada.Descricao = Request.Form["descricao"];
+            if (vagaJornada.cadastrar()) {
+                TempData["alertSucesso"] = "Tipo de Vaga cadastrada com sucesso!";
+            } else {
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Tipo de Vaga!";
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
