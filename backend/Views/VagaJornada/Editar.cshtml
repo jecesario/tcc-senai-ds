@@ -1,0 +1,24 @@
+﻿@model backend.Models.VagaJornada
+@{
+    ViewBag.Title = "Editar Tipo de Vaga";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Editar  Tipo de Jornada</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/VagaJornada/EditarAction" method="post" class="jValidator">
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <input name="descricao" type="text" class="form-control" id="nome" value="@Model.Descricao" data-rules="required|min:3|max:50">
+                <input name="id" type="hidden" class="form-control" id="id" value="@Model.Id">
+            </div>
+            <button type="submit" class="btn btn-success">Editar Tipo de Jornada</button>
+        </form>
+    </div>
+</div>
+<script src="~/Scripts/validator.js"></script>

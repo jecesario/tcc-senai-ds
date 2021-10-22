@@ -20,7 +20,7 @@ namespace backend.Controllers.admin.vagas
             }
             var vagaJornadas = VagaJornada.listar();
             if (vagaJornadas == null || vagaJornadas.Count == 0) {
-                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de vaga cadastrado!";
+                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de Jornada cadastrado!";
             }
             return View(vagaJornadas);
         }
@@ -41,9 +41,40 @@ namespace backend.Controllers.admin.vagas
             var vagaJornada = new VagaJornada();
             vagaJornada.Descricao = Request.Form["descricao"];
             if (vagaJornada.cadastrar()) {
-                TempData["alertSucesso"] = "Tipo de Vaga cadastrada com sucesso!";
+                TempData["alertSucesso"] = "Tipo de Jornada cadastrada com sucesso!";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Tipo de Vaga!";
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Tipo de Jornada!";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Editar(int id) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var vagaJornada = new VagaJornada();
+            vagaJornada.Id = id;
+
+            return View(vagaJornada.buscarPorId());
+        }
+
+        [HttpPost]
+        public ActionResult EditarAction() {
+            var descricao = Request.Form["descricao"];
+            var id = int.Parse(Request.Form["id"]);
+
+            var vagaJornada = new VagaJornada();
+            vagaJornada.Id = id;
+            vagaJornada.Descricao = descricao;
+            if (vagaJornada.editar()) {
+                TempData["alertSucesso"] = "Tipo de Jornada editada com sucesso!";
+            } else {
+                TempData["alertErro"] = "Ocorreu um erro ao editar Tipo de Jornada!";
             }
 
             return RedirectToAction("Index");
