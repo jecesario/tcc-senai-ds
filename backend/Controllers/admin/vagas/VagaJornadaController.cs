@@ -79,5 +79,23 @@ namespace backend.Controllers.admin.vagas
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Apagar(int id) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var vagaJornada = new VagaJornada();
+            vagaJornada.Id = id;
+            if (vagaJornada.apagar()) {
+                TempData["alertSucesso"] = "Tipo de Jornada apagado com sucesso!";
+            } else {
+                TempData["alertErro"] = "Ocorreu um erro ao deletar Tipo de Jornada!";
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
