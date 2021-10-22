@@ -78,9 +78,9 @@ namespace backend.Models
             return resp;
         }
 
-        public VagaTipo buscarPorId() {
+        public VagaJornada buscarPorId() {
             var con = new MySqlConnection(dbConfig);
-            var vagaTipo = new VagaTipo();
+            var vagaJornada = new VagaJornada();
 
             try {
                 con.Open();
@@ -91,25 +91,25 @@ namespace backend.Models
 
                 if (dados.HasRows) {
                     while (dados.Read()) {
-                        vagaTipo.Id = int.Parse(dados["id"].ToString());
-                        vagaTipo.Descricao = dados["descricao"].ToString();
+                        vagaJornada.Id = int.Parse(dados["id"].ToString());
+                        vagaJornada.Descricao = dados["descricao"].ToString();
                     }
                 } else {
-                    vagaTipo = null;
+                    vagaJornada = null;
                 }
 
             } catch (Exception e) {
-                vagaTipo = null;
+                vagaJornada = null;
             } finally {
                 con.Close();
             }
 
-            return vagaTipo;
+            return vagaJornada;
         }
 
-        public static List<VagaTipo> listar() {
+        public static List<VagaJornada> listar() {
             var con = new MySqlConnection(dbConfig);
-            var vagaTipos = new List<VagaTipo>();
+            var vagaJornadas = new List<VagaJornada>();
 
             try {
                 con.Open();
@@ -119,25 +119,25 @@ namespace backend.Models
 
                 if (dados.HasRows) {
                     while (dados.Read()) {
-                        var vagaTipo = new VagaTipo();
-                        vagaTipo.Id = int.Parse(dados["id"].ToString());
-                        vagaTipo.Descricao = dados["descricao"].ToString();
-                        vagaTipos.Add(vagaTipo);
+                        var vagaJornada = new VagaJornada();
+                        vagaJornada.Id = int.Parse(dados["id"].ToString());
+                        vagaJornada.Descricao = dados["descricao"].ToString();
+                        vagaJornadas.Add(vagaJornada);
                     }
                 }
 
             } catch (Exception e) {
-                vagaTipos = null;
+                vagaJornadas = null;
             } finally {
                 con.Close();
             }
 
-            return vagaTipos;
+            return vagaJornadas;
         }
 
-        public List<VagaTipo> buscarPorDescricao(string descricao) {
+        public List<VagaJornada> buscarPorDescricao(string descricao) {
             var con = new MySqlConnection(dbConfig);
-            var vagaTipos = new List<VagaTipo>();
+            var vagaJornadas = new List<VagaJornada>();
 
             try {
                 con.Open();
@@ -148,22 +148,22 @@ namespace backend.Models
 
                 if (dados.HasRows) {
                     while (dados.Read()) {
-                        var vagaTipo = new VagaTipo();
-                        vagaTipo.Id = int.Parse(dados["id"].ToString());
-                        vagaTipo.Descricao = dados["descricao"].ToString();
-                        vagaTipos.Add(vagaTipo);
+                        var vagaJornada = new VagaJornada();
+                        vagaJornada.Id = int.Parse(dados["id"].ToString());
+                        vagaJornada.Descricao = dados["descricao"].ToString();
+                        vagaJornadas.Add(vagaJornada);
                     }
                 } else {
-                    vagaTipos = null;
+                    vagaJornadas = null;
                 }
 
             } catch (Exception e) {
-                vagaTipos = null;
+                vagaJornadas = null;
             } finally {
                 con.Close();
             }
 
-            return vagaTipos;
+            return vagaJornadas;
         }
     }
 }
