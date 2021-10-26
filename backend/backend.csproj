@@ -233,6 +233,7 @@
     <Content Include="Views\VagaJornada\Editar.cshtml" />
     <Content Include="Views\VagaJornada\Buscar.cshtml" />
     <Content Include="Views\Vaga\Cadastrar.cshtml" />
+    <Content Include="Views\Vaga\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -20,7 +20,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "INSERT INTO vagas_modalidades (descricao) VALUES (@descricao)";
+                query.CommandText = "INSERT INTO vagas_jornadas (descricao) VALUES (@descricao)";
                 query.Parameters.AddWithValue("@descricao", Descricao);
 
                 if (query.ExecuteNonQuery() > 0) {
@@ -42,7 +42,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "DELETE FROM vagas_modalidades WHERE id = @id";
+                query.CommandText = "DELETE FROM vagas_jornadas WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
                 if (query.ExecuteNonQuery() > 0) {
                     resp = true;
@@ -63,7 +63,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "UPDATE vagas_modalidades SET descricao = @descricao WHERE id = @id";
+                query.CommandText = "UPDATE vagas_jornadas SET descricao = @descricao WHERE id = @id";
                 query.Parameters.AddWithValue("@descricao", Descricao);
                 query.Parameters.AddWithValue("@id", Id);
                 if (query.ExecuteNonQuery() > 0) {
@@ -85,7 +85,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM vagas_modalidades WHERE id = @id";
+                query.CommandText = "SELECT * FROM vagas_jornadas WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
                 var dados = query.ExecuteReader();
 
@@ -114,7 +114,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM vagas_modalidades";
+                query.CommandText = "SELECT * FROM vagas_jornadas";
                 var dados = query.ExecuteReader();
 
                 if (dados.HasRows) {
@@ -142,7 +142,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM vagas_modalidades WHERE descricao LIKE @descricao";
+                query.CommandText = "SELECT * FROM vagas_jornadas WHERE descricao LIKE @descricao";
                 query.Parameters.AddWithValue("@descricao", "%" + descricao + "%");
                 var dados = query.ExecuteReader();
 
