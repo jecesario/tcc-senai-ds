@@ -145,6 +145,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\admin\vagas\VagaController.cs" />
     <Compile Include="Controllers\admin\vagas\VagaJornadaController.cs" />
     <Compile Include="Controllers\admin\vagas\VagaTipoController.cs" />
     <Compile Include="Controllers\api\CursoController.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\HabilidadeCurriculo.cs" />
     <Compile Include="Models\TipoFormacao.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Vaga.cs" />
     <Compile Include="Models\VagaJornada.cs" />
     <Compile Include="Models\VagaTipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,6 +232,7 @@
     <Content Include="Views\VagaJornada\Cadastrar.cshtml" />
     <Content Include="Views\VagaJornada\Editar.cshtml" />
     <Content Include="Views\VagaJornada\Buscar.cshtml" />
+    <Content Include="Views\Vaga\Cadastrar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
