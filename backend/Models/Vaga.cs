@@ -100,9 +100,9 @@ namespace backend.Models
             return resp;
         }
 
-        public List<Vaga> buscarPorId() {
+        public Vaga buscarPorId() {
             var con = new MySqlConnection(dbConfig);
-            var vagas = new List<Vaga>();
+            var vaga = new Vaga();
 
             try {
                 con.Open();
@@ -113,7 +113,6 @@ namespace backend.Models
 
                 if (dados.HasRows) {
                     while (dados.Read()) {
-                        var vaga = new Vaga();
                         vaga.Id = dados.GetInt32("id");
                         vaga.Cargo = dados.GetString("cargo");
                         vaga.Quantidade = dados.GetInt32("quantidade");
@@ -124,24 +123,23 @@ namespace backend.Models
                         vaga.Atribuicoes = dados.GetString("atribuicoes");
                         vaga.Beneficios = dados.GetString("beneficios");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
-                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("dd/MM/yyyy");
+                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("yyyy-MM-dd");
                         vaga.Observacoes = dados.GetString("observacoes");
                         vaga.VagaJornadaId = dados.GetInt32("id_vagas_modalidades");
                         vaga.VagaTipoId = dados.GetInt32("id_vagas_tipos");
                         vaga.UsuarioId = dados.GetInt32("id_usuario");
-                        vagas.Add(vaga);
                     }
                 } else {
-                    vagas = null;
+                    vaga = null;
                 }
 
             } catch (Exception e) {
-                vagas = null;
+                vaga = null;
             } finally {
                 con.Close();
             }
 
-            return vagas;
+            return vaga;
         }
 
         public bool apagar() {
@@ -196,6 +194,7 @@ namespace backend.Models
                     resp = true;
                 }
             } catch (Exception e) {
+                string erro = e.Message;
                 resp = false;
             } finally {
                 con.Close();

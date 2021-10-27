@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\backend",
-    "\\backend\\Scripts",
-    "\\backend\\Views",
+    "\\backend\\Controllers",
+    "\\backend\\Controllers\\admin",
+    "\\backend\\Controllers\\admin\\vagas",
     "\\backend\\Views\\Curriculo"
   ],
   "SelectedNode": "\\backend.sln",

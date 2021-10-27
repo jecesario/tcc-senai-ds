@@ -1,6 +1,7 @@
 ﻿
 @{
     var usuario = (backend.Models.Usuario)Session["usuario"];
+    usuario.Nome = usuario.Nome.Split(' ').FirstOrDefault();
 }
 <!doctype html>
 <html lang="pt-br">
@@ -22,8 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    @if (@usuario.Tipo == 1)
-                    {
+                    @if (@usuario.Tipo == 1) {
                         <li class="nav-item">
                             @Html.ActionLink("Currículos", "Index", "Curriculo", new { area = "" }, new { @class = "nav-link" })
                         </li>
@@ -48,9 +48,7 @@
                         <li class="nav-item">
                             @Html.ActionLink("Vagas", "Index", "Vaga", new { area = "" }, new { @class = "nav-link" })
                         </li>
-                    }
-                    else
-                    {
+                    } else {
                         <li class="nav-item">
                             @Html.ActionLink("Meu Curriculo", "MeuCurriculo", "Curriculo", new { area = "" }, new { @class = "nav-link" })
                         </li>

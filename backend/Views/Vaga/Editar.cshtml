@@ -1,0 +1,120 @@
+﻿@model backend.Models.Vaga
+@{
+    ViewBag.Title = "Cadastrar Vaga";
+    var jornadas = ViewData["jornadas"] as List<backend.Models.VagaJornada>;
+    var tiposContracao = ViewData["tiposContratacao"] as List<backend.Models.VagaTipo>;
+    var vaga = Model;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Editar vaga</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/Vaga/EditarAction" method="post" class="jValidator">
+            @if (@TempData["alertInfo"] != null) {
+                <div class="alert alert-info" role="alert">
+                    @TempData["alertInfo"]
+                </div>
+            }
+            @if (@TempData["alertSucesso"] != null) {
+                <div class="alert alert-success" role="alert">
+                    @TempData["alertSucesso"]
+                </div>
+            }
+            @if (@TempData["alertErro"] != null) {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["alertErro"]
+                </div>
+            }
+            <div class="form-floating mb-3">
+                <select name="jornada" class="form-select" id="floatingSelectGrid" aria-label="Jornada" data-rules="pick">
+                    <option value="" selected>Selecione uma opção</option>
+                    @foreach (var jornada in jornadas) {
+                        <option value="@jornada.Id" @(vaga.VagaJornadaId == jornada.Id ? "selected" : "")>@jornada.Descricao</option>
+                    }
+                </select>
+                <label for="floatingSelectGrid">Jornada de Trabalho</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select name="tipo" class="form-select" id="floatingSelectGrid" aria-label="Tipo" data-rules="pick">
+                    <option value="" selected>Selecione uma opção</option>
+                    @foreach (var tipo in tiposContracao) {
+                        <option value="@tipo.Id" @(vaga.VagaTipoId == tipo.Id ? "selected" : "")>@tipo.Descricao</option>
+                    }
+                </select>
+                <label for="floatingSelectGrid">Tipo de Contratação</label>
+            </div>
+            <div class="mb-3">
+                <label for="cargo" class="form-label">Cargo</label>
+                <input name="cargo" type="text" class="form-control" id="cargo" data-rules="required|min:3|max:40" value="@vaga.Cargo">
+            </div>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade de vagas</label>
+                <input name="quantidade" type="number" class="form-control" id="quantidade" data-rules="required|max:3" value="@vaga.Quantidade">
+            </div>
+            <div class="mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input name="cidade" type="text" class="form-control" id="cidade" data-rules="required|min:3|max:50" value="@vaga.Cidade">
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <select name="estado" class="form-select" id="floatingSelectGrid" aria-label="Estado" data-rules="pick">
+                        <option value="">Selecione um estado</option>
+                        <option value="SP" selected>São Paulo</option>
+                    </select>
+                    <label for="floatingSelectGrid">Estado</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="empresa" class="form-label">Empresa contratante</label>
+                <input name="empresa" type="text" class="form-control" id="empresa" data-rules="required|min:3|max:100" value="@vaga.Empresa">
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <textarea name="requisitos" class="form-control" placeholder="O que o candidado precisa saber?" id="floatingTextarea2" style="height: 200px" data-rules="required|min:3|max:500">@vaga.Requisitos</textarea>
+                        <label for="floatingTextarea2">Requisitos</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <textarea name="atribuicoes" class="form-control" placeholder="O que o candidado vai fazer?" id="floatingTextarea2" style="height: 200px" data-rules="required|min:3|max:500">@vaga.Atribuicoes</textarea>
+                        <label for="floatingTextarea2">Atribuições</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="remuneracao" class="form-label">Remuneração</label>
+                <input name="remuneracao" type="number" class="form-control" id="remuneracao" value="@vaga.Remuneracao">
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <textarea name="beneficios" class="form-control" placeholder="O que o candidado vai fazer?" id="floatingTextarea2" style="height: 200px" data-rules="required|min:3|max:300">@vaga.Beneficios</textarea>
+                        <label for="floatingTextarea2">Benefícios</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="dataLimite" class="form-label">Data limite</label>
+                <input name="dataLimite" type="date" class="form-control" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" id="dataLimite" data-rules="required" value="@vaga.DataLimite">
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <textarea name="observacoes" class="form-control" placeholder="Como que faz pra aplicar o candidato?" id="floatingTextarea2" style="height: 200px" data-rules="required|max:255">@vaga.Observacoes</textarea>
+                        <label for="floatingTextarea2">Benefícios</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Editar</button>
+        </form>
+    </div>
+</div>
+<script src="~/Scripts/validator.js"></script>
