@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using backend.Models.Dtos;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -27,33 +28,27 @@ namespace backend.Models
         public int VagaTipoId { get; set; }
         public int UsuarioId { get; set; }
 
-        public static List<Vaga> listar() {
+        public static List<ListarVagasResponse> listar() {
             var con = new MySqlConnection(dbConfig);
-            var vagas = new List<Vaga>();
+            var vagas = new List<ListarVagasResponse>();
 
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM vagas";
+                query.CommandText = "SELECT id, cargo, cidade, estado, requisitos, atribuicoes, remuneracao, beneficios, data_postagem FROM vagas";
                 var dados = query.ExecuteReader();
 
                 if (dados.HasRows) {
                     while (dados.Read()) {
-                        var vaga = new Vaga();
+                        var vaga = new ListarVagasResponse();
                         vaga.Id = dados.GetInt32("id");
-                        vaga.Cargo = dados.GetString("cargo");
-                        vaga.Quantidade = dados.GetInt32("quantidade");
-                        vaga.Cidade = dados.GetString("cidade");
-                        vaga.Estado = dados.GetString("estado");
-                        vaga.Empresa = dados.GetString("empresa");
-                        vaga.Requisitos = dados.GetString("requisitos");
-                        vaga.Beneficios = dados.GetString("beneficios");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
-                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("dd/MM/yyyy");
-                        vaga.Observacoes = dados.GetString("observacoes");
-                        vaga.VagaJornadaId = dados.GetInt32("id_vagas_modalidades");
-                        vaga.VagaTipoId = dados.GetInt32("id_vagas_tipos");
-                        vaga.UsuarioId = dados.GetInt32("id_usuario");
+                        vaga.Cargo = dados.GetString("cargo");
+                        vaga.Localidade = dados.GetString("cidade") + "-" + dados.GetString("estado");
+                        vaga.Remuneracao = dados.GetDouble("remuneracao");
+                        vaga.Beneficios = dados.GetString("beneficios");
+                        vaga.Requisitos = dados.GetString("requisitos");
+                        vaga.Atribuicoes = dados.GetString("atribuicoes");
                         vagas.Add(vaga);
                     }
                 }
@@ -126,6 +121,7 @@ namespace backend.Models
                         vaga.Estado = dados.GetString("estado");
                         vaga.Empresa = dados.GetString("empresa");
                         vaga.Requisitos = dados.GetString("requisitos");
+                        vaga.Atribuicoes = dados.GetString("atribuicoes");
                         vaga.Beneficios = dados.GetString("beneficios");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
                         vaga.DataLimite = dados.GetDateTime("data_limite").ToString("dd/MM/yyyy");
@@ -207,5 +203,6 @@ namespace backend.Models
 
             return resp;
         }
+
     }
 }

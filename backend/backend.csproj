@@ -166,6 +166,7 @@
     <Compile Include="Models\Curriculo.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Dtos\CurriculoResponse.cs" />
+    <Compile Include="Models\Dtos\ListarVagasResponse.cs" />
     <Compile Include="Models\Experiencia.cs" />
     <Compile Include="Models\Formacao.cs" />
     <Compile Include="Models\Habilidade.cs" />

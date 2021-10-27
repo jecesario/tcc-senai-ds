@@ -12,7 +12,17 @@ namespace backend.Controllers.admin.vagas
         // GET: Vaga
         public ActionResult Index()
         {
-            return View();
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+
+            var vagas = Vaga.listar();
+
+            return View(vagas);
         }
 
         public ActionResult Cadastrar() {

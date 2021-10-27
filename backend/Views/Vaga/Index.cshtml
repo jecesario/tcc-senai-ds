@@ -1,20 +1,66 @@
-﻿
+﻿@model IEnumerable<backend.Models.Dtos.ListarVagasResponse>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vagas - Listar";
 }
 
-<h2>Listar Vagas</h2>
-
-<div class="card text-center">
-    <div class="card-header">
-        Featured
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    <div class="card-footer text-muted">
-        2 days ago
+<div class="row my-3">
+    <div class="col-md">
+        <h1>Listando todos as Vagas</h1>
+        <h4>Você pode utilizar a busca para filtrar por cargo</h4>
+        @if (@TempData["alertInfo"] != null) {
+            <div class="alert alert-info" role="alert">
+                @TempData["alertInfo"]
+            </div>
+        }
+        @if (@TempData["alertSucesso"] != null) {
+            <div class="alert alert-success" role="alert">
+                @TempData["alertSucesso"]
+            </div>
+        }
+        @if (@TempData["alertErro"] != null) {
+            <div class="alert alert-danger" role="alert">
+                @TempData["alertErro"]
+            </div>
+        }
     </div>
 </div>
+
+<div class="row mb-4">
+    <div class="col-md">
+        @Html.ActionLink("Cadastrar Vaga", "Cadastrar", "Vaga", new { area = "" }, new { @class = "btn btn-success" })
+    </div>
+</div>
+
+@foreach (var vaga in Model) {
+    <div class="card text-decoration-none text-black mb-3">
+        <div class="card-header d-flex justify-content-between">
+            <div>
+                <h5 class="p-0 m-0">@vaga.Cargo - @vaga.Localidade</h5>
+            </div>
+            <div>
+                <p class="p-0 m-0">@vaga.DataPostagem</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text py-1 m-0">
+                <span class="fw-bold">Requisitos: </span>@vaga.Requisitos
+            </p>
+            <p class="card-text py-1 m-0">
+                <span class="fw-bold">Atribuições: </span>@vaga.Atribuicoes
+            </p>
+            <p class="card-text py-1 m-0">
+                <span class="fw-bold">Remuneração: </span>@vaga.Remuneracao
+            </p>
+            <p class="card-text py-1 m-0">
+                <span class="fw-bold">Benefícios: </span>@vaga.Beneficios
+            </p>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between">
+            @Html.ActionLink("Ver vaga", "Visualizar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-success" })
+            <div>
+                @Html.ActionLink(" ", "Editar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-warning far fa-edit" })
+                @Html.ActionLink(" ", "Apagar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+            </div>
+        </div>
+    </div>
+}
