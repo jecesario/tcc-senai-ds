@@ -15,17 +15,20 @@
 <div class="row">
     <div class="col-md-6">
         <form action="/Vaga/EditarAction" method="post" class="jValidator">
-            @if (@TempData["alertInfo"] != null) {
+            @if (@TempData["alertInfo"] != null)
+            {
                 <div class="alert alert-info" role="alert">
                     @TempData["alertInfo"]
                 </div>
             }
-            @if (@TempData["alertSucesso"] != null) {
+            @if (@TempData["alertSucesso"] != null)
+            {
                 <div class="alert alert-success" role="alert">
                     @TempData["alertSucesso"]
                 </div>
             }
-            @if (@TempData["alertErro"] != null) {
+            @if (@TempData["alertErro"] != null)
+            {
                 <div class="alert alert-danger" role="alert">
                     @TempData["alertErro"]
                 </div>
@@ -33,7 +36,8 @@
             <div class="form-floating mb-3">
                 <select name="jornada" class="form-select" id="floatingSelectGrid" aria-label="Jornada" data-rules="pick">
                     <option value="" selected>Selecione uma opção</option>
-                    @foreach (var jornada in jornadas) {
+                    @foreach (var jornada in jornadas)
+                    {
                         <option value="@jornada.Id" @(vaga.VagaJornadaId == jornada.Id ? "selected" : "")>@jornada.Descricao</option>
                     }
                 </select>
@@ -42,7 +46,8 @@
             <div class="form-floating mb-3">
                 <select name="tipo" class="form-select" id="floatingSelectGrid" aria-label="Tipo" data-rules="pick">
                     <option value="" selected>Selecione uma opção</option>
-                    @foreach (var tipo in tiposContracao) {
+                    @foreach (var tipo in tiposContracao)
+                    {
                         <option value="@tipo.Id" @(vaga.VagaTipoId == tipo.Id ? "selected" : "")>@tipo.Descricao</option>
                     }
                 </select>
@@ -113,6 +118,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="id" value="@Model.Id" />
             <button type="submit" class="btn btn-success">Editar</button>
         </form>
     </div>

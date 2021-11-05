@@ -114,6 +114,7 @@ namespace backend.Controllers.admin.vagas
             ViewBag.TiposContratacao = tiposContratacao;
 
             var vaga = new Vaga();
+            vaga.Id = int.Parse(Request.Form.Get("id"));
             vaga.Cargo = Request.Form.Get("cargo");
             vaga.Quantidade = int.Parse(Request.Form.Get("quantidade"));
             vaga.Cidade = Request.Form.Get("cidade");

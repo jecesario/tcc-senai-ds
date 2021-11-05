@@ -7,17 +7,20 @@
     <div class="col-md">
         <h1>Listando todos as Vagas</h1>
         <h4>Você pode utilizar a busca para filtrar por cargo</h4>
-        @if (@TempData["alertInfo"] != null) {
+        @if (@TempData["alertInfo"] != null)
+        {
             <div class="alert alert-info" role="alert">
                 @TempData["alertInfo"]
             </div>
         }
-        @if (@TempData["alertSucesso"] != null) {
+        @if (@TempData["alertSucesso"] != null)
+        {
             <div class="alert alert-success" role="alert">
                 @TempData["alertSucesso"]
             </div>
         }
-        @if (@TempData["alertErro"] != null) {
+        @if (@TempData["alertErro"] != null)
+        {
             <div class="alert alert-danger" role="alert">
                 @TempData["alertErro"]
             </div>
@@ -31,36 +34,44 @@
     </div>
 </div>
 
-@foreach (var vaga in Model) {
-    <div class="card text-decoration-none text-black mb-3">
-        <div class="card-header d-flex justify-content-between">
-            <div>
-                <h5 class="p-0 m-0">@vaga.Cargo - @vaga.Localidade</h5>
+@if (Model == null)
+{
+    <h3>Nenhuma vaga cadastrada</h3>
+}
+else
+{
+    foreach (var vaga in Model)
+    {
+        <div class="card text-decoration-none text-black mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    <h5 class="p-0 m-0">@vaga.Cargo - @vaga.Localidade</h5>
+                </div>
+                <div>
+                    <p class="p-0 m-0">@vaga.DataPostagem</p>
+                </div>
             </div>
-            <div>
-                <p class="p-0 m-0">@vaga.DataPostagem</p>
+            <div class="card-body">
+                <p class="card-text py-1 m-0">
+                    <span class="fw-bold">Requisitos: </span>@vaga.Requisitos
+                </p>
+                <p class="card-text py-1 m-0">
+                    <span class="fw-bold">Atribuições: </span>@vaga.Atribuicoes
+                </p>
+                <p class="card-text py-1 m-0">
+                    <span class="fw-bold">Remuneração: </span>@vaga.Remuneracao
+                </p>
+                <p class="card-text py-1 m-0">
+                    <span class="fw-bold">Benefícios: </span>@vaga.Beneficios
+                </p>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+                @Html.ActionLink("Ver vaga", "Visualizar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-success" })
+                <div>
+                    @Html.ActionLink(" ", "Editar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-warning far fa-edit" })
+                    @Html.ActionLink(" ", "Apagar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <p class="card-text py-1 m-0">
-                <span class="fw-bold">Requisitos: </span>@vaga.Requisitos
-            </p>
-            <p class="card-text py-1 m-0">
-                <span class="fw-bold">Atribuições: </span>@vaga.Atribuicoes
-            </p>
-            <p class="card-text py-1 m-0">
-                <span class="fw-bold">Remuneração: </span>@vaga.Remuneracao
-            </p>
-            <p class="card-text py-1 m-0">
-                <span class="fw-bold">Benefícios: </span>@vaga.Beneficios
-            </p>
-        </div>
-        <div class="card-footer text-muted d-flex justify-content-between">
-            @Html.ActionLink("Ver vaga", "Visualizar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-success" })
-            <div>
-                @Html.ActionLink(" ", "Editar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-warning far fa-edit" })
-                @Html.ActionLink(" ", "Apagar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
-            </div>
-        </div>
-    </div>
+    }
 }
