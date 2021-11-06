@@ -166,6 +166,7 @@
     <Compile Include="Models\Curriculo.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Dtos\CurriculoResponse.cs" />
+    <Compile Include="Models\Dtos\DetalharVagaResponse.cs" />
     <Compile Include="Models\Dtos\ListarVagasResponse.cs" />
     <Compile Include="Models\Experiencia.cs" />
     <Compile Include="Models\Formacao.cs" />
@@ -236,6 +237,7 @@
     <Content Include="Views\Vaga\Cadastrar.cshtml" />
     <Content Include="Views\Vaga\Index.cshtml" />
     <Content Include="Views\Vaga\Editar.cshtml" />
+    <Content Include="Views\Vaga\Detalhar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

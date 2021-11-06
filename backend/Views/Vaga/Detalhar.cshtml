@@ -1,0 +1,47 @@
+﻿@model backend.Models.Dtos.DetalharVagaResponse 
+@{
+    ViewBag.Title = "Vaga - Detalhar";
+    var vaga = Model;
+}
+
+<h2>Detalhar Vaga</h2>
+
+<div class="card text-decoration-none text-black my-3">
+    <div class="card-header d-flex justify-content-between">
+        <div>
+            <h5 class="p-0 m-0">@vaga.Cargo - @vaga.Localidade - @vaga.Quantidade Vagas - @vaga.Tipo - @vaga.Jornada</h5>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="card-text py-1 m-0">
+            <span class="fw-bold">Contratante: </span>@vaga.Contratante
+        </p>
+        <p class="card-text py-1 m-0">
+            <span class="fw-bold">Requisitos: </span>@vaga.Requisitos
+        </p>
+        <p class="card-text py-1 m-0">
+            <span class="fw-bold">Atribuições: </span>@vaga.Atribuicoes
+        </p>
+        <p class="card-text py-1 m-0">
+            <span class="fw-bold">Remuneração: </span>R$ @vaga.Remuneracao
+        </p>
+        <p class="card-text py-1 m-0">
+            <span class="fw-bold">Benefícios: </span>@vaga.Beneficios
+        </p>
+        <p class="card-text py-1 m-0">
+            <span class="fw-bold">Observações: </span>@vaga.Observacoes
+        </p>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-between">
+        <div>
+            <p class="m-0">Postado em: @vaga.DataPostagem Por: @vaga.Usuario - Expira em: @vaga.DataLimite</p>
+        </div>
+        <div>
+            @Html.ActionLink(" ", "Editar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-warning far fa-edit" })
+            @Html.ActionLink(" ", "Apagar", "Vaga", new { id = vaga.Id }, new { @class = "btn btn-danger far fa-trash-alt" })
+        </div>
+    </div>
+</div>
+

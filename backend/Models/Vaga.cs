@@ -203,5 +203,40 @@ namespace backend.Models
             return resp;
         }
 
+        public DetalharVagaResponse toDetalhar()
+        {
+            var vaga = new DetalharVagaResponse();
+            
+            // Buscando o tipo de vaga
+            var tipo = new VagaTipo();
+            tipo.Id = VagaTipoId;
+
+            // Buscando o tipo de jornada de vaga
+            var jornada = new VagaJornada();
+            jornada.Id = VagaJornadaId;
+
+            // Buscando usuário que publicou a vaga
+            var usuario = new Usuario();
+            usuario.Id = UsuarioId;
+
+            vaga.Id = Id;
+            vaga.Cargo = Cargo;
+            vaga.Quantidade = Quantidade;
+            vaga.Localidade = Cidade + "-" + Estado;
+            vaga.Contratante = Empresa;
+            vaga.Remuneracao = Remuneracao;
+            vaga.Beneficios = Beneficios;
+            vaga.Requisitos = Requisitos;
+            vaga.Atribuicoes = Atribuicoes;
+            vaga.DataPostagem = DataPostagem;
+            vaga.DataLimite = DateTime.Parse(DataLimite).ToString("dd/MM/yyyy"); ;
+            vaga.Observacoes = Observacoes;
+            vaga.Tipo = tipo.buscarPorId().Descricao;
+            vaga.Jornada = jornada.buscarPorId().Descricao;
+            vaga.Usuario = usuario.buscarPorId().Nome;
+
+            return vaga;
+        }
+
     }
 }
