@@ -4,8 +4,7 @@
     "\\backend",
     "\\backend\\Controllers",
     "\\backend\\Controllers\\admin",
-    "\\backend\\Controllers\\admin\\vagas",
-    "\\backend\\Views\\Curriculo"
+    "\\backend\\Controllers\\admin\\vagas"
   ],
   "SelectedNode": "\\backend.sln",
   "PreviewInSolutionExplorer": false
