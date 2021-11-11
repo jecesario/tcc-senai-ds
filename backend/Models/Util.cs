@@ -9,7 +9,7 @@ namespace backend.Models
 {
     public class Util
     {
-        static string criptografar(string value)
+        public static string criptografar(string value)
         {
             var UE = new UnicodeEncoding();
             byte[] HashValue, MessagesBytes = UE.GetBytes(value);
@@ -23,5 +23,7 @@ namespace backend.Models
             }
             return strhex;
         }
+
+        
     }
 }

@@ -28,7 +28,7 @@ namespace backend.Models
                 var query = con.CreateCommand();
                 query.CommandText = "SELECT * FROM usuarios WHERE email = @email AND senha = @senha";
                 query.Parameters.AddWithValue("@email", Email);
-                query.Parameters.AddWithValue("@senha", Senha);
+                query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
                 var dados = query.ExecuteReader();
                 if (dados.Read()) {
                     usuario.Id = int.Parse(dados["id"].ToString());
@@ -66,7 +66,7 @@ namespace backend.Models
                     query.CommandText = "INSERT INTO usuarios (nome, email, senha, turma, ano, tipo, curso_id) VALUES (@nome, @email, @senha, @turma, @ano, @tipo, @cursoId)";
                     query.Parameters.AddWithValue("@nome", Nome);
                     query.Parameters.AddWithValue("@email", Email);
-                    query.Parameters.AddWithValue("@senha", Senha);
+                    query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
                     query.Parameters.AddWithValue("@turma", Turma);
                     query.Parameters.AddWithValue("@ano", Ano);
                     query.Parameters.AddWithValue("@tipo", Tipo);
@@ -156,7 +156,7 @@ namespace backend.Models
                 query.CommandText = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha, turma = @turma, ano = @ano, tipo = @tipo, curso_id = @cursoId WHERE id = @id";
                 query.Parameters.AddWithValue("@nome", Nome);
                 query.Parameters.AddWithValue("@email", Email);
-                query.Parameters.AddWithValue("@senha", Senha);
+                query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
                 query.Parameters.AddWithValue("@turma", Turma);
                 query.Parameters.AddWithValue("@ano", Ano);
                 query.Parameters.AddWithValue("@tipo", Tipo);
