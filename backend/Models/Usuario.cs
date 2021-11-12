@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using backend.Models.Dtos;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -275,6 +276,41 @@ namespace backend.Models
             }
 
             return usuarios;
+        }
+
+        public UsuarioLoginResponse entrarApi()
+        {
+            var con = new MySqlConnection(dbConfig);
+            var usuario = new UsuarioLoginResponse();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT token FROM usuarios WHERE email = @email AND senha = @senha AND tipo = @tipo";
+                query.Parameters.AddWithValue("@email", Email);
+                query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
+                query.Parameters.AddWithValue("@tipo", 1);
+                var dados = query.ExecuteReader();
+                if (dados.Read())
+                {
+                    usuario.Token = dados.GetString("token");
+                }
+                else
+                {
+                    usuario = null;
+                }
+            }
+            catch (Exception e)
+            {
+                usuario = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return usuario;
         }
     }
 }

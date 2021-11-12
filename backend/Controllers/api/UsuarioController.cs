@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using backend.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,24 @@ namespace backend.Controllers.api
 
             }
             return Request.CreateResponse(HttpStatusCode.NotFound, "Usuario " + usuario.Id + " não encontrado");
+        }
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/Usuario/Entrar")]
+        public HttpResponseMessage Entrar([FromBody] UsuarioLoginRequest usuarioLogin)
+        {
+            var usuario = new Usuario();
+            usuario.Email = usuarioLogin.Email;
+            usuario.Senha = usuarioLogin.Senha;
+            var usuarioToken = new UsuarioLoginResponse();
+
+            var logado = usuario.entrarApi();
+
+            if (logado != null)
+            {
+                usuarioToken = logado;
+                return Request.CreateResponse(HttpStatusCode.OK, usuarioToken);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Ocorreu um erro ao logar, verifique as credenciais");
         }
     }
     
