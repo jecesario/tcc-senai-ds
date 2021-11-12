@@ -63,13 +63,14 @@ namespace backend.Models
                 try {
                     con.Open();
                     var query = con.CreateCommand();
-                    query.CommandText = "INSERT INTO usuarios (nome, email, senha, turma, ano, tipo, curso_id) VALUES (@nome, @email, @senha, @turma, @ano, @tipo, @cursoId)";
+                    query.CommandText = "INSERT INTO usuarios (nome, email, senha, turma, ano, tipo, token, curso_id) VALUES (@nome, @email, @senha, @turma, @ano, @tipo, @token, @cursoId)";
                     query.Parameters.AddWithValue("@nome", Nome);
                     query.Parameters.AddWithValue("@email", Email);
                     query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
                     query.Parameters.AddWithValue("@turma", Turma);
                     query.Parameters.AddWithValue("@ano", Ano);
                     query.Parameters.AddWithValue("@tipo", Tipo);
+                    query.Parameters.AddWithValue("@token", Util.criptografar(Email+DateTime.Now.Millisecond));
                     query.Parameters.AddWithValue("@cursoId", CursoId);
                     if (query.ExecuteNonQuery() > 0) {
                         resp = true;
