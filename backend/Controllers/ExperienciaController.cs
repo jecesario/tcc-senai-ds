@@ -51,6 +51,7 @@ namespace backend.Controllers
             if (experiencia.cadastrar())
             {
                 TempData["alertSucesso"] = "Experiencia cadastrada com sucesso!";
+                curriculo.atualizarDataEdicao();
             }
             else
             {
@@ -103,6 +104,7 @@ namespace backend.Controllers
             if(experiencia.editar())
             {
                 TempData["alertSucesso"] = "Experiencia editada com sucesso!";
+                curriculo.atualizarDataEdicao();
             } else
             {
                 TempData["alertErro"] = "Ocorreu um erro ao editar Experiencia!";
@@ -121,11 +123,18 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
+
+            // Guardando dados do curriculo do usuário logado 
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            curriculo = curriculo.buscarPorUsuarioId();
+
             var experiencia = new Experiencia();
             experiencia.Id = id;
             if (experiencia.apagar())
             {
                 TempData["alertSucesso"] = "Experiencia apagada com sucesso!";
+                curriculo.atualizarDataEdicao();
             }
             else
             {

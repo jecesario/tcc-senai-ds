@@ -20,6 +20,7 @@ namespace backend.Models
         public string Endereco { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+        public string DataEdicao { get; set; }
         public string UsuarioId { get; set; }
 
         public static List<CurriculoResponse> listar()
@@ -77,6 +78,7 @@ namespace backend.Models
                         curriculo.Endereco = dados["endereco"].ToString();
                         curriculo.Cidade = dados["cidade"].ToString();
                         curriculo.Estado = dados["estado"].ToString();
+                        curriculo.DataEdicao = dados.GetDateTime("data_edicao").ToString();
                     }
                 }
                 else
@@ -167,6 +169,28 @@ namespace backend.Models
             }
 
             return resp;
+        }
+
+        public void atualizarDataEdicao()
+        {
+            var con = new MySqlConnection(dbConfig);
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "UPDATE curriculos SET data_edicao = @dataEdicao WHERE id = @id";
+                query.Parameters.AddWithValue("@dataEdicao", DateTime.Now);
+                query.Parameters.AddWithValue("@id", Id);
+                query.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }

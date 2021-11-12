@@ -45,6 +45,8 @@ namespace backend.Controllers
             curriculo = curriculo.buscarPorUsuarioId();
             ViewBag.Curriculo = curriculo;
 
+            ViewBag.UltimaEdicao = Util.dateAgo(DateTime.Parse(curriculo.DataEdicao));
+
             // Se o usuário ainda não tiver cadastrado um currículo, redireciona para a tela que pede para ele cadastrar um currículo
             if (curriculo == null)
             {
@@ -133,13 +135,21 @@ namespace backend.Controllers
             curriculo.Cidade = Request.Form["cidade"];
             curriculo.Estado = Request.Form["estado"];
             curriculo.UsuarioId = Request.Form["id"];
-            curriculo.cadastrar();
-            
+            if (curriculo.cadastrar())
+            {
+                TempData["alertSucesso"] = "Curriculo cadastrado com sucesso!";
+            }
+            else
+            {
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Curriculo!";
+            }
             // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
             var checks = Request.Form["checks"];
             var habilidadeCurriculo = new HabilidadeCurriculo();
             habilidadeCurriculo.CurriculoId = curriculo.buscarPorUsuarioId().Id;
             habilidadeCurriculo.cadastrar(checks);
+
+            curriculo.atualizarDataEdicao();
             
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
@@ -210,14 +220,25 @@ namespace backend.Controllers
             curriculo.Cidade = Request.Form["cidade"];
             curriculo.Estado = Request.Form["estado"];
             curriculo.UsuarioId = Request.Form["usuarioId"];
-            curriculo.editar();
+            
+
+            if (curriculo.editar())
+            {
+                TempData["alertSucesso"] = "Curriculo editado com sucesso!";
+            }
+            else
+            {
+                TempData["alertErro"] = "Ocorreu um erro ao editar Curriculo!";
+            }
 
             // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
             var checks = Request.Form["checks"];
             var habilidadeCurriculo = new HabilidadeCurriculo();
             habilidadeCurriculo.CurriculoId = curriculo.buscarPorUsuarioId().Id;
             habilidadeCurriculo.editar(checks);
-            TempData["alertSucesso"] = "Curriculo editado com sucesso!";
+
+            curriculo.atualizarDataEdicao();
+
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
     }

@@ -52,6 +52,7 @@ namespace backend.Controllers
             if (formacao.cadastrar())
             {
                 TempData["alertSucesso"] = "Formação cadastrada com sucesso!";
+                curriculo.atualizarDataEdicao();
             }
             else
             {
@@ -106,6 +107,7 @@ namespace backend.Controllers
             if (formacao.editar())
             {
                 TempData["alertSucesso"] = "Formação editada com sucesso!";
+                curriculo.atualizarDataEdicao();
             }
             else
             {
@@ -125,11 +127,18 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
+
+            // Guardando dados do curriculo do usuário logado 
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            curriculo = curriculo.buscarPorUsuarioId();
+
             var formacao = new Formacao();
             formacao.Id = id;
             if (formacao.apagar())
             {
                 TempData["alertSucesso"] = "Formação apagada com sucesso!";
+                curriculo.atualizarDataEdicao();
             }
             else
             {
