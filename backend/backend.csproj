@@ -148,6 +148,7 @@
     <Compile Include="Controllers\admin\vagas\VagaController.cs" />
     <Compile Include="Controllers\admin\vagas\VagaJornadaController.cs" />
     <Compile Include="Controllers\admin\vagas\VagaTipoController.cs" />
+    <Compile Include="Controllers\api\CurriculoController.cs" />
     <Compile Include="Controllers\api\CursoController.cs" />
     <Compile Include="Controllers\api\FormacaoController.cs" />
     <Compile Include="Controllers\api\UsuarioController.cs" />
@@ -165,7 +166,8 @@
     </Compile>
     <Compile Include="Models\Curriculo.cs" />
     <Compile Include="Models\Curso.cs" />
-    <Compile Include="Models\Dtos\CurriculoResponse.cs" />
+    <Compile Include="Models\Dtos\DetalharCurriculoResponse.cs" />
+    <Compile Include="Models\Dtos\ListarCurriculoResponse.cs" />
     <Compile Include="Models\Dtos\DetalharVagaResponse.cs" />
     <Compile Include="Models\Dtos\ListarVagasResponse.cs" />
     <Compile Include="Models\Dtos\UsuarioLoginRequest.cs" />

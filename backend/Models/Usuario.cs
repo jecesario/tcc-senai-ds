@@ -312,5 +312,35 @@ namespace backend.Models
 
             return usuario;
         }
+
+        public static bool validarToken(string token)
+        {
+            var con = new MySqlConnection(dbConfig);
+            var resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT token FROM usuarios WHERE token = @token AND tipo = 1";
+                query.Parameters.AddWithValue("@Token", token);
+                var dados = query.ExecuteReader();
+                if (dados.HasRows)
+                {
+                    resp = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
     }
 }

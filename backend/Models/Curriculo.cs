@@ -23,10 +23,10 @@ namespace backend.Models
         public string DataEdicao { get; set; }
         public string UsuarioId { get; set; }
 
-        public static List<CurriculoResponse> listar()
+        public static List<ListarCurriculoResponse> listar()
         {
             var con = new MySqlConnection(dbConfig);
-            var curriculos = new List<CurriculoResponse>();
+            var curriculos = new List<ListarCurriculoResponse>();
 
             con.Open();
             var query = con.CreateCommand();
@@ -37,7 +37,8 @@ namespace backend.Models
             {
                 while (dados.Read())
                 {
-                    var curriculo = new CurriculoResponse();
+                    var curriculo = new ListarCurriculoResponse();
+                    curriculo.Id = dados.GetInt32("id");
                     curriculo.Nome = dados["nome"].ToString();
                     curriculo.Telefone = dados["telefone"].ToString();
                     curriculo.Cidade = dados["cidade"].ToString();
@@ -79,6 +80,87 @@ namespace backend.Models
                         curriculo.Cidade = dados["cidade"].ToString();
                         curriculo.Estado = dados["estado"].ToString();
                         curriculo.DataEdicao = dados.GetDateTime("data_edicao").ToString();
+                    }
+                }
+                else
+                {
+                    curriculo = null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                curriculo = null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return curriculo;
+        }
+
+        public DetalharCurriculoResponse buscarPorId()
+        {
+            var con = new MySqlConnection(dbConfig);
+            var curriculo = new DetalharCurriculoResponse();
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM curriculos WHERE id = @id";
+                query.Parameters.AddWithValue("@id", Id);
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows)
+                {
+                    while (dados.Read())
+                    {
+                        curriculo.Id = int.Parse(dados["id"].ToString());
+                        curriculo.Github = dados["github"].ToString();
+                        curriculo.Linkedin = dados["linkedin"].ToString();
+                        curriculo.Telefone = dados["telefone"].ToString();
+                        curriculo.Resumo = dados["resumo"].ToString();
+                        curriculo.Endereco = dados["endereco"].ToString();
+                        curriculo.Localidade = dados["cidade"].ToString() + "-" + dados["estado"].ToString();
+                        curriculo.DataEdicao = dados.GetDateTime("data_edicao").ToString();
+
+                        // Preenchendo usuário
+                        var usuario = new Usuario();
+                        usuario.Id = int.Parse(dados["usuario_id"].ToString());
+                        curriculo.Usuario = usuario.buscarPorId();
+
+                        // Guardando curso do usuário
+                        var curso = new Curso();
+                        curso.Id = int.Parse(curriculo.Usuario.CursoId);
+                        curriculo.Curso = curso.buscarPorId().Nome;
+
+                        // Guardado habilidades do usuário logado
+                        var habilidadeCurriculo = new HabilidadeCurriculo();
+                        habilidadeCurriculo.CurriculoId = curriculo.Id;
+                        var listaHabilidades = habilidadeCurriculo.buscarPorCurriculoId();
+
+                        // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
+                        var habilidades = new List<Habilidade>();
+                        foreach (var i in listaHabilidades)
+                        {
+                            var habilidade = new Habilidade();
+                            habilidade.Id = i.HabilidadeId;
+                            habilidades.Add(habilidade.buscarPorId());
+                        }
+                        curriculo.Habilidades = habilidades;
+
+                        // Guardando as experiencias do usuário baseadas pelo id do curriculo
+                        var experiencia = new Experiencia();
+                        experiencia.CurriculoId = curriculo.Id;
+                        curriculo.Experiencias = experiencia.buscarPorCurriculoId();
+
+                        // Guardando as formações do usuário baseadas pelo id do curriculo
+                        var formacao = new Formacao();
+                        formacao.CurriculoId = curriculo.Id;
+                        curriculo.Formacoes = formacao.buscarPorCurriculoId();
+
                     }
                 }
                 else
