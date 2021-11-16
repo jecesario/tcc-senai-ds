@@ -21,6 +21,7 @@ namespace backend.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string DataEdicao { get; set; }
+        public string Anexo { get; set; }
         public string UsuarioId { get; set; }
 
         public static List<ListarCurriculoResponse> listar()
@@ -71,15 +72,16 @@ namespace backend.Models
                 {
                     while (dados.Read())
                     {
-                        curriculo.Id = int.Parse(dados["id"].ToString());
-                        curriculo.Github = dados["github"].ToString();
-                        curriculo.Linkedin = dados["linkedin"].ToString();
-                        curriculo.Telefone = dados["telefone"].ToString();
-                        curriculo.Resumo = dados["resumo"].ToString();
-                        curriculo.Endereco = dados["endereco"].ToString();
-                        curriculo.Cidade = dados["cidade"].ToString();
-                        curriculo.Estado = dados["estado"].ToString();
+                        curriculo.Id = dados.GetInt32("id");
+                        curriculo.Github = dados.GetString("github");
+                        curriculo.Linkedin = dados.GetString("linkedin");
+                        curriculo.Telefone = dados.GetString("telefone");
+                        curriculo.Resumo = dados.GetString("resumo");
+                        curriculo.Endereco = dados.GetString("endereco");
+                        curriculo.Cidade = dados.GetString("cidade");
+                        curriculo.Estado = dados.GetString("estado");
                         curriculo.DataEdicao = dados.GetDateTime("data_edicao").ToString();
+                        curriculo.Anexo = dados["anexo"].ToString();
                     }
                 }
                 else
@@ -273,6 +275,64 @@ namespace backend.Models
             {
                 con.Close();
             }
+        }
+
+        public bool anexarDoc()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "UPDATE curriculos SET anexo = @anexo WHERE id = @id";
+                query.Parameters.AddWithValue("@anexo", Anexo);
+                query.Parameters.AddWithValue("@id", Id);
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
+            }
+            catch (Exception e)
+            {
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
+        }
+
+        public bool deletarDoc()
+        {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try
+            {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "UPDATE curriculos SET anexo = @anexo WHERE id = @id";
+                query.Parameters.AddWithValue("@anexo", null);
+                query.Parameters.AddWithValue("@id", Id);
+                if (query.ExecuteNonQuery() > 0)
+                {
+                    resp = true;
+                }
+            }
+            catch (Exception e)
+            {
+                resp = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return resp;
         }
     }
 }

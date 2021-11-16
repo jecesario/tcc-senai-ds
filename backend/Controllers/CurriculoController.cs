@@ -1,6 +1,7 @@
 ﻿using backend.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -239,6 +240,84 @@ namespace backend.Controllers
 
             curriculo.atualizarDataEdicao();
 
+            return RedirectToAction("MeuCurriculo", "Curriculo");
+        }
+
+        public ActionResult AnexarDoc()
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
+
+            // Guardando dados do curriculo do usuário logado 
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            curriculo = curriculo.buscarPorUsuarioId();
+
+            HttpPostedFileBase arquivo = Request.Files[0];
+
+            var nomeArquivo = usuario.Email + Util.criptografar(DateTime.Now.Millisecond.ToString());
+
+            if (!Directory.Exists(Server.MapPath("~/Content/Uploads")))
+            {
+                Directory.CreateDirectory(Server.MapPath("~/Content/Uploads"));
+            }
+
+            if (arquivo.ContentLength > 0)
+            {
+                var uploadPath = Server.MapPath("~/Content/Uploads");
+                string caminhoArquivo = Path.Combine(@uploadPath,
+                    Path.GetFileName(nomeArquivo));
+                caminhoArquivo += Path.GetExtension(arquivo.FileName);
+                nomeArquivo += Path.GetExtension(arquivo.FileName);
+                arquivo.SaveAs(caminhoArquivo);
+
+                // Alterando o valor de "anexo" na tabela currículo
+                curriculo.Anexo = nomeArquivo;
+                curriculo.anexarDoc();
+
+                TempData["alertSucesso"] = "Upou em " + caminhoArquivo;
+            }
+            return RedirectToAction("MeuCurriculo", "Curriculo");
+        }
+
+        public ActionResult ExcluirDoc()
+        {
+            if (Session["usuario"] == null)
+            {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 1)
+            {
+                return RedirectToAction("Index", "Curriculo");
+            }
+
+            // Guardando dados do curriculo do usuário logado 
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            curriculo = curriculo.buscarPorUsuarioId();
+
+            var arquivo = Server.MapPath("~/Content/Uploads/") + curriculo.Anexo;
+            var existe = System.IO.File.Exists(arquivo);
+            if (existe)
+            {
+                try
+                {
+                    System.IO.File.Delete(arquivo);
+                    curriculo.deletarDoc();
+                    TempData["alertSucesso"] = "Deletou em " + arquivo;
+                } catch (System.IO.IOException e)
+                {
+                    TempData["alertSucesso"] = "Errou em " + e.Message;
+                }
+            }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
     }
