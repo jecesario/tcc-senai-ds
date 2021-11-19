@@ -1,4 +1,5 @@
-﻿@model IEnumerable<backend.Models.Dtos.ListarCurriculoResponse>
+﻿@using PagedList.Mvc;
+@model PagedList.PagedList<backend.Models.Dtos.ListarCurriculoResponse>
 @{
     ViewBag.Title = "Listar Curriculos";
     var curriculos = Model;
@@ -28,10 +29,10 @@
     </div>
 </div>
 @*<div class="row mb-4">
-    <div class="col-md">
-        @Html.ActionLink("Cadastrar Novo Curriculo", "Cadastrar", "Curso", new { area = "" }, new { @class = "btn btn-success" })
-    </div>
-</div>*@
+        <div class="col-md">
+            @Html.ActionLink("Cadastrar Novo Curriculo", "Cadastrar", "Curso", new { area = "" }, new { @class = "btn btn-success" })
+        </div>
+    </div>*@
 <div class="row">
     <div class="col-md">
         <div class="input-group mb-3">
@@ -65,22 +66,35 @@
         </table>
     </div>
 </div>
+<style type="text/css">
+    .page-item a {
+        position: relative;
+        display: block;
+        color: #0d6efd;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        padding: 0.375rem 0.75rem;
+    }
+
+    .page-item.active a {
+        z-index: 3;
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+</style>
+
 <div class="row">
     <div class="col-md">
         <nav aria-label="..." class="d-flex justify-content-center">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">2</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
+            @Html.PagedListPager(Model,
+                     pagina => Url.Action("Index", new { pagina }),
+                     new PagedListRenderOptions
+                     {
+                         LiElementClasses = new string[] { "page-item" }
+                     })
         </nav>
     </div>
 </div>

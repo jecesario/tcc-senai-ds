@@ -5,13 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace backend.Controllers
 {
     public class CurriculoController : Controller
     {
         // GET: Curriculo
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
             if (Session["usuario"] == null)
             {
@@ -22,10 +23,10 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
-            var curriculos = Curriculo.listar();
+            var curriculos = Curriculo.listar().OrderBy(p => p.Id).ToPagedList(pagina, 3);
             if (curriculos == null || curriculos.Count == 0)
             {
-                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
+                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curriculo cadastrado!";
             }
             return View(curriculos);
         }

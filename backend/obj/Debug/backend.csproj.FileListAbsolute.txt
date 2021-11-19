@@ -199,3 +199,7 @@ E:\backup\Peu\tcc-senai-ds\backend\obj\Debug\backend.csproj.AssemblyReference.ca
 E:\backup\Peu\tcc-senai-ds\backend\obj\Debug\backend.csproj.CoreCompileInputs.cache
 E:\backup\Peu\tcc-senai-ds\backend\obj\Debug\backend.dll
 E:\backup\Peu\tcc-senai-ds\backend\obj\Debug\backend.pdb
+C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.dll
+C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.Mvc.dll
+C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.xml
+C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.Mvc.xml
