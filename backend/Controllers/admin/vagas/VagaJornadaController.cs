@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace backend.Controllers.admin.vagas
     public class VagaJornadaController : Controller
     {
         // GET: VagaJornada
-        public ActionResult Index() {
+        public ActionResult Index(int pagina = 1) {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
@@ -18,7 +19,7 @@ namespace backend.Controllers.admin.vagas
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var vagaJornadas = VagaJornada.listar();
+            var vagaJornadas = VagaJornada.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
             if (vagaJornadas == null || vagaJornadas.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de Jornada cadastrado!";
             }
@@ -99,7 +100,7 @@ namespace backend.Controllers.admin.vagas
         }
 
         [HttpGet]
-        public ActionResult Buscar(string descricao) {
+        public ActionResult Buscar(string descricao, int pagina = 1) {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
@@ -108,7 +109,7 @@ namespace backend.Controllers.admin.vagas
                 return RedirectToAction("Entrar", "Home");
             }
             var vagaJornada = new VagaJornada();
-            return View(vagaJornada.buscarPorDescricao(descricao));
+            return View(vagaJornada.buscarPorDescricao(descricao).OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }
