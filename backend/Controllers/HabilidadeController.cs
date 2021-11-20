@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace backend.Controllers
 {
     public class HabilidadeController : Controller
     {
-        public ActionResult Index() {
+        public ActionResult Index(int pagina = 1) {
             if(Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
@@ -17,7 +18,7 @@ namespace backend.Controllers
             if(usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var habilidades = Habilidade.listar();
+            var habilidades = Habilidade.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
             if (habilidades == null || habilidades.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhuma habilidade cadastrada!";
             }
@@ -100,7 +101,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public ActionResult Buscar(string nome)
+        public ActionResult Buscar(string nome, int pagina = 1)
         {
             if (Session["usuario"] == null)
             {
@@ -112,7 +113,7 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var habilidade = new Habilidade();
-            return View(habilidade.buscarPorNome(nome));
+            return View(habilidade.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }
