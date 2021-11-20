@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace backend.Controllers
     public class TipoFormacaoController : Controller
     {
         // GET: TipoFormacao
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
@@ -19,7 +20,7 @@ namespace backend.Controllers
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var tipoFormacao = TipoFormacao.listar();
+            var tipoFormacao = TipoFormacao.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
             if (tipoFormacao == null || tipoFormacao.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de formação cadastrado!";
             }
@@ -102,7 +103,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public ActionResult Buscar(string nome) {
+        public ActionResult Buscar(string nome, int pagina = 1) {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
@@ -111,7 +112,7 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var tipoFormacao = new TipoFormacao();
-            return View(tipoFormacao.buscarPorNome(nome));
+            return View(tipoFormacao.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }
