@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace backend.Controllers.admin.vagas
     public class VagaTipoController : Controller
     {
         // GET: VagaTipo
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
@@ -19,7 +20,7 @@ namespace backend.Controllers.admin.vagas
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var tipoVagas = VagaTipo.listar();
+            var tipoVagas = VagaTipo.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
             if (tipoVagas == null || tipoVagas.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de vaga cadastrado!";
             }
@@ -100,7 +101,7 @@ namespace backend.Controllers.admin.vagas
         }
 
         [HttpGet]
-        public ActionResult Buscar(string descricao) {
+        public ActionResult Buscar(string descricao, int pagina = 1) {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
@@ -109,7 +110,7 @@ namespace backend.Controllers.admin.vagas
                 return RedirectToAction("Entrar", "Home");
             }
             var vagaTipo = new VagaTipo();
-            return View(vagaTipo.buscarPorDescricao(descricao));
+            return View(vagaTipo.buscarPorDescricao(descricao).OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }
