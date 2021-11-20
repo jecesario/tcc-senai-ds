@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace backend.Controllers
     
     public class CursoController : Controller
     {
-        public ActionResult Index() {
+        public ActionResult Index(int pagina = 1) {
             if (Session["usuario"] == null)
             {
                 return RedirectToAction("Entrar", "Home");
@@ -20,7 +21,7 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
-            var cursos = Curso.listar();
+            var cursos = Curso.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
             if (cursos == null || cursos.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
             }
@@ -104,7 +105,7 @@ namespace backend.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public ActionResult Buscar(string nome)
+        public ActionResult Buscar(string nome, int pagina = 1)
         {
             if (Session["usuario"] == null)
             {
@@ -116,7 +117,7 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var curso = new Curso();
-            return View(curso.buscarPorNome(nome));
+            return View(curso.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }
