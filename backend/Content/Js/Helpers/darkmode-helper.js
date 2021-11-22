@@ -3,7 +3,9 @@ const head = document.getElementsByTagName("HEAD")[0];
 const link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
-link.href = "./css/darkmode.css";
+link.href = "/Content/Css/darkmode.css";
+
+console.log(head);
 
 mode.addEventListener("change", (event) => {
   event.preventDefault();

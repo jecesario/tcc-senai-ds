@@ -1,0 +1,40 @@
+#table {
+  width: 100%;
+  margin-top: 40px;
+}
+
+#table .table-header {
+  background: #d90204;
+  border-radius: 5px 5px 0 0;
+  padding: 15px;
+  /* display: flex;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: 350px 200px 160px 1fr 50px;
+}
+
+#table .table-header .table-column h3 {
+  color: #fefefe;
+  padding-left: 10px
+}
+
+#table .table-body {
+  border: 1px solid #cecece;
+  padding: 15px;
+  border-radius: 0 0 5px 5px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+#table .table-body .table-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 350px 200px 160px 1fr 50px;
+  padding: 15px 10px;
+  z-index: 1;
+  text-decoration: none;
+}
+
+#table .table-body .table-row:hover {
+    background: rgba(0, 0, 0, 0.075);
+}

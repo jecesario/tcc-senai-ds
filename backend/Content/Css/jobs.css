@@ -1,0 +1,88 @@
+.form-container {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1.title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #474747;
+}
+
+a.btn {
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+a.btn-green {
+    color: #fdfdfd;
+    background-color: #009129;
+}
+
+.jobs-list {
+    max-width: 1200px;
+}
+
+.job-item-header {
+    background-color: #D92E2E;
+    border-radius: 10px 10px 0 0;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-item-title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #FEFEFE;
+    margin-bottom: 10px;
+}
+
+.job-item-location,
+.job-item-salary-benefits,
+.job-item-method {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    margin: 5px 0;
+}
+
+.job-item-location svg,
+.job-item-salary-benefits svg,
+.job-item-method svg {
+    margin-right: 5px;
+}
+
+.job-item-actions {
+    display: flex;
+    align-items: center;
+}
+
+.job-item-actions a {
+    text-decoration: none;
+    color: #FFF;
+    padding: 0 5px;
+}
+
+.job-item-body {
+    padding: 20px 30px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #DEDDDD;
+}
+
+.job-item-qualifications-title,
+.job-item-assignments-title {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.job-item-qualifications-text {
+    margin-bottom: 20px;
+}

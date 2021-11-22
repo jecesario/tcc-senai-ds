@@ -1,12 +1,12 @@
 const inputEntries = [
     ...document.querySelectorAll(
-      ".form-container > form > .input-container > input, .form-container > form > .input-container > select"
+      "form > .input-container > input, .form-container > form > .input-container > select"
     ),
   ];
 console.log(inputEntries)
   const labelEntries = [
     ...document.querySelectorAll(
-      ".form-container > form > .input-container > label"
+      "form > .input-container > label"
     ),
   ];
 

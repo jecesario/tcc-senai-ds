@@ -1,0 +1,22 @@
+@import url("../reset.css");
+@import url("../sidemenu.css");
+@import url("../switch-mode.css");
+@import url("table.css");
+
+.dashboard-container {
+  padding: 40px 50px 40px 107px;
+}
+
+.dashboard-header {
+  padding: 40px 50px 40px 107px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cecece;
+  border-radius: 7px;
+}

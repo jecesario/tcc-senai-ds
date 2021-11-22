@@ -1,5 +1,5 @@
-@import url("./reset.css");
-
+@import url("reset.css");
+@import url("form-style.css");
 #container-signin-and-signout {
     width: 100%;
     height: 100vh;
@@ -56,7 +56,7 @@
 }
 
 .intro-bg>.content>.intro-title>h2 {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 500;
     font-style: italic;
     color: #fff;
@@ -168,7 +168,6 @@
     border-radius: 5px;
     background: #D92E2E;
     margin-bottom: 35px;
-    cursor: pointer;
 }
 
 .form-container>form>h3.create-account {
