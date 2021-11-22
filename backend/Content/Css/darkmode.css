@@ -132,11 +132,11 @@ video {
     stroke: #fff;
 }
 
-#table .table-header {
+#table thead {
     background: #1D262D;
 }
 
-#table .table-body {
+#table tbody {
     border: 1px solid #1D262D;
 }
 
