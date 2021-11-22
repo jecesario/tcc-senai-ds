@@ -31,20 +31,17 @@
             </div>
         </section>
         <section class="form-container">
-            @if (@TempData["alertInfo"] != null)
-            {
+            @if (@TempData["alertInfo"] != null) {
                 <div class="alert alert-info" role="alert">
                     @TempData["alertInfo"]
                 </div>
             }
-            @if (@TempData["alertSucesso"] != null)
-            {
+            @if (@TempData["alertSucesso"] != null) {
                 <div class="alert alert-success" role="alert">
                     @TempData["alertSucesso"]
                 </div>
             }
-            @if (@TempData["alertErro"] != null)
-            {
+            @if (@TempData["alertErro"] != null) {
                 <div class="alert alert-danger" role="alert">
                     @TempData["alertErro"]
                 </div>

@@ -5,30 +5,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace backend.Controllers
-{
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
+namespace backend.Controllers {
+    public class HomeController : Controller {
+        public ActionResult Index() {
             return RedirectToAction("Entrar");
         }
 
-        public ActionResult Entrar()
-        {
+        public ActionResult Entrar() {
             Session.Clear();
             return View();
         }
 
         [HttpPost]
-        public ActionResult EntrarAction()
-        {
+        public ActionResult EntrarAction() {
             var usuario = new Usuario();
             usuario.Email = Request.Form["email"];
             usuario.Senha = Request.Form["senha"];
             var usuarioLogado = usuario.entrar();
-            if (usuarioLogado != null)
-            {
+            if (usuarioLogado != null) {
                 Session["usuario"] = usuarioLogado;
 
                 return RedirectToAction("MeuCurriculo", "Curriculo");
@@ -37,14 +31,12 @@ namespace backend.Controllers
             return RedirectToAction("Entrar");
         }
 
-        public ActionResult Cadastrar()
-        {
+        public ActionResult Cadastrar() {
             return View(Curso.listar());
         }
 
         [HttpPost]
-        public ActionResult CadastrarAction()
-        {
+        public ActionResult CadastrarAction() {
             var usuario = new Usuario();
             usuario.Nome = Request.Form["nome"];
             usuario.Email = Request.Form["email"];
@@ -53,20 +45,16 @@ namespace backend.Controllers
             usuario.Ano = Request.Form["ano"];
             usuario.Tipo = 0;
             usuario.CursoId = Request.Form["curso"];
-            if (usuario.cadastrar())
-            {
+            if (usuario.cadastrar()) {
                 TempData["alertSucesso"] = "Usuário cadastrado. Efetue login abaixo";
                 return RedirectToAction("Entrar");
-            }
-            else
-            {
+            } else {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar usuário!";
             }
             return RedirectToAction("Cadastrar");
         }
 
-        public ActionResult Sair()
-        {
+        public ActionResult Sair() {
             Session.Clear();
             return RedirectToAction("Index");
         }

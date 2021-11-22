@@ -47,13 +47,14 @@ namespace backend.Controllers
             curriculo = curriculo.buscarPorUsuarioId();
             ViewBag.Curriculo = curriculo;
 
-            ViewBag.UltimaEdicao = Util.dateAgo(DateTime.Parse(curriculo.DataEdicao));
 
             // Se o usuário ainda não tiver cadastrado um currículo, redireciona para a tela que pede para ele cadastrar um currículo
             if (curriculo == null)
             {
                 return View();
             }
+
+            ViewBag.UltimaEdicao = Util.dateAgo(DateTime.Parse(curriculo.DataEdicao));
 
             // Guardando curso do usuário
             var curso = new Curso();

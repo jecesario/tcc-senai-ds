@@ -3,105 +3,100 @@
     Layout = null;
 }
 
-
-@{
-    ViewBag.Title = "Cadastrar Usuário";
-}
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <style>
-        body {
-            background: #007bff;
-            background: linear-gradient(to right, #0062E6, #33AEFF);
-        }
-
-        .card-img-left {
-            width: 45%;
-            /* Link to your background image using in the property below! */
-            background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
-            background-size: cover;
-        }
-
-        .btn-login {
-            font-size: 0.9rem;
-            letter-spacing: 0.05rem;
-            padding: 0.75rem 1rem;
-        }
-    </style>
-    <title>Cadastrar</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/Content/Css/login-and-signup.css" />
+    <title>Cadastro - Portal de Empregabilidade Senai</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-xl-9 mx-auto">
-                <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
-                    <div class="card-img-left d-none d-md-flex">
-                        <!-- Background image for card set in CSS! -->
-                    </div>
-                    <div class="card-body p-4 p-sm-5">
-                        <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastro</h5>
-                        <form action="/Home/CadastrarAction" method="post" class="jValidator">
-                            @if (@TempData["alertInfo"] != null)
-                            {
-                                <div class="alert alert-info" role="alert">
-                                    @TempData["alertInfo"]
-                                </div>
-                            }
-                            @if (@TempData["alertSucesso"] != null)
-                            {
-                                <div class="alert alert-success" role="alert">
-                                    @TempData["alertSucesso"]
-                                </div>
-                            }
-                            @if (@TempData["alertErro"] != null)
-                            {
-                                <div class="alert alert-danger" role="alert">
-                                    @TempData["alertErro"]
-                                </div>
-                            }
-                            <div class="form-floating mb-3">
-                                <input type="text" name="nome" class="form-control" id="floatingInput" placeholder="Fernando Ponte Preta" data-rules="required|min:2">
-                                <label for="floatingInput">Nome *</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" name="email" class="form-control" id="floatingInput" placeholder="fernando@pontepreta.com.br" data-rules="required|email">
-                                <label for="floatingInput">E-mail *</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" name="senha" class="form-control" id="floatingInput" placeholder="********"  data-rules="required|min:8|max:20">
-                                <label for="floatingInput">Senha *</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <select name="curso" class="form-select" id="floatingSelectGrid" aria-label="Curso">
-                                    <option value="0" selected>Selecione um curso</option>
-                                    @foreach (var curso in Model)
-                                    {
-                                        <option value="@Html.DisplayFor(id => curso.Id)">@Html.DisplayFor(id => curso.Nome)</option>
-                                    }
-                                </select>
-                                <label for="floatingSelectGrid">Curso</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" name="turma" class="form-control" id="floatingInput" placeholder="1DSN">
-                                <label for="floatingInput">Turma</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" name="ano" class="form-control" id="floatingInput" placeholder="2021">
-                                <label for="floatingInput">Ano</label>
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-primary btn-login fw-bold text-uppercase">Cadastrar</button>
-                        </form>
-                        @Html.ActionLink("Já tem cadastro? Entre", "Entrar", "Home", new { area = "" }, new { @class = "d-block text-center mt-2 small" })
-                    </div>
+    <main id="container-signin-and-signout">
+        <section class="intro-bg">
+            <div class="background"></div>
+            <div class="content">
+                <div class="logo">
+                    <img src="~/Content/Images/logo.png" alt="logo negativada senai" />
                 </div>
+                <div class="intro-title">
+                    <h1>Portal de Empregabilidade Senai</h1>
+                    <h2>
+                        Feito de alunos para alunos e professores com o objetivo de conectar empresas e candidatos à vagas.
+                    </h2>
+                </div>
+                <p class="copyright">
+                    SENAI - Serviço Nacional de Aprendizagem Industrial © Todos os
+                    direitos reservados.
+                </p>
             </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="~/Scripts/validator.js"></script>
+        </section>
+        <section class="form-container">
+            @if (@TempData["alertInfo"] != null) {
+                <div class="alert alert-info" role="alert">
+                    @TempData["alertInfo"]
+                </div>
+            }
+            @if (@TempData["alertSucesso"] != null) {
+                <div class="alert alert-success" role="alert">
+                    @TempData["alertSucesso"]
+                </div>
+            }
+            @if (@TempData["alertErro"] != null) {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["alertErro"]
+                </div>
+            }
+            <form action="/Home/CadastrarAction" method="post">
+                <div class="form-title">
+                    <h1>Cadastrar</h1>
+                    <h2>Preencha os campos abaixo para criar seu usuário</h2>
+                </div>
+
+                <div class="input-container">
+                    <label for="name">Nome</label>
+                    <input name="nome" type="text" id="name" />
+                </div>
+
+                <div class="input-container">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" id="email" />
+                </div>
+
+                <div class="input-container">
+                    <label for="password">Senha</label>
+                    <input name="senha" type="password" id="password" />
+                </div>
+
+                <div class="input-container">
+                    <label for="curso">Curso</label>
+                    <select name="curso" id="curso">
+                        <option value="0" selected></option>
+                        @foreach (var curso in Model) {
+                            <option value="@Html.DisplayFor(id => curso.Id)">@Html.DisplayFor(id => curso.Nome)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="turma">Turma</label>
+                    <input name="turma" type="text" id="turma" />
+                </div>
+
+                <div class="input-container">
+                    <label for="year">Ano</label>
+                    <input name="ano" type="text" id="year" />
+                </div>
+
+                <button type="submit">Criar conta</button>
+                <h3 class="create-account">
+                    Já tem uma conta ?
+                    @Html.ActionLink("Entre", "Entrar", "Home", new { area = "" }, new { @class = "d-block text-center mt-2 small" })
+                </h3>
+            </form>
+        </section>
+    </main>
+    <script src="~/Content/Js/Helpers/input-helper.js"></script>
 </body>
 </html>
