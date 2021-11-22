@@ -160,10 +160,13 @@
     <Content Include="Content\Js\Helpers\input-helper.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Svg\courses.svg" />
+    <Content Include="Content\Svg\curriculo.svg" />
     <Content Include="Content\Svg\edit.svg" />
     <Content Include="Content\Svg\email.svg" />
     <Content Include="Content\Svg\grads.svg" />
+    <Content Include="Content\Svg\jornada.svg" />
     <Content Include="Content\Svg\location.svg" />
+    <Content Include="Content\Svg\logout.svg" />
     <Content Include="Content\Svg\moon.svg" />
     <Content Include="Content\Svg\moon2.svg" />
     <Content Include="Content\Svg\phone.svg" />
@@ -173,6 +176,8 @@
     <Content Include="Content\Svg\sun2.svg" />
     <Content Include="Content\Svg\trash.svg" />
     <Content Include="Content\Svg\users.svg" />
+    <Content Include="Content\Svg\vagas.svg" />
+    <Content Include="Content\Svg\vagaTipo.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\requests.js" />
     <Content Include="Scripts\validator.js" />

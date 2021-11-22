@@ -168,6 +168,7 @@
     border-radius: 5px;
     background: #D92E2E;
     margin-bottom: 35px;
+    cursor: pointer;
 }
 
 .form-container>form>h3.create-account {

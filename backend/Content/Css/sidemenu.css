@@ -11,7 +11,7 @@
     align-items: flex-start;
     justify-content: space-between;
     overflow-x: hidden;
-    z-index: 999;
+    z-index: 9999;
   }
 
   #sidemenu .logo-sidemenu {
@@ -54,4 +54,8 @@
     color: #fff;
     font-size: 1rem;
     text-decoration: none;
+  }
+
+  .logout {
+      margin-bottom: 30px;
   }
