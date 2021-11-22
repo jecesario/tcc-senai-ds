@@ -143,6 +143,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Css\login-and-signup.css" />
+    <Content Include="Content\Css\reset.css" />
+    <Content Include="Content\Images\bg.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Js\Helpers\darkmode-helper.js" />
+    <Content Include="Content\Js\Helpers\input-helper.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\requests.js" />

@@ -1,0 +1,180 @@
+@import url("./reset.css");
+
+#container-signin-and-signout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.intro-bg {
+    height: 100%;
+    width: 50vw;
+}
+
+.intro-bg>.background {
+    position: fixed;
+    z-index: 1;
+    width: 50vw;
+    height: 100%;
+    background: url("../Images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: hue-rotate(-265deg);
+}
+
+.intro-bg>.content {
+    position: fixed;
+    z-index: 2;
+    height: 100%;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.intro-bg>.content>.logo {
+    padding: 65px 0;
+    flex-grow: 1;
+}
+
+.intro-bg>.content>.copyright {
+    padding: 0 0 65px;
+}
+
+.intro-bg>.content>.intro-title {
+    flex-grow: 2;
+}
+
+.intro-bg>.content>.intro-title>h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.intro-bg>.content>.intro-title>h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #fff;
+}
+
+.intro-bg>.content>.copyright {
+    font-size: .75rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.form-container {
+    height: 100%;
+    max-height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fefefe;
+}
+
+.form-container>form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    justify-content: center;
+}
+
+.form-container>form>.form-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 35px;
+}
+
+.form-container>form>.form-title>h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+.form-container>form>.form-title>h2 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.form-container>form>.input-container {
+    position: relative;
+    padding: 30px 0;
+    width: 100%;
+    max-width: 322px;
+}
+
+.form-container>form>.input-container>label {
+    position: absolute;
+    top: 42px;
+    left: 10px;
+    font-size: 1.15rem;
+    color: #cecece;
+    z-index: 999;
+    transition: .4s ease-in-out;
+}
+
+.form-container>form>.input-container>label.focus-input {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    font-size: 1.15rem;
+    color: #474747;
+    z-index: 999;
+    transition: .4s ease-in-out;
+}
+
+.form-container>form>.input-container>input {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    padding: 11px 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background: #efefef;
+}
+
+.form-container>form>.input-container>select {
+    position: relative;
+    width: 100%;
+    padding: 11px 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background: #efefef;
+}
+
+.form-container>form>.input-container>input:focus {
+    outline-color: #4455dd;
+}
+
+.form-container>form>button {
+    max-width: 200px;
+    padding: 12px 35px;
+    align-self: center;
+    color: #fdfdfd;
+    text-transform: uppercase;
+    font-size: 1.15rem;
+    border: none;
+    border-radius: 5px;
+    background: #D92E2E;
+    margin-bottom: 35px;
+    cursor: pointer;
+}
+
+.form-container>form>h3.create-account {
+    font-size: 0.85rem;
+}
+
+.form-container>form>h3.create-account>a {
+    color: #D92E2E;
+}

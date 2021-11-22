@@ -203,3 +203,7 @@ C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.dll
 C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.Mvc.dll
 C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.xml
 C:\Users\aluno\Desktop\Jean3DSN\tcc\tcc-senai-ds\backend\bin\PagedList.Mvc.xml
+E:\backup\Peu\tcc-senai-ds\backend\bin\PagedList.dll
+E:\backup\Peu\tcc-senai-ds\backend\bin\PagedList.Mvc.dll
+E:\backup\Peu\tcc-senai-ds\backend\bin\PagedList.xml
+E:\backup\Peu\tcc-senai-ds\backend\bin\PagedList.Mvc.xml

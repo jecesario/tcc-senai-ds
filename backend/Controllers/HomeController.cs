@@ -27,10 +27,10 @@ namespace backend.Controllers
             usuario.Email = Request.Form["email"];
             usuario.Senha = Request.Form["senha"];
             var usuarioLogado = usuario.entrar();
-            if(usuarioLogado != null)
+            if (usuarioLogado != null)
             {
                 Session["usuario"] = usuarioLogado;
-                
+
                 return RedirectToAction("MeuCurriculo", "Curriculo");
             }
             TempData["alertErro"] = "Usuário e/ou Senha inváidos";
@@ -57,7 +57,8 @@ namespace backend.Controllers
             {
                 TempData["alertSucesso"] = "Usuário cadastrado. Efetue login abaixo";
                 return RedirectToAction("Entrar");
-            } else
+            }
+            else
             {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar usuário!";
             }
