@@ -95,3 +95,11 @@
 .page-title a {
     text-decoration: none;
 }
+
+.search-word {
+    margin-bottom: 30px;
+}
+
+.search-word span {
+    font-style: italic;
+}
