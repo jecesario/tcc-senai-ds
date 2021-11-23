@@ -1,23 +1,17 @@
-﻿@model backend.Models.Curso
-@{
+﻿@{
     ViewBag.Title = "Cadastrar Curso";
 }
-
-<div class="row">
-    <div class="col-md-6">
-        <h1>Cadastrar novo Curso</h1>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        <form action="/Curso/CadastrarAction" method="post" class="jValidator">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome do Curso</label>
-                <input name="nome" type="text" class="form-control" id="nome" data-rules="required|min:3|max:50">
+<link href="~/Content/Css/form.css" rel="stylesheet" />
+<div id="users-container" class="dashboard-container">
+    <h1 class="page-title"><a href="/Curso"><</a> Cadastrar curso</h1>
+    <div class="search">
+        <form action="/Curso/CadastrarAction" method="post" class="form-single">
+            <div class="input-container">
+                <label for="nome">Curso</label>
+                <input name="nome" type="text" id="nome" />
+                <button type="submit" class="btn-form">Cadastrar</button>
             </div>
-            <button type="submit" class="btn btn-success">Cadastrar</button>
         </form>
     </div>
 </div>
-<script src="~/Scripts/validator.js"></script>
+<script src="~/Content/Js/Helpers/input-helper.js"></script>
