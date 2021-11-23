@@ -19,7 +19,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 500px;
+    max-width:500px;
     justify-content: center;
 }
 
@@ -65,7 +65,7 @@
 
 .search>form>button {
     max-width: 200px;
-    padding: 12px 35px;
+    padding: 15px 35px;
     align-self: center;
     color: #fdfdfd;
     text-transform: uppercase;
@@ -74,4 +74,24 @@
     border-radius: 5px;
     background: #D92E2E;
     margin-bottom: 35px;
+}
+
+.form-single {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.btn-form {
+    text-decoration: none;
+    color: #f4f4f4;
+    background: #009129;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 0;
+}
+
+.page-title a {
+    text-decoration: none;
 }
