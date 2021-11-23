@@ -35,7 +35,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT id, cargo, cidade, estado, requisitos, atribuicoes, remuneracao, beneficios, data_postagem FROM vagas";
+                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, id_vagas_tipos, id_vagas_modalidades FROM vagas";
                 var dados = query.ExecuteReader();
 
                 if (dados.HasRows) {
@@ -44,11 +44,18 @@ namespace backend.Models
                         vaga.Id = dados.GetInt32("id");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
                         vaga.Cargo = dados.GetString("cargo");
-                        vaga.Localidade = dados.GetString("cidade") + "-" + dados.GetString("estado");
+                        vaga.Localidade = dados.GetString("cidade") + "/" + dados.GetString("estado");
+                        vaga.Contratante = dados.GetString("empresa");
                         vaga.Remuneracao = dados.GetDouble("remuneracao");
                         vaga.Beneficios = dados.GetString("beneficios");
                         vaga.Requisitos = dados.GetString("requisitos");
                         vaga.Atribuicoes = dados.GetString("atribuicoes");
+                        var vagaTipo = new VagaTipo();
+                        vagaTipo.Id = dados.GetInt32("id_vagas_tipos");
+                        vaga.Tipo = vagaTipo.buscarPorId().Descricao;
+                        var vagaJorndada = new VagaJornada();
+                        vagaJorndada.Id = dados.GetInt32("id_vagas_modalidades");
+                        vaga.Jornada = vagaJorndada.buscarPorId().Descricao;
                         vagas.Add(vaga);
                     }
                 }

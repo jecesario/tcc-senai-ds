@@ -1,5 +1,6 @@
 ﻿using backend.Models;
 using backend.Models.Dtos;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace backend.Controllers.admin.vagas
     public class VagaController : Controller
     {
         // GET: Vaga
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
@@ -21,7 +22,7 @@ namespace backend.Controllers.admin.vagas
                 return RedirectToAction("Entrar", "Home");
             }
 
-            var vagas = Vaga.listar();
+            var vagas = Vaga.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
 
             return View(vagas);
         }

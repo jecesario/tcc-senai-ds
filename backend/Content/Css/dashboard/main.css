@@ -3,6 +3,24 @@
 @import url("../switch-mode.css");
 @import url("table.css");
 
+.is-hidden {
+    display: none;
+}
+
+#loading {
+    z-index: 999999;
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+#loading-content.loaded {
+    display: none;
+}
+
 .dashboard-container {
   padding: 40px 50px 40px 107px;
 }

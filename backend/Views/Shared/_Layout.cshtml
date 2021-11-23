@@ -14,107 +14,110 @@
     <link rel="stylesheet" href="~/Content/Css/users.css" />
 </head>
 <body>
-    <main id="users">
-        <div class="switch-mode-container switch-mode-container-admin">
-            <label class="switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round"></div>
-            </label>
-        </div>
-        <aside id="sidemenu">
-            <div class="logo-sidemenu">
-                <img src="~/Content/Images/logo.png" alt="senai logo negativada" />
+    <div id="loading">
+        <main id="users">
+            <div class="switch-mode-container switch-mode-container-admin">
+                <label class="switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
             </div>
-            <div class="menu-links">
-                @if (usuario.Tipo == 1) {
-                    <div class="menu-link-container">
-                        <a class="link" href="/Curriculo/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/curriculo.svg" alt="Ícone de curriculo" />
-                            </div>
-                            Currículos
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/Usuario/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/users.svg" alt="Ícone de usuários" />
-                            </div>
-                            Usuários
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/Habilidade/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/skills.svg" alt="Ícone de quebra cabeças" />
-                            </div>
-                            Habilidades
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/Curso/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/courses.svg" alt="Ícone de cursos" />
-                            </div>
-                            Cursos
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/TipoFormacao/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/grads.svg" alt="Ícone de capelo" />
-                            </div>
-                            Formações
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/Vaga/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/vagas.svg" alt="Ícone de mala" />
-                            </div>
-                            Vagas
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/VagaTipo/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/vagaTipo.svg" alt="Ícone de " />
-                            </div>
-                            Contratos
-                        </a>
-                    </div>
-                    <div class="menu-link-container">
-                        <a class="link" href="/VagaJornada/Index">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/jornada.svg" alt="Ícone de escritório" />
-                            </div>
-                            Jornadas
-                        </a>
-                    </div>
-                } else {
-                    <div class="menu-link-container">
-                        <a class="link" href="#">
-                            <div class="icon-container">
-                                <img src="~/Content/Svg/grads.svg" alt="Formação" />
-                            </div>
-                            Formação
-                        </a>
-                    </div>
-                }
-            </div>
-            <div class="logout">
-                <div class="menu-link-container">
-                    <a class="link" href="/Home/Sair">
-                        <div class="icon-container">
-                            <img src="~/Content/Svg/logout.svg" alt="Ícone de sair" />
-                        </div>
-                        Sair
-                    </a>
+            <aside id="sidemenu">
+                <div class="logo-sidemenu">
+                    <img src="~/Content/Images/logo.png" alt="senai logo negativada" />
                 </div>
-            </div>
-        </aside>
+                <div class="menu-links">
+                    @if (usuario.Tipo == 1) {
+                        <div class="menu-link-container">
+                            <a class="link" href="/Curriculo/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/curriculo.svg" alt="Ícone de curriculo" />
+                                </div>
+                                Currículos
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/Usuario/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/users.svg" alt="Ícone de usuários" />
+                                </div>
+                                Usuários
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/Habilidade/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/skills.svg" alt="Ícone de quebra cabeças" />
+                                </div>
+                                Habilidades
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/Curso/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/courses.svg" alt="Ícone de cursos" />
+                                </div>
+                                Cursos
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/TipoFormacao/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/grads.svg" alt="Ícone de capelo" />
+                                </div>
+                                Formações
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/Vaga/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/vagas.svg" alt="Ícone de mala" />
+                                </div>
+                                Vagas
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/VagaTipo/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/vagaTipo.svg" alt="Ícone de " />
+                                </div>
+                                Contratos
+                            </a>
+                        </div>
+                        <div class="menu-link-container">
+                            <a class="link" href="/VagaJornada/Index">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/jornada.svg" alt="Ícone de escritório" />
+                                </div>
+                                Jornadas
+                            </a>
+                        </div>
+                    } else {
+                        <div class="menu-link-container">
+                            <a class="link" href="#">
+                                <div class="icon-container">
+                                    <img src="~/Content/Svg/grads.svg" alt="Formação" />
+                                </div>
+                                Formação
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="logout">
+                    <div class="menu-link-container">
+                        <a class="link" href="/Home/Sair">
+                            <div class="icon-container">
+                                <img src="~/Content/Svg/logout.svg" alt="Ícone de sair" />
+                            </div>
+                            Sair
+                        </a>
+                    </div>
+                </div>
+            </aside>
             @RenderBody()
-    </main>
+        </main>
+    </div>
     <script src="~/Content/Js/Helpers/darkmode-helper.js"></script>
+    <script src="~/Content/Js/Helpers/loading.js"></script>
 </body>
 </html>

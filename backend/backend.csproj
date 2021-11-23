@@ -158,6 +158,7 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Js\Helpers\darkmode-helper.js" />
     <Content Include="Content\Js\Helpers\input-helper.js" />
+    <Content Include="Content\Js\Helpers\loading.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Svg\courses.svg" />
     <Content Include="Content\Svg\curriculo.svg" />

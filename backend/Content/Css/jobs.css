@@ -1,5 +1,5 @@
 .form-container {
-    max-width: 1200px;
+/*    max-width: 1200px;*/
     display: flex;
     justify-content: space-between;
 }
@@ -23,9 +23,9 @@ a.btn-green {
     background-color: #009129;
 }
 
-.jobs-list {
+/*.jobs-list {
     max-width: 1200px;
-}
+}*/
 
 .job-item-header {
     background-color: #D92E2E;
