@@ -14,7 +14,10 @@ console.log(inputEntries)
     return {
       id: inputEntry.id,
       value: inputEntry.value,
-      focus: function (label) {
+        focus: function (label) {
+            if (inputEntry.value) {
+                label.classList.add("focus-input");
+            }
         inputEntry.addEventListener("focus", function(e) {
           e.preventDefault();
           if(inputEntry.id === label.htmlFor){
@@ -24,7 +27,8 @@ console.log(inputEntries)
       },
       blur: function (label) {
         inputEntry.addEventListener("blur", function(e) {
-          e.preventDefault();
+            e.preventDefault();
+            console.log(inputEntry.value);
           if (!inputEntry.value && inputEntry.id === label.htmlFor) {
             label.classList.remove("focus-input");
           }
