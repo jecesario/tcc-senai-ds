@@ -45,20 +45,31 @@ body {
     align-items: center;
     font-size: 0.85rem;
     font-weight: 300;
-}
-
-.dashboard-container>.profile-header>.profile-info>.info-block-bottom h3.location {
-    margin-bottom: 5px;
-}
-
-.dashboard-container>.profile-header>.profile-info>.info-block-bottom h3>img {
     margin-right: 10px;
 }
 
-.dashboard-container>.profile-header>.profile-info>.info-block-bottom>.contact>h3:first-of-type {
-    margin-right: 20px;
+.location img {
+    margin-right: 10px;
 }
 
+.contact h3:first-child {
+    min-width: 250px;
+}
+
+.contact h3 img {
+    margin-right: 10px;
+}
+
+.social {
+    display: flex;
+}
+
+    .social h3 img {
+        margin-right: 10px;
+    }
+    .social h3:first-child {
+        min-width: 250px;
+    }
 .profile-body {
     padding: 40px 50px 40px 107px;
     background: #f5f5f5;
