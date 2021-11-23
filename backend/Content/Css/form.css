@@ -1,6 +1,17 @@
 .search {
     height: 100%;
     max-height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-green {
+    text-decoration: none;
+    color: #f4f4f4;
+    background: #009129;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .search>form {
