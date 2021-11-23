@@ -5,8 +5,6 @@ link.rel = "stylesheet";
 link.type = "text/css";
 link.href = "/Content/Css/darkmode.css";
 
-console.log(head);
-
 mode.addEventListener("change", (event) => {
   event.preventDefault();
   localStorage.setItem("darkmodeActive", mode.checked);
@@ -26,7 +24,7 @@ const loadDarkmode = () => {
     }
   };
   
-  window.addEventListener("DOMContentLoaded", (event) => {
-    loadDarkmode();
-  });
+window.addEventListener("DOMContentLoaded", (event) => {
+loadDarkmode();
+});
   
