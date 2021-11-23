@@ -156,3 +156,12 @@ video {
 .page-item.active a {
     color: #aaa;
 }
+
+
+/* icones dos cards */
+.experience-card .card-header .top-header .controlls a:first-child path {
+    stroke: #fff;
+}
+.formation-card .card-header .top-header .controlls a:last-child path {
+    fill: #fff;
+}
