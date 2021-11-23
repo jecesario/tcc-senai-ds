@@ -143,3 +143,7 @@ video {
 .search > form > .input-container > label.focus-input {
     color: #fdfdfd !important;
 }
+
+.page-item.active a {
+    color: #aaa;
+}
