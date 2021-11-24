@@ -93,7 +93,7 @@
         </tbody>
     </table>
     @Html.PagedListPager(Model,
-                         pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "nome", Request.Params["nome"] } }),
+                         pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "descricao", Request.Params["descricao"] } }),
                          new PagedListRenderOptions {
                              LiElementClasses = new string[] { "page-item" }
                          })
