@@ -244,6 +244,17 @@ namespace backend.Controllers
 
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
+        public ActionResult Buscar(string habilidades, int pagina = 1) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var curriculo = new Curriculo();
+            return View(curriculo.buscarPorHabilidades(habilidades).OrderBy(p => p.Id).ToPagedList(pagina, 2));
+        }
 
         public ActionResult AnexarDoc()
         {
