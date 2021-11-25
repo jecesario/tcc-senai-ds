@@ -154,6 +154,7 @@
     <Content Include="Content\Css\sidemenu.css" />
     <Content Include="Content\Css\switch-mode.css" />
     <Content Include="Content\Css\users.css" />
+    <Content Include="Content\Images\avatar-default.png" />
     <Content Include="Content\Images\bg.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Js\Helpers\darkmode-helper.js" />
