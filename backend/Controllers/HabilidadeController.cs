@@ -42,9 +42,11 @@ namespace backend.Controllers
             var habilidade = new Habilidade();
             habilidade.Nome = Request.Form["nome"];
             if (habilidade.cadastrar()) {
-                TempData["alertSucesso"] = "Habilidade cadastrada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Habilidade " + habilidade.Nome + " foi cadastrada.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar habilidade!";
+                TempData["alertMensagem"] = "Verifique os dados te tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -73,9 +75,11 @@ namespace backend.Controllers
             habilidade.Id = id;
             habilidade.Nome = nome;
             if (habilidade.editar()) {
-                TempData["alertSucesso"] = "Habilidade editada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Habilidade " + habilidade.Nome + " foi editada.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao editar habilidade!";
+                TempData["alertMensagem"] = "Verifique os dados te tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -93,9 +97,11 @@ namespace backend.Controllers
             var habilidade = new Habilidade();
             habilidade.Id = id;
             if (habilidade.apagar()) {
-                TempData["alertSucesso"] = "Habilidade apagada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Habilidade " + habilidade.Nome + " foi apagada.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao deletar habilidade!";
+                TempData["alertErro"] = "Ocorreu um erro ao apagar habilidade!";
+                TempData["alertMensagem"] = "Verifique os dados te tente novamente.";
             }
             return RedirectToAction("Index");
         }

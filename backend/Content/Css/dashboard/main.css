@@ -8,7 +8,7 @@
 }
 
 #loading {
-    z-index: 999999;
+    z-index: 1001;
     position: absolute;
     top: 0;
     left: -5px;
