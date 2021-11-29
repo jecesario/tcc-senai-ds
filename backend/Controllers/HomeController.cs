@@ -24,10 +24,10 @@ namespace backend.Controllers {
             var usuarioLogado = usuario.entrar();
             if (usuarioLogado != null) {
                 Session["usuario"] = usuarioLogado;
-
                 return RedirectToAction("MeuCurriculo", "Curriculo");
             }
-            TempData["alertErro"] = "Usuário e/ou Senha inváidos";
+            TempData["alertErro"] = "Ocorreu um erro ao efetuar login!";
+            TempData["alertMensagem"] = "Usuário e/ou Senha inválidos.";
             return RedirectToAction("Entrar");
         }
 
@@ -45,12 +45,20 @@ namespace backend.Controllers {
             usuario.Ano = Request.Form["ano"];
             usuario.Tipo = 0;
             usuario.CursoId = Request.Form["curso"];
-            if (usuario.cadastrar()) {
-                TempData["alertSucesso"] = "Usuário cadastrado. Efetue login abaixo";
-                return RedirectToAction("Entrar");
-            } else {
+
+            if(usuario.buscarPorEmail() != null) {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar usuário!";
+                TempData["alertMensagem"] = "O e-mail informado já pertece a outro usuário.";
+                return RedirectToAction("Cadastrar");
             }
+
+            if (usuario.cadastrar()) {
+                TempData["alertSucesso"] = "Usuário cadastrado com sucesso!";
+                TempData["alertMensagem"] = "Preencha os dados de login para acessar o sistema.";
+                return RedirectToAction("Entrar");
+            }
+            TempData["alertErro"] = "Ocorreu um erro ao cadastrar usuário!";
+            TempData["alertMensagem"] = "Verifique seus dados e preencha novamente.";
             return RedirectToAction("Cadastrar");
         }
 

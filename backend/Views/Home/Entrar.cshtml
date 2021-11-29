@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/Content/Css/login-and-signup.css" />
+    <link rel="stylesheet" href="~/Content/Css/sweetalert2.min.css" />
     <title>Entrar - Portal de Empregabilidade Senai</title>
 </head>
 <body>
@@ -31,21 +32,6 @@
             </div>
         </section>
         <section class="form-container">
-            @if (@TempData["alertInfo"] != null) {
-                <div class="alert alert-info" role="alert">
-                    @TempData["alertInfo"]
-                </div>
-            }
-            @if (@TempData["alertSucesso"] != null) {
-                <div class="alert alert-success" role="alert">
-                    @TempData["alertSucesso"]
-                </div>
-            }
-            @if (@TempData["alertErro"] != null) {
-                <div class="alert alert-danger" role="alert">
-                    @TempData["alertErro"]
-                </div>
-            }
             <form action="/Home/EntrarAction" method="post">
                 <div class="form-title">
                     <h1>Entrar</h1>
@@ -72,7 +58,17 @@
     </main>
 
     <script src="~/Content/Js/Helpers/input-helper.js"></script>
-    <script>
-    </script>
+    <script src="~/Content/Js/sweetalert2.min.js"></script>
+    <script src="~/Content/Js/Helpers/alert-helper.js"></script>
+    @if (@TempData["alertSucesso"] != null) {
+        <script>
+            successAlertWithButton('@Html.Raw(TempData["alertSuccess"])', '@Html.Raw(TempData["alertMensagem"])');
+        </script>
+    }
+    @if (@TempData["alertErro"] != null) {
+        <script>
+            errorAlertWithButton('@Html.Raw(TempData["alertErro"])', '@Html.Raw(TempData["alertMensagem"])');
+        </script>
+    }
 </body>
 </html>

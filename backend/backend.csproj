@@ -152,14 +152,17 @@
     <Content Include="Content\Css\profile.css" />
     <Content Include="Content\Css\reset.css" />
     <Content Include="Content\Css\sidemenu.css" />
+    <Content Include="Content\Css\sweetalert2.min.css" />
     <Content Include="Content\Css\switch-mode.css" />
     <Content Include="Content\Css\users.css" />
     <Content Include="Content\Images\avatar-default.png" />
     <Content Include="Content\Images\bg.png" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Js\Helpers\alert-helper.js" />
     <Content Include="Content\Js\Helpers\darkmode-helper.js" />
     <Content Include="Content\Js\Helpers\input-helper.js" />
     <Content Include="Content\Js\Helpers\loading.js" />
+    <Content Include="Content\Js\sweetalert2.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Svg\courses.svg" />
     <Content Include="Content\Svg\curriculo.svg" />
