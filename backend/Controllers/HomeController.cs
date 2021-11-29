@@ -58,7 +58,7 @@ namespace backend.Controllers {
                 return RedirectToAction("Entrar");
             }
             TempData["alertErro"] = "Ocorreu um erro ao cadastrar usuário!";
-            TempData["alertMensagem"] = "Verifique seus dados e preencha novamente.";
+            TempData["alertMensagem"] = "Verifique seus dados e tente novamente.";
             return RedirectToAction("Cadastrar");
         }
 

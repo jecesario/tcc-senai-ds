@@ -46,7 +46,7 @@ namespace backend.Controllers
                 TempData["alertMensagem"] = "Habilidade " + habilidade.Nome + " foi cadastrada.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar habilidade!";
-                TempData["alertMensagem"] = "Verifique os dados te tente novamente.";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -79,7 +79,7 @@ namespace backend.Controllers
                 TempData["alertMensagem"] = "Habilidade " + habilidade.Nome + " foi editada.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao editar habilidade!";
-                TempData["alertMensagem"] = "Verifique os dados te tente novamente.";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -101,7 +101,7 @@ namespace backend.Controllers
                 TempData["alertMensagem"] = "Habilidade " + habilidade.Nome + " foi apagada.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao apagar habilidade!";
-                TempData["alertMensagem"] = "Verifique os dados te tente novamente.";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
             return RedirectToAction("Index");
         }

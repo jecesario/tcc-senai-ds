@@ -46,9 +46,11 @@ namespace backend.Controllers
             var curso = new Curso();
             curso.Nome = Request.Form["nome"];
             if (curso.cadastrar()) {
-                TempData["alertSucesso"] = "Curso cadastrado com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Curso " + curso.Nome + " foi cadastrado.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar curso!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -78,9 +80,11 @@ namespace backend.Controllers
             curso.Id = id;
             curso.Nome = nome;
             if (curso.editar()) {
-                TempData["alertSucesso"] = "Curso editado com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Curso " + curso.Nome + " foi editado.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao editar curso!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -98,9 +102,11 @@ namespace backend.Controllers
             var curso = new Curso();
             curso.Id = id;
             if (curso.apagar()) {
-                TempData["alertSucesso"] = "Curso apagado com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Curso " + curso.Nome + " foi apagado.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao deletar curso!";
+                TempData["alertErro"] = "Ocorreu um erro ao apagar curso!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
             return RedirectToAction("Index");
         }
