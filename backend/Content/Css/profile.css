@@ -7,8 +7,8 @@ body {
 }
 
 .dashboard-container > .profile-header > .profile-avatar {
-  width: 125px;
-  height: 125px;
+  width: 148px;
+  height: 148px;
   display: inline-block;
   background: url("../Images/avatar-default.png");
   background-size: cover;
@@ -184,6 +184,7 @@ body {
   background: #fefefe;
   border-radius: 5px;
   border: 1px solid #cecece;
+  margin-bottom: 20px;
 }
 
 .experience-card .card-header, 
