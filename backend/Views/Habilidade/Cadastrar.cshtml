@@ -5,13 +5,14 @@
 <div id="users-container" class="dashboard-container">
     <h1 class="page-title"><a href="/Habilidade"><</a> Cadastrar habilidade</h1>
     <div class="search">
-        <form action="/Habilidade/CadastrarAction" method="post" class="form-single">
+        <form action="/Habilidade/CadastrarAction" method="post" class="form-single jValidator">
             <div class="input-container">
                 <label for="nome">Habilidade</label>
-                <input name="nome" type="text" id="nome" />
+                <input name="nome" type="text" id="nome" data-rules="required|max:30" />
                 <button type="submit" class="btn-form">Cadastrar</button>
             </div>
         </form>
     </div>
 </div>
+<script src="~/Content/Js/validator.js"></script>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>

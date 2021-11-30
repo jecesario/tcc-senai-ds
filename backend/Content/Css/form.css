@@ -144,3 +144,13 @@ form {
 .form-experiencia-formacao .btn-form {
     align-self: start;
 }
+
+form > .input-container > input.is-invalid {
+    border-color: #D92E2E;
+}
+
+.invalid-feedback {
+    color: #D92E2E;
+    margin-top: 5px;
+    font-size: 13px;
+}
