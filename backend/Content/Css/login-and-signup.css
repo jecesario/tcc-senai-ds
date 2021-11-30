@@ -178,3 +178,13 @@
 .form-container>form>h3.create-account>a {
     color: #D92E2E;
 }
+
+.form-container > form > .input-container > input.is-invalid {
+    border-color: #D92E2E;
+}
+
+.invalid-feedback {
+    color: #D92E2E;
+    margin-top: 5px;
+    font-size: 13px;
+}

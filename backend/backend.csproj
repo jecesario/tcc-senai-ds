@@ -127,22 +127,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Css\darkmode.css" />
     <Content Include="Content\Css\dashboard\main.css" />
     <Content Include="Content\Css\dashboard\table.css" />
@@ -187,7 +171,7 @@
     <Content Include="Content\Svg\vagaTipo.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\requests.js" />
-    <Content Include="Scripts\validator.js" />
+    <Content Include="Content\Js\validator.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -235,22 +219,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="libman.json" />
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\Uploads\jean%40gmail.com3e0f2348d7815ab1018621e3aab8c3d392eb58cefdb9abd096d8fdb1f742cb6a.docx" />
     <Content Include="Content\Uploads\jean%40gmail.com7c4cf1e76982a730a86a3c4dbbacfb24216332814091c4b17008ee30a29ba436.docx" />
     <Content Include="Content\Uploads\jean%40gmail.coma4d88ccad29017fc73b20a50743aefbff5486fe6190f8457eff4eeb2cf6a4c97.docx" />

@@ -34,7 +34,7 @@
             </div>
         </section>
         <section class="form-container">
-            <form action="/Home/CadastrarAction" method="post">
+            <form action="/Home/CadastrarAction" method="post" class="jValidator">
                 <div class="form-title">
                     <h1>Cadastrar</h1>
                     <h2>Preencha os campos abaixo para criar seu usuário</h2>
@@ -42,17 +42,17 @@
 
                 <div class="input-container">
                     <label for="name">Nome</label>
-                    <input name="nome" type="text" id="name" />
+                    <input name="nome" type="text" id="name" data-rules="required|min:3|max:50" />
                 </div>
 
                 <div class="input-container">
                     <label for="email">Email</label>
-                    <input name="email" type="email" id="email" />
+                    <input name="email" type="text" id="email" data-rules="required|email|max:50" />
                 </div>
 
                 <div class="input-container">
                     <label for="password">Senha</label>
-                    <input name="senha" type="password" id="password" />
+                    <input name="senha" type="password" id="password" data-rules="required|min:8|max:20" />
                 </div>
 
                 <div class="input-container">
@@ -83,6 +83,7 @@
             </form>
         </section>
     </main>
+    <script src="~/Content/Js/validator.js"></script>
     <script src="~/Content/Js/Helpers/input-helper.js"></script>
     <script src="~/Content/Js/sweetalert2.min.js"></script>
     <script src="~/Content/Js/Helpers/alert-helper.js"></script>
