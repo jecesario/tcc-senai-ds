@@ -103,7 +103,7 @@ namespace backend.Controllers
             curso.Id = id;
             if (curso.apagar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Curso " + curso.Nome + " foi apagado.";
+                TempData["alertMensagem"] = "Curso foi apagado.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao apagar curso!";
                 TempData["alertMensagem"] = "Verifique os dados e tente novamente.";

@@ -4,22 +4,10 @@
     ViewBag.Title = "Listar Tipos de Formação";
     var tiposFormacao = Model;
 }
-@if (@TempData["alertInfo"] != null) {
-    <div class="alert alert-info" role="alert">
-        @TempData["alertInfo"]
-    </div>
-}
-@if (@TempData["alertSucesso"] != null) {
-    <div class="alert alert-success" role="alert">
-        @TempData["alertSucesso"]
-    </div>
-}
-@if (@TempData["alertErro"] != null) {
-    <div class="alert alert-danger" role="alert">
-        @TempData["alertErro"]
-    </div>
-}
 <link href="~/Content/Css/form.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Css/sweetalert2.min.css" />
+<script src="~/Content/Js/sweetalert2.min.js"></script>
+<script src="~/Content/Js/Helpers/alert-helper.js"></script>
 <div id="users-container" class="dashboard-container">
     <h1 class="page-title">Tipos de formação</h1>
     <div class="search">
@@ -29,7 +17,7 @@
                 <input name="nome" type="text" id="buscar" />
             </div>
         </form>
-        <a href="#" class="btn-green">Adicionar tipo de formação</a>
+        <a href="/TipoFormacao/Cadastrar" class="btn-green">Adicionar tipo de formação</a>
     </div>
     <table id="table">
         <thead>
@@ -58,7 +46,7 @@
                                           stroke-linejoin="round" />
                                 </svg>
                             </a>
-                            <a href="/TipoFormacao/Apagar/@tipoFormacao.Id">
+                            <a href="#" onclick="deleteAlert('/TipoFormacao/Apagar/@tipoFormacao.Id')">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_43:2366)">
                                         <path fill-rule="evenodd"
@@ -98,3 +86,13 @@
                     })
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
+@if (@TempData["alertSucesso"] != null) {
+    <script>
+            successAlert('@Html.Raw(TempData["alertSucesso"])', '@Html.Raw(TempData["alertMensagem"])');
+    </script>
+}
+@if (@TempData["alertErro"] != null) {
+    <script>
+            errorAlertWithButton('@Html.Raw(TempData["alertErro"])', '@Html.Raw(TempData["alertMensagem"])');
+    </script>
+}
