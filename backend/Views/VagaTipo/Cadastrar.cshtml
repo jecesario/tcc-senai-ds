@@ -1,17 +1,18 @@
 ﻿@{
-    ViewBag.Title = "Cadastrar Tipo de Vaga";
+    ViewBag.Title = "Cadastrar Tipo de Contrato";
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
     <h1 class="page-title"><a href="/VagaTipo"><</a> Cadastrar tipo de vaga</h1>
     <div class="search">
-        <form action="/VagaTipo/CadastrarAction" method="post" class="form-single">
+        <form action="/VagaTipo/CadastrarAction" method="post" class="form-single jValidator">
             <div class="input-container">
                 <label for="descricao">Tipo de Contrato</label>
-                <input name="descricao" type="text" id="descricao" />
+                <input name="descricao" type="text" id="descricao" data-rules="required|max:30" />
                 <button type="submit" class="btn-form">Cadastrar</button>
             </div>
         </form>
     </div>
 </div>
+<script src="~/Content/Js/validator.js"></script>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>

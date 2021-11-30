@@ -1,20 +1,21 @@
 ﻿@model backend.Models.VagaTipo
 @{
-    ViewBag.Title = "Editar Tipo de Vaga";
+    ViewBag.Title = "Editar Tipo de Contrato";
     var vagaTipo = Model;
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
     <h1 class="page-title"><a href="/VagaTipo"><</a> Editar tipo de contrato</h1>
     <div class="search">
-        <form action="/VagaTipo/EditarAction" method="post" class="form-single">
+        <form action="/VagaTipo/EditarAction" method="post" class="form-single jValidator">
             <div class="input-container">
                 <label for="descricao">Tipo de Contrato</label>
-                <input name="descricao" type="text" id="descricao" value="@vagaTipo.Descricao" />
+                <input name="descricao" type="text" id="descricao" value="@vagaTipo.Descricao" data-rules="required|max:30" />
                 <input name="id" type="hidden" id="id" value="@vagaTipo.Id">
                 <button type="submit" class="btn-form">Editar</button>
             </div>
         </form>
     </div>
 </div>
+<script src="~/Content/Js/validator.js"></script>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
