@@ -14,7 +14,7 @@
     border-radius: 5px;
 }
 
-.search>form {
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,13 +23,13 @@
     justify-content: center;
 }
 
-.search>form>.input-container {
+.input-container {
     position: relative;
     padding: 30px 0;
     width: 100%;
 }
 
-.search>form>.input-container>label {
+.input-container>label {
     position: absolute;
     top: 42px;
     left: 10px;
@@ -37,9 +37,10 @@
     color: #cecece;
     z-index: 999;
     transition: .4s ease-in-out;
+    cursor: text;
 }
 
-.search>form>.input-container>label.focus-input {
+.input-container>label.focus-input {
     position: absolute;
     top: 4px;
     left: 0;
@@ -49,7 +50,7 @@
     transition: .4s ease-in-out;
 }
 
-.search>form>.input-container>input {
+.input-container>input {
     position: relative;
     width: 100%;
     max-width: 300px;
@@ -59,21 +60,8 @@
     background: #efefef;
 }
 
-.search>form>.input-container>input:focus {
+.input-container > input:focus, .input-container > textarea:focus {
     outline-color: #4455dd;
-}
-
-.search>form>button {
-    max-width: 200px;
-    padding: 15px 35px;
-    align-self: center;
-    color: #fdfdfd;
-    text-transform: uppercase;
-    font-size: 1.15rem;
-    border: none;
-    border-radius: 5px;
-    background: #D92E2E;
-    margin-bottom: 35px;
 }
 
 .form-single {
@@ -102,4 +90,57 @@
 
 .search-word span {
     font-style: italic;
+}
+
+.search > .form-experiencia-formacao > .input-container > input {
+    max-width: none;
+}
+
+.search > .form-experiencia-formacao > .input-container {
+    padding: 20px 0;
+}
+
+.search > .form-experiencia-formacao > .input-container label {
+    top: 32px;
+}
+
+.search > .form-experiencia-formacao > .input-container label.focus-input {
+    top: -6px;
+}
+
+.double-input-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.double-input-container .input-container {
+    width: 200px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 0 -3px;
+}
+
+.checkbox-container label {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.input-container > textarea {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    padding: 11px 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background: #efefef;
+    resize: none;
+}
+
+.form-experiencia-formacao .btn-form {
+    align-self: start;
 }
