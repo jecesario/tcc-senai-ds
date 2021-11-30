@@ -44,9 +44,9 @@ namespace backend.Controllers.admin.vagas
             vagaTipo.Descricao = Request.Form["descricao"];
             if (vagaTipo.cadastrar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Tipo de Jornada " + vagaTipo.Descricao + " foi cadastrada.";
+                TempData["alertMensagem"] = "Tipo de Jornada " + vagaTipo.Descricao + " foi cadastrado.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao cadastrar tipo de jornada!";
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar tipo de contrato!";
                 TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
@@ -77,9 +77,9 @@ namespace backend.Controllers.admin.vagas
             vagaTipo.Descricao = descricao;
             if (vagaTipo.editar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Tipo de Jornada " + vagaTipo.Descricao + " foi editada.";
+                TempData["alertMensagem"] = "Tipo de contrato " + vagaTipo.Descricao + " foi editado.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao editar tipo de jornada!";
+                TempData["alertErro"] = "Ocorreu um erro ao editar tipo de contrato!";
                 TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
@@ -98,9 +98,9 @@ namespace backend.Controllers.admin.vagas
             vagaTipo.Id = id;
             if (vagaTipo.apagar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Tipo de Jornada foi apagada.";
+                TempData["alertMensagem"] = "Tipo de Contrato foi apagado.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao apagar tipo de jornada!";
+                TempData["alertErro"] = "Ocorreu um erro ao apagar tipo de contrato!";
                 TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
             return RedirectToAction("Index");

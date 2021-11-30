@@ -42,9 +42,11 @@ namespace backend.Controllers.admin.vagas
             var vagaJornada = new VagaJornada();
             vagaJornada.Descricao = Request.Form["descricao"];
             if (vagaJornada.cadastrar()) {
-                TempData["alertSucesso"] = "Tipo de Jornada cadastrada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Tipo de Jornada " + vagaJornada.Descricao + " foi cadastrada.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Tipo de Jornada!";
+                TempData["alertErro"] = "Ocorreu um erro ao cadastrar tipo de jornada!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -73,9 +75,11 @@ namespace backend.Controllers.admin.vagas
             vagaJornada.Id = id;
             vagaJornada.Descricao = descricao;
             if (vagaJornada.editar()) {
-                TempData["alertSucesso"] = "Tipo de Jornada editada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Tipo de Jornada " + vagaJornada.Descricao + " foi editada.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao editar Tipo de Jornada!";
+                TempData["alertErro"] = "Ocorreu um erro ao editar tipo de jornada!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
 
             return RedirectToAction("Index");
@@ -92,10 +96,13 @@ namespace backend.Controllers.admin.vagas
             var vagaJornada = new VagaJornada();
             vagaJornada.Id = id;
             if (vagaJornada.apagar()) {
-                TempData["alertSucesso"] = "Tipo de Jornada apagado com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Tipo de Jornada foi apagada.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao deletar Tipo de Jornada!";
+                TempData["alertErro"] = "Ocorreu um erro ao apagar tipo de jornada!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
+
             return RedirectToAction("Index");
         }
 
