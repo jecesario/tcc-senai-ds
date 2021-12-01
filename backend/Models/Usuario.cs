@@ -261,8 +261,11 @@ namespace backend.Models
                 if (dados.HasRows) {
                     while (dados.Read()) {
                         var usuario = new Usuario();
-                        usuario.Id = int.Parse(dados["id"].ToString());
-                        usuario.Nome = dados["nome"].ToString();
+                        usuario.Id = dados.GetInt32("id");
+                        usuario.Nome = dados.GetString("nome");
+                        usuario.Turma = dados.GetString("turma");
+                        usuario.Ano = dados.GetString("ano");
+                        usuario.Email = dados.GetString("email");
                         usuarios.Add(usuario);
                     }
                 } else {
