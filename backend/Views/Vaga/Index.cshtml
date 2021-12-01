@@ -4,23 +4,11 @@
     ViewBag.Title = "Vagas - Listar";
     var vagas = Model;
 }
-@if (@TempData["alertInfo"] != null) {
-    <div class="alert alert-info" role="alert">
-        @TempData["alertInfo"]
-    </div>
-}
-@if (@TempData["alertSucesso"] != null) {
-    <div class="alert alert-success" role="alert">
-        @TempData["alertSucesso"]
-    </div>
-}
-@if (@TempData["alertErro"] != null) {
-    <div class="alert alert-danger" role="alert">
-        @TempData["alertErro"]
-    </div>
-}
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <link href="~/Content/Css/jobs.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/Css/sweetalert2.min.css" />
+<script src="~/Content/Js/sweetalert2.min.js"></script>
+<script src="~/Content/Js/Helpers/alert-helper.js"></script>
 <div id="users-container" class="dashboard-container">
     <h1 class="page-title">Vagas</h1>
     <div class="search">
@@ -51,16 +39,16 @@
                         <h3 class="job-item-method">
                             <?xml version="1.0" ?>
                             <svg width="19" height="19" id="Layer_1" style="enable-background:new 0 0 64 64;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g>
-                                <path d="M50.522,60.004H13.478c-5.502,0-9.978-4.476-9.978-9.978V23.597c0-5.502,4.476-9.978,9.978-9.978    h37.044c5.502,0,9.978,4.476,9.978,9.978v26.429C60.5,55.528,56.024,60.004,50.522,60.004z M13.478,19.429    c-2.298,0-4.168,1.87-4.168,4.168v26.429c0,2.298,1.87,4.168,4.168,4.168h37.044c2.298,0,4.168-1.87,4.168-4.168V23.597    c0-2.298-1.87-4.168-4.168-4.168H13.478z" style="fill: #A30101;" /></g><g>
-                                <path d="M57.4,34.525H6.405c-1.604,0-2.905-1.301-2.905-2.905c0-1.604,1.301-2.905,2.905-2.905H57.4    c1.604,0,2.905,1.301,2.905,2.905C60.305,33.224,59.005,34.525,57.4,34.525z" style="fill: #A30101;" /></g><g>
-                                <path d="M39.714,19.429c-1.604,0-2.905-1.301-2.905-2.905V9.806h-9.972v6.718    c0,1.604-1.301,2.905-2.905,2.905s-2.905-1.301-2.905-2.905V9.775c0-3.187,2.593-5.779,5.779-5.779H36.84    c3.187,0,5.779,2.593,5.779,5.779v6.749C42.619,18.129,41.318,19.429,39.714,19.429z" style="fill: #A30101;" /></g><g>
-                                <path d="M43.395,39.717c-1.604,0-2.905-1.301-2.905-2.905V31.62c0-1.604,1.301-2.905,2.905-2.905    S46.3,30.016,46.3,31.62v5.191C46.3,38.416,44.999,39.717,43.395,39.717z" style="fill: #A30101;" /></g><g>
-                                <path d="M20.687,39.717c-1.604,0-2.905-1.301-2.905-2.905V31.62c0-1.604,1.301-2.905,2.905-2.905    c1.604,0,2.905,1.301,2.905,2.905v5.191C23.592,38.416,22.291,39.717,20.687,39.717z" style="fill: #A30101;" /></g></g></svg> @vaga.Tipo - @vaga.Jornada
+                            <path d="M50.522,60.004H13.478c-5.502,0-9.978-4.476-9.978-9.978V23.597c0-5.502,4.476-9.978,9.978-9.978    h37.044c5.502,0,9.978,4.476,9.978,9.978v26.429C60.5,55.528,56.024,60.004,50.522,60.004z M13.478,19.429    c-2.298,0-4.168,1.87-4.168,4.168v26.429c0,2.298,1.87,4.168,4.168,4.168h37.044c2.298,0,4.168-1.87,4.168-4.168V23.597    c0-2.298-1.87-4.168-4.168-4.168H13.478z" style="fill: #A30101;" /></g><g>
+                            <path d="M57.4,34.525H6.405c-1.604,0-2.905-1.301-2.905-2.905c0-1.604,1.301-2.905,2.905-2.905H57.4    c1.604,0,2.905,1.301,2.905,2.905C60.305,33.224,59.005,34.525,57.4,34.525z" style="fill: #A30101;" /></g><g>
+                            <path d="M39.714,19.429c-1.604,0-2.905-1.301-2.905-2.905V9.806h-9.972v6.718    c0,1.604-1.301,2.905-2.905,2.905s-2.905-1.301-2.905-2.905V9.775c0-3.187,2.593-5.779,5.779-5.779H36.84    c3.187,0,5.779,2.593,5.779,5.779v6.749C42.619,18.129,41.318,19.429,39.714,19.429z" style="fill: #A30101;" /></g><g>
+                            <path d="M43.395,39.717c-1.604,0-2.905-1.301-2.905-2.905V31.62c0-1.604,1.301-2.905,2.905-2.905    S46.3,30.016,46.3,31.62v5.191C46.3,38.416,44.999,39.717,43.395,39.717z" style="fill: #A30101;" /></g><g>
+                            <path d="M20.687,39.717c-1.604,0-2.905-1.301-2.905-2.905V31.62c0-1.604,1.301-2.905,2.905-2.905    c1.604,0,2.905,1.301,2.905,2.905v5.191C23.592,38.416,22.291,39.717,20.687,39.717z" style="fill: #A30101;" /></g></g></svg> @vaga.Tipo - @vaga.Jornada
                         </h3>
                     </div>
                     <div class="job-item-actions">
                         <div class="controlls">
-                            <a href="#">
+                            <a href="/Vaga/Editar/@vaga.Id">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg%22%3E">
                                     <path d="M15 10.995V15C15 15.3978 14.842 15.7794 14.5607 16.0607C14.2794 16.342 13.8978 16.5 13.5 16.5H3C2.60218 16.5 2.22064 16.342 1.93934 16.0607C1.65804 15.7794 1.5 15.3978 1.5 15V4.5C1.5 4.10218 1.65804 3.72064 1.93934 3.43934C2.22064 3.15804 2.60218 3 3 3H7.005"
                                           stroke="#630000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -68,7 +56,7 @@
                                           stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </a>
-                            <a href="#">
+                            <a href="#" onclick="deleteAlert('/Vaga/Apagar/@vaga.Id')">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_43:2366)">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -115,3 +103,13 @@
                     })
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
+@if (@TempData["alertSucesso"] != null) {
+    <script>
+            successAlert('@Html.Raw(TempData["alertSucesso"])', '@Html.Raw(TempData["alertMensagem"])');
+    </script>
+}
+@if (@TempData["alertErro"] != null) {
+    <script>
+            errorAlertWithButton('@Html.Raw(TempData["alertErro"])', '@Html.Raw(TempData["alertMensagem"])');
+    </script>
+}

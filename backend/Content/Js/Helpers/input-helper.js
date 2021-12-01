@@ -1,6 +1,6 @@
 const inputEntries = [
     ...document.querySelectorAll(
-      ".input-container > input, .form-container > .input-container > select, .input-container > textarea"
+      ".input-container > input, .input-container > textarea"
     ),
   ];
 console.log(inputEntries)
@@ -15,9 +15,9 @@ console.log(inputEntries)
       id: inputEntry.id,
       value: inputEntry.value,
         focus: function (label) {
-            if (inputEntry.value) {
-                label.classList.add("focus-input");
-            }
+        if (inputEntry.value) {
+            label.classList.add("focus-input");
+        }
         inputEntry.addEventListener("focus", function(e) {
           e.preventDefault();
           if(inputEntry.id === label.htmlFor){
