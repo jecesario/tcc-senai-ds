@@ -50,7 +50,7 @@ form {
     transition: .4s ease-in-out;
 }
 
-.input-container>input {
+.input-container > input {
     position: relative;
     width: 100%;
     max-width: 300px;
@@ -58,6 +58,7 @@ form {
     border-radius: 5px;
     border: 1px solid transparent;
     background: #efefef;
+    box-sizing: border-box;
 }
 
 .input-container > input:focus, .input-container > textarea:focus {
@@ -92,19 +93,19 @@ form {
     font-style: italic;
 }
 
-.search > .form-experiencia-formacao > .input-container > input {
+/*.input-container > input {
     max-width: none;
-}
+}*/
 
-.search > .form-experiencia-formacao > .input-container {
+.input-container {
     padding: 20px 0;
 }
 
-.search > .form-experiencia-formacao > .input-container label {
+.input-container label {
     top: 32px;
 }
 
-.search > .form-experiencia-formacao > .input-container label.focus-input {
+.input-container label.focus-input {
     top: -6px;
 }
 
@@ -132,16 +133,26 @@ form {
 
 .input-container > textarea {
     position: relative;
-    width: 100%;
+    width: calc(100% - 20px);
     height: 150px;
     padding: 11px 10px;
     border-radius: 5px;
     border: 1px solid transparent;
     background: #efefef;
     resize: none;
+    box-sizing: border-box;
 }
 
-.form-experiencia-formacao .btn-form {
+.input-container > select {
+    position: relative;
+    width: 100%;
+    padding: 11px 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background: #efefef;
+}
+
+.btn-form {
     align-self: start;
 }
 
@@ -153,4 +164,17 @@ form > .input-container > input.is-invalid {
     color: #D92E2E;
     margin-top: 5px;
     font-size: 13px;
+}
+
+.job-form form {
+    max-width: 600px;
+}
+
+.job-form form .input-container > textarea {
+    width: calc (100% - 20px);
+}
+
+.job-form form .double-input-container .input-container {
+    width: inherit;
+    margin: 0 20px 0 0;
 }

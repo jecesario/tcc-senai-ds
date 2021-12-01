@@ -27,6 +27,10 @@ a.btn-green {
     max-width: 1200px;
 }*/
 
+.job-item {
+    margin-bottom: 20px;
+}
+
 .job-item-header {
     background-color: #D92E2E;
     border-radius: 10px 10px 0 0;

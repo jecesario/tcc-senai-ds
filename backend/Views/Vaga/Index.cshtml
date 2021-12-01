@@ -22,15 +22,15 @@
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <link href="~/Content/Css/jobs.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
-    <h1 class="page-title">Cursos</h1>
+    <h1 class="page-title">Vagas</h1>
     <div class="search">
-        <form action="/Curso/Buscar" method="get">
+        <form action="/Vaga/Buscar" method="get">
             <div class="input-container">
                 <label for="buscar">Pesquisar</label>
                 <input name="nome" type="text" id="buscar" />
             </div>
         </form>
-        <a href="#" class="btn-green">Adicionar vaga</a>
+        <a href="/Vaga/Cadastrar" class="btn-green">Adicionar vaga</a>
     </div>
 
     @foreach (var vaga in vagas) {
