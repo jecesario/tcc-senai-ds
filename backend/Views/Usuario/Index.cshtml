@@ -91,3 +91,13 @@
                     })
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
+@if (@TempData["alertSucesso"] != null) {
+    <script>
+            successAlert('@Html.Raw(TempData["alertSucesso"])', '@Html.Raw(TempData["alertMensagem"])');
+    </script>
+}
+@if (@TempData["alertErro"] != null) {
+    <script>
+            errorAlertWithButton('@Html.Raw(TempData["alertErro"])', '@Html.Raw(TempData["alertMensagem"])');
+    </script>
+}

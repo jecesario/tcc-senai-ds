@@ -6,51 +6,41 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace backend.Controllers
-{
-    public class UsuarioController : Controller
-    {
+namespace backend.Controllers {
+    public class UsuarioController : Controller {
         // GET: Usuario
-        public ActionResult Index(int pagina = 1)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Index(int pagina = 1) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo != 1)
-            {
+            if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuarios = Usuario.listar().OrderBy(p => p.Id).ToPagedList(pagina, 3);
-            if (usuarios == null || usuarios.Count == 0)
-            {
+            if (usuarios == null || usuarios.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
             }
             return View(usuarios);
         }
 
-        public ActionResult Editar(int id)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Editar(int id) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Id == id || usuario.Tipo == 1)
-            {
+            if (usuario.Id == id || usuario.Tipo == 1) {
                 var oUsuario = new Usuario();
                 oUsuario.Id = id;
                 ViewBag.Cursos = Curso.listar();
-                return View(oUsuario.buscarPorId()); 
-                
+                return View(oUsuario.buscarPorId());
+
             }
-            
+
             return RedirectToAction("Entrar", "Home");
         }
         [HttpPost]
-        public ActionResult Editar()
-        {
+        public ActionResult Editar() {
             // Pegando informações do form
             var usuario = new Usuario();
             usuario.Id = int.Parse(Request.Form["id"]);
@@ -67,36 +57,30 @@ namespace backend.Controllers
             // Verificando se é o próprio usuário se editando ou se é um admin
             //if(usuario.Id == logado.Id)
             //{
-                if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo)
-                {
-                    if (usuario.editar())
-                    {
-                    TempData["alertSucesso"] = "Usuário editado com sucesso!";
-                    if (logado.Tipo == 1)
-                    {
-                        
-                            //if (logado.Id == usuario.Id)
-                            //{
-                            //    return RedirectToAction("Sair", "Home");
-                            //}
-                            return RedirectToAction("Index", "Usuario");
-                    }
-                    else
-                    {
+            if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo) {
+                if (usuario.editar()) {
+                    TempData["alertSucesso"] = "Sucesso!";
+                    TempData["alertMensagem"] = "O usuário foi editado corretamente.";
+                    if (logado.Tipo == 1) {
+
+                        //if (logado.Id == usuario.Id)
+                        //{
+                        //    return RedirectToAction("Sair", "Home");
+                        //}
+                        return RedirectToAction("Index", "Usuario");
+                    } else {
                         Session["usuario"] = usuario;
                         return RedirectToAction("MeuCurriculo", "Curriculo");
                     }
 
+                } else {
+                    TempData["alertSucesso"] = "Erro!";
+                    TempData["alertMensagem"] = "Ocorreu um erro ao ediar usuário.";
                 }
-                    else
-                    {
-                        TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
-                    }
-                }
-                else
-                {
-                    TempData["alertErro"] = "E-mail já cadastrado por outro usuário!";
-                }
+            } else {
+                TempData["alertSucesso"] = "Erro!";
+                TempData["alertMensagem"] = "E-mail já cadastrado por outro usuário.";
+            }
             //} else
             //{
             //    if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo)
@@ -118,44 +102,37 @@ namespace backend.Controllers
             //    }
             //}
 
-            return RedirectToAction("Editar/"+usuario.Id, "Usuario");
+            return RedirectToAction("Editar/" + usuario.Id, "Usuario");
 
         }
 
-        public ActionResult Apagar(int id)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Apagar(int id) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo != 1)
-            {
+            if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
             var oUsuario = new Usuario();
             oUsuario.Id = id;
-            if (oUsuario.apagar())
-            {
-                TempData["alertSucesso"] = "Usuário apagado com sucesso!";
-            }
-            else
-            {
-                TempData["alertErro"] = "Ocorreu um erro ao deletar Usuário!";
+            if (oUsuario.apagar()) {
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Usuário foi apagada.";
+            } else {
+                TempData["alertErro"] = "Ocorreu um erro ao apagar usuário!";
+                TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
             }
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult Buscar(string nome, int pagina = 1)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Buscar(string nome, int pagina = 1) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo != 1)
-            {
+            if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
             var oUsuario = new Usuario();
