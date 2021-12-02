@@ -171,7 +171,7 @@ form > .input-container > input.is-invalid {
 }
 
 .job-form form .input-container > textarea {
-    width: calc (100% - 20px);
+    width: calc(100% - 20px);
     font-family: inherit;
 }
 

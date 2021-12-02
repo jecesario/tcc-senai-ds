@@ -5,34 +5,38 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace backend.Controllers
-{
-    public class ExperienciaController : Controller
-    {
+namespace backend.Controllers {
+    public class ExperienciaController : Controller {
         // GET: Experiencia
-        public ActionResult Cadastrar()
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Cadastrar() {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Entrar", "Home");
             }
+
+            var curriculo = new Curriculo();
+            curriculo.UsuarioId = usuario.Id.ToString();
+            var experiencia = new Experiencia();
+            experiencia.CurriculoId = curriculo.buscarPorUsuarioId().Id;
+
+            if (experiencia.buscarPorCurriculoId().Count >= 3) {
+                TempData["alertErro"] = "Ocorreu um erro!";
+                TempData["alertMensagem"] = "Você só pode cadastrar 3 experiências.";
+                return RedirectToAction("MeuCurriculo", "Curriculo");
+            }
+
             return View();
         }
 
-        public ActionResult CadastrarAction()
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult CadastrarAction() {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Entrar", "Home");
             }
 
@@ -48,27 +52,23 @@ namespace backend.Controllers
             experiencia.Admissao = Request.Form["admissao"];
             experiencia.Demissao = Request.Form["demissao"] == null ? experiencia.Admissao : Request.Form["demissao"];
             experiencia.CurriculoId = curriculo.Id;
-            if (experiencia.cadastrar())
-            {
-                TempData["alertSucesso"] = "Experiencia cadastrada com sucesso!";
+            if (experiencia.cadastrar()) {
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Experiencia foi cadastrada.";
                 curriculo.atualizarDataEdicao();
-            }
-            else
-            {
-                TempData["alertErro"] = "Ocorreu um erro ao cadastrada Experiencia!";
+            } else {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao cadastrar experiencia.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
 
-        public ActionResult Editar(int id)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Editar(int id) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Entrar", "Home");
             }
             var experiencia = new Experiencia();
@@ -76,15 +76,12 @@ namespace backend.Controllers
             return View(experiencia.buscarPorId());
         }
 
-        public ActionResult EditarAction()
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult EditarAction() {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Entrar", "Home");
             }
 
@@ -101,26 +98,23 @@ namespace backend.Controllers
             experiencia.Demissao = Request.Form["demissao"] == null ? experiencia.Admissao : Request.Form["demissao"];
             experiencia.CurriculoId = curriculo.Id;
             experiencia.Id = int.Parse(Request.Form["id"]);
-            if(experiencia.editar())
-            {
-                TempData["alertSucesso"] = "Experiencia editada com sucesso!";
+            if (experiencia.editar()) {
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Experiencia foi editada.";
                 curriculo.atualizarDataEdicao();
-            } else
-            {
-                TempData["alertErro"] = "Ocorreu um erro ao editar Experiencia!";
+            } else {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao editar experiencia.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
 
-        public ActionResult Apagar(int id)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Apagar(int id) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Entrar", "Home");
             }
 
@@ -131,14 +125,13 @@ namespace backend.Controllers
 
             var experiencia = new Experiencia();
             experiencia.Id = id;
-            if (experiencia.apagar())
-            {
-                TempData["alertSucesso"] = "Experiencia apagada com sucesso!";
+            if (experiencia.apagar()) {
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Experiencia foi apagada.";
                 curriculo.atualizarDataEdicao();
-            }
-            else
-            {
-                TempData["alertErro"] = "Ocorreu um erro ao deletar Experiencia!";
+            } else {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao apagar experiencia.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }

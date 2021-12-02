@@ -130,9 +130,11 @@
     checkProfessionalExperienceDate: () => {
         let admissionDate = document.querySelector('#admissao');
         let resignationDate = document.querySelector('#demissao');
-        if (resignationDate.value < admissionDate.value) {
-            jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
-            return true;
+        if (resignationDate.value !== '') {
+            if (resignationDate.value < admissionDate.value) {
+                jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
+                return true;
+            }
         }
     },
     checkStartConclusionFormationDate: () => {
@@ -158,7 +160,7 @@ function checkToggle() {
     if (checkbox.checked) {
         demissao.setAttribute('disabled', 'disabled');
         demissao.removeAttribute('data-rules', 'required');
-        demissao.value = admissao.value;
+        demissao.value = '';
     } else {
         demissao.removeAttribute('disabled', 'disabled');
         demissao.setAttribute('data-rules', 'required');

@@ -5,10 +5,8 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace backend.Models
-{
-    public class Experiencia
-    {
+namespace backend.Models {
+    public class Experiencia {
         private static string dbConfig = ConfigurationManager.ConnectionStrings["dbConfigSenai"].ConnectionString;
         public int Id { get; set; }
         public string Cargo { get; set; }
@@ -18,16 +16,14 @@ namespace backend.Models
         public string Demissao { get; set; }
         public int CurriculoId { get; set; }
 
-        public bool cadastrar()
-        {
+        public bool cadastrar() {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
             Admissao = DateTime.Parse(Admissao).ToString("yyyy-MM-dd");
             Demissao = DateTime.Parse(Demissao).ToString("yyyy-MM-dd");
 
-            try
-            {
+            try {
                 con.Open();
                 var query = con.CreateCommand();
                 query.CommandText = "INSERT INTO experiencias (cargo, empregador, resumo, admissao, demissao, curriculo_id) VALUES (@cargo, @empregador, @resumo, @admissao, @demissao, @curriculoId)";
@@ -37,40 +33,31 @@ namespace backend.Models
                 query.Parameters.AddWithValue("@admissao", Admissao);
                 query.Parameters.AddWithValue("@demissao", Demissao);
                 query.Parameters.AddWithValue("@curriculoId", CurriculoId);
-                if (query.ExecuteNonQuery() > 0)
-                {
+                if (query.ExecuteNonQuery() > 0) {
                     resp = true;
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 resp = false;
-            }
-            finally
-            {
+            } finally {
                 con.Close();
             }
 
             return resp;
         }
 
-        public List<Experiencia> buscarPorCurriculoId()
-        {
+        public List<Experiencia> buscarPorCurriculoId() {
             var con = new MySqlConnection(dbConfig);
             var experiencias = new List<Experiencia>();
 
-            try
-            {
+            try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT * FROM experiencias WHERE curriculo_id = @curriculoId";
+                query.CommandText = "SELECT * FROM experiencias WHERE curriculo_id = @curriculoId ORDER BY admissao DESC";
                 query.Parameters.AddWithValue("@curriculoId", CurriculoId);
                 var dados = query.ExecuteReader();
 
-                if (dados.HasRows)
-                {
-                    while (dados.Read())
-                    {
+                if (dados.HasRows) {
+                    while (dados.Read()) {
                         var experiencia = new Experiencia();
                         experiencia.Id = dados.GetInt32("id");
                         experiencia.Cargo = dados.GetString("cargo");
@@ -80,62 +67,47 @@ namespace backend.Models
                         experiencia.Demissao = dados.GetDateTime("demissao").ToString("dd/MM/yyyy");
                         experiencias.Add(experiencia);
                     }
-                }
-                else
-                {
+                } else {
                     experiencias = null;
                 }
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 experiencias = null;
-            }
-            finally
-            {
+            } finally {
                 con.Close();
             }
 
             return experiencias;
         }
 
-        public bool apagar()
-        {
+        public bool apagar() {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
-            try
-            {
+            try {
                 con.Open();
                 var query = con.CreateCommand();
                 query.CommandText = "DELETE FROM experiencias WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
-                if (query.ExecuteNonQuery() > 0)
-                {
+                if (query.ExecuteNonQuery() > 0) {
                     resp = true;
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 resp = false;
-            }
-            finally
-            {
+            } finally {
                 con.Close();
             }
 
             return resp;
         }
 
-        public bool editar()
-        {
+        public bool editar() {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
 
             Admissao = DateTime.Parse(Admissao).ToString("yyyy-MM-dd");
             Demissao = DateTime.Parse(Demissao).ToString("yyyy-MM-dd");
-            try
-            {
+            try {
                 con.Open();
                 var query = con.CreateCommand();
                 query.CommandText = "UPDATE experiencias SET cargo = @cargo, empregador = @empregador, resumo = @resumo, admissao = @admissao, demissao = @demissao, curriculo_id = @curriculoId WHERE id = @id";
@@ -146,40 +118,31 @@ namespace backend.Models
                 query.Parameters.AddWithValue("@demissao", Demissao);
                 query.Parameters.AddWithValue("@curriculoId", CurriculoId);
                 query.Parameters.AddWithValue("@id", Id);
-                if (query.ExecuteNonQuery() > 0)
-                {
+                if (query.ExecuteNonQuery() > 0) {
                     resp = true;
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 resp = false;
-            }
-            finally
-            {
+            } finally {
                 con.Close();
             }
 
             return resp;
         }
 
-        public Experiencia buscarPorId()
-        {
+        public Experiencia buscarPorId() {
             var con = new MySqlConnection(dbConfig);
             var experiencia = new Experiencia();
 
-            try
-            {
+            try {
                 con.Open();
                 var query = con.CreateCommand();
                 query.CommandText = "SELECT * FROM experiencias WHERE id = @id";
                 query.Parameters.AddWithValue("@id", Id);
                 var dados = query.ExecuteReader();
 
-                if (dados.HasRows)
-                {
-                    while (dados.Read())
-                    {
+                if (dados.HasRows) {
+                    while (dados.Read()) {
                         experiencia.Id = dados.GetInt32("id");
                         experiencia.Cargo = dados.GetString("cargo");
                         experiencia.Empregador = dados.GetString("empregador");
@@ -187,19 +150,13 @@ namespace backend.Models
                         experiencia.Admissao = dados.GetDateTime("admissao").ToString("yyyy-MM-dd");
                         experiencia.Demissao = dados.GetDateTime("demissao").ToString("yyyy-MM-dd");
                     }
-                }
-                else
-                {
+                } else {
                     experiencia = null;
                 }
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 experiencia = null;
-            }
-            finally
-            {
+            } finally {
                 con.Close();
             }
 

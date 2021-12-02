@@ -3,43 +3,39 @@
     ViewBag.Title = "Editar Experiencia";
     var experiencia = Model;
 }
-<div class="row">
-    <div class="col-md-6">
-        <h1>Editar Experiencia</h1>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
+<link href="~/Content/Css/form.css" rel="stylesheet" />
+<div id="users-container" class="dashboard-container">
+    <h1 class="page-title"><a href="/Curriculo/MeuCurriculo"><</a> Editar experiência</h1>
+    <div class="form-experiencia-formacao">
         <form action="/Experiencia/EditarAction" method="post" class="jValidator">
-            <div class="mb-3">
-                <label for="cargo" class="form-label">Cargo *</label>
-                <input name="cargo" type="text" class="form-control" id="cargo" value="@experiencia.Cargo" data-rules="required|min:3|max:50">
+            <div class="input-container">
+                <label for="cargo">Cargo</label>
+                <input name="cargo" type="text" id="cargo" data-rules="required|max:50" value="@experiencia.Cargo" />
             </div>
-            <div class="mb-3">
-                <label for="empregador" class="form-label">Empregador *</label>
-                <input name="empregador" type="text" class="form-control" id="empregador" value="@experiencia.Empregador" data-rules="required|min:3|max:100">
+            <div class="input-container">
+                <label for="empregador">Empregador</label>
+                <input name="empregador" type="text" id="empregador" data-rules="required|max:50" value="@experiencia.Empregador" />
             </div>
-            <div class="form-floating mb-3">
-                <textarea name="resumo" class="form-control" placeholder="Resumo das atividades" id="floatingTextarea2" style="height: 200px" data-rules="required|min:20|max:1000"> @experiencia.Resumo</textarea>
-                <label for="floatingTextarea2">Resumo das atividades *</label>
+            <div class="input-container">
+                <label for="admissao">Admissão</label>
+                <input name="admissao" type="text" id="admissao" data-rules="required" value="@experiencia.Admissao" />
             </div>
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                <input type="checkbox" class="btn-check" id="empregoAtual" autocomplete="off" onchange="checkToggle()">
-                <label class="btn btn-outline-primary" for="empregoAtual">Emprego Atual</label>
+            <div class="input-container">
+                <label for="demissao">Demissão</label>
+                <input name="demissao" type="text" id="demissao" value="@experiencia.Demissao" />
+                <div class="checkbox-container">
+                    <input name="empregoAtual" type="checkbox" id="empregoAtual" onchange="checkToggle()" />
+                    <label for="empregoAtual">Emprego atual</label>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="admissao" class="form-label">Admissao *</label>
-                <input name="admissao" type="date" class="form-control" id="admissao" value="@experiencia.Admissao" data-rules="required">
-            </div>
-            <div class="mb-3">
-                <label for="demissao" class="form-label">Demissao *</label>
-                <input name="demissao" type="date" class="form-control" id="demissao" value="@experiencia.Demissao" data-rules="required">
+            <div class="input-container">
+                <label for="resumo">Resumo das atividades</label>
+                <textarea name="resumo" id="resumo" data-rules="required|max:500">@experiencia.Resumo</textarea>
             </div>
             <input type="hidden" name="id" value="@experiencia.Id" />
-            <button type="submit" class="btn btn-success">Editar Experiência</button>
+            <button type="submit" class="btn-form">Cadastrar</button>
         </form>
     </div>
 </div>
-
-<script src="~/Scripts/validator.js"></script>
+<script src="~/Content/Js/validator.js"></script>
+<script src="~/Content/Js/Helpers/input-helper.js"></script>

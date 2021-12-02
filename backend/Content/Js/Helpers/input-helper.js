@@ -1,9 +1,8 @@
 const inputEntries = [
     ...document.querySelectorAll(
-      ".input-container > input, .input-container > textarea"
+      ".input-container > input, .input-container > select, .input-container > textarea"
     ),
   ];
-console.log(inputEntries)
   const labelEntries = [
     ...document.querySelectorAll(
       ".input-container > label"
@@ -15,9 +14,6 @@ console.log(inputEntries)
       id: inputEntry.id,
       value: inputEntry.value,
         focus: function (label) {
-        if (inputEntry.value) {
-            label.classList.add("focus-input");
-        }
         inputEntry.addEventListener("focus", function(e) {
           e.preventDefault();
           if(inputEntry.id === label.htmlFor){
@@ -33,7 +29,15 @@ console.log(inputEntries)
             label.classList.remove("focus-input");
           }
         });
-      },
+        },
+        onload: function (label) {
+            window.addEventListener("load", function (e) {
+                e.preventDefault();
+                if (inputEntry.value) {
+                    label.classList.add("focus-input");
+                }
+            });
+        }
     };
   });
 
@@ -41,6 +45,7 @@ console.log(inputEntries)
     labelEntries.forEach(label => {
         input.focus(label);
         input.blur(label);
+        input.onload(label);
     })
   }
 

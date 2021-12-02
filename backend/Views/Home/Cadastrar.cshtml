@@ -58,7 +58,7 @@
                 <div class="input-container">
                     <label for="curso">Curso</label>
                     <select name="curso" id="curso">
-                        <option value="0" selected></option>
+                        <option value="" selected></option>
                         @foreach (var curso in Model) {
                             <option value="@Html.DisplayFor(id => curso.Id)">@Html.DisplayFor(id => curso.Nome)</option>
                         }
