@@ -7,8 +7,8 @@ body {
 }
 
 .dashboard-container > .profile-header > .profile-avatar {
-  width: 148px;
-  height: 148px;
+  width: 140px;
+  height: 140px;
   display: inline-block;
   background: url("../Images/avatar-default.png");
   background-size: cover;
@@ -76,13 +76,13 @@ body {
         min-width: 250px;
     }
 
-.dashboard-container
+/*.dashboard-container
   > .profile-header
   > .profile-info
   > .info-block-bottom
   h3.location {
   margin-bottom: 5px;
-}
+}*/
 
 .dashboard-container
   > .profile-header

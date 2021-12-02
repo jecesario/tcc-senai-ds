@@ -9,7 +9,13 @@
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
-    <h1 class="page-title"><a href="/Usuarios"><</a> Editar usuário</h1>
+    <h1 class="page-title">
+        @if (Model.Tipo == 1) {
+            <a href="/Usuarios">< </a>
+        } else {
+            <a href="/Curriculo/MeuCurriculo">< </a>
+        } Editar usuário
+    </h1>
     <div class="form-user">
         <form action="/Usuario/Editar" method="post" class="jValidator">
             <div class="input-container">

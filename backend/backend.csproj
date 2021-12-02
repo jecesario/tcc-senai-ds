@@ -152,6 +152,7 @@
     <Content Include="Content\Svg\curriculo.svg" />
     <Content Include="Content\Svg\edit.svg" />
     <Content Include="Content\Svg\email.svg" />
+    <Content Include="Content\Svg\feedback.svg" />
     <Content Include="Content\Svg\github.svg" />
     <Content Include="Content\Svg\grads.svg" />
     <Content Include="Content\Svg\jornada.svg" />
