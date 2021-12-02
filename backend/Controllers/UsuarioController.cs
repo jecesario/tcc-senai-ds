@@ -19,7 +19,7 @@ namespace backend.Controllers {
             }
             var usuarios = Usuario.listar().OrderBy(p => p.Id).ToPagedList(pagina, 3);
             if (usuarios == null || usuarios.Count == 0) {
-                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curso cadastrado!";
+                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum usuário cadastrado!";
             }
             return View(usuarios);
         }
@@ -118,7 +118,7 @@ namespace backend.Controllers {
             oUsuario.Id = id;
             if (oUsuario.apagar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Usuário foi apagada.";
+                TempData["alertMensagem"] = "Usuário foi apagado.";
             } else {
                 TempData["alertErro"] = "Ocorreu um erro ao apagar usuário!";
                 TempData["alertMensagem"] = "Verifique os dados e tente novamente.";
@@ -136,7 +136,13 @@ namespace backend.Controllers {
                 return RedirectToAction("Entrar", "Home");
             }
             var oUsuario = new Usuario();
-            return View(oUsuario.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 3));
+            var usuarioList = oUsuario.buscarPorNome(nome);
+            if(usuarioList == null) {
+                TempData["alertErro"] = "Ocorreu um erro!";
+                TempData["alertMensagem"] = "Nenhum usuário foi encontrado.";
+                return RedirectToAction("Index");
+            }
+            return View(usuarioList.OrderBy(p => p.Id).ToPagedList(pagina, 3));
         }
     }
 }

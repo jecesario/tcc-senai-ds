@@ -67,9 +67,11 @@ namespace backend.Controllers.admin.vagas
             vaga.UsuarioId = usuario.Id;
 
             if (vaga.cadastrar()) {
-                TempData["alertSucesso"] = "Vaga cadastrada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Vaga foi cadastrada.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao cadastrar vaga!";
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao cadastrar vaga.";
             }
 
             return RedirectToAction("Index");
@@ -134,9 +136,11 @@ namespace backend.Controllers.admin.vagas
             vaga.UsuarioId = usuario.Id;
 
             if (vaga.editar()) {
-                TempData["alertSucesso"] = "Vaga editada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Vaga foi editada.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao editar vaga!";
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao editar vaga.";
             }
 
             return RedirectToAction("Index");
@@ -157,11 +161,13 @@ namespace backend.Controllers.admin.vagas
             vaga.Id = id;
             if (vaga.apagar())
             {
-                TempData["alertSucesso"] = "Vaga apagada com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Vaga foi apagada.";
             }
             else
             {
-                TempData["alertErro"] = "Ocorreu um erro ao deletar Vaga!";
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao deletar vaga.";
             }
             return RedirectToAction("Index");
         }
