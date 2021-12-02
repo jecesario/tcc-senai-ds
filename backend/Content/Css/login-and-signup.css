@@ -179,7 +179,7 @@
     color: #D92E2E;
 }
 
-.form-container > form > .input-container > input.is-invalid {
+.form-container > form > .input-container > input.is-invalid, select.is-invalid {
     border-color: #D92E2E;
 }
 

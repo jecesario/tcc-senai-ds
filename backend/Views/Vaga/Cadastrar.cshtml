@@ -13,7 +13,7 @@
                 <div class="input-container">
                     <label for="jornada">Jornada</label>
                     <select name="jornada" id="jornada" data-rules="pick">
-                        <option value="0" selected></option>
+                        <option value="" selected></option>
                         @foreach (var jornada in jornadas) {
                             <option value="@jornada.Id">@jornada.Descricao</option>
                         }
@@ -22,7 +22,7 @@
                 <div class="input-container">
                     <label for="tipo">Tipo de Contratação</label>
                     <select name="tipo" id="tipo" data-rules="pick">
-                        <option value="0" selected></option>
+                        <option value="" selected></option>
                         @foreach (var tipo in tiposContracao) {
                             <option value="@tipo.Id">@tipo.Descricao</option>
                         }
@@ -32,22 +32,22 @@
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="cargo">Cargo</label>
-                    <input name="cargo" type="text" id="cargo" />
+                    <input name="cargo" type="text" id="cargo" data-rules="required|max:50" />
                 </div>
                 <div class="input-container">
                     <label for="quantidade">Quantidade</label>
-                    <input name="quantidade" type="text" id="quantidade" />
+                    <input name="quantidade" type="text" id="quantidade" data-rules="required|max:3" />
                 </div>
             </div>
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="cidade">Cidade</label>
-                    <input name="cidade" type="text" id="cidade" />
+                    <input name="cidade" type="text" id="cidade" data-rules="required|max:50" />
                 </div>
                 <div class="input-container">
                     <label for="estado">Estado</label>
                     <select name="estado" id="estado" data-rules="pick">
-                        <option value="0" selected></option>
+                        <option value="" selected></option>
                         <option value="SP"> São Paulo</option>
                     </select>
                 </div>
@@ -55,38 +55,38 @@
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="empresa">Empresa contratante</label>
-                    <input name="empresa" type="text" id="empresa" />
+                    <input name="empresa" type="text" id="empresa" data-rules="required|max:50" />
                 </div>
                 <div class="input-container">
                     <label for="remuneracao">Remuneração</label>
-                    <input name="remuneracao" type="text" id="remuneracao" />
+                    <input name="remuneracao" type="text" id="remuneracao" data-rules="required|max:10" />
                 </div>
             </div>
 
                 <div class="input-container">
                     <label for="requisitos">Requisitos</label>
-                    <textarea name="requisitos" id="requisitos"></textarea>
+                    <textarea name="requisitos" id="requisitos" data-rules="required|max:1000"></textarea>
                 </div>
                 <div class="input-container">
                     <label for="atribuicoes">Atribuições</label>
-                    <textarea name="atribuicoes" id="atribuicoes"></textarea>
+                    <textarea name="atribuicoes" id="atribuicoes" data-rules="required|max:1000"></textarea>
                 </div>
 
 
                 <div class="input-container">
                     <label for="beneficios">Benefícios</label>
-                    <textarea name="beneficios" id="beneficios"></textarea>
+                    <textarea name="beneficios" id="beneficios" data-rules="required|max:500"></textarea>
                 </div>
                 <div class="input-container">
                     <label for="observacoes">Observações</label>
-                    <textarea name="observacoes" id="observacoes"></textarea>
+                    <textarea name="observacoes" id="observacoes" data-rules="required|max:500"></textarea>
                 </div>
 
             <div class="double-input-container">
 
                 <div class="input-container">
                     <label for="dataLimite">Data limite</label>
-                    <input name="dataLimite" type="text" id="dataLimite" />
+                    <input name="dataLimite" type="text" id="dataLimite" data-rules="required" />
                 </div>
             </div>
             <button type="submit" class="btn-form">Cadastrar</button>
@@ -94,4 +94,4 @@
     </div>
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
-<script src="~/Scripts/validator.js"></script>
+<script src="~/Content/Js/validator.js"></script>

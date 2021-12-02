@@ -172,6 +172,7 @@ form > .input-container > input.is-invalid {
 
 .job-form form .input-container > textarea {
     width: calc (100% - 20px);
+    font-family: inherit;
 }
 
 .job-form form .double-input-container .input-container {
@@ -181,4 +182,14 @@ form > .input-container > input.is-invalid {
 
 .form-user .input-container > select {
     max-width: 300px;
+}
+
+input.is-invalid, textarea.is-invalid, select.is-invalid {
+    border-color: #D92E2E;
+}
+
+.invalid-feedback {
+    color: #D92E2E;
+    margin-top: 5px;
+    font-size: 13px;
 }

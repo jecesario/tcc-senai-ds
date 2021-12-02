@@ -1,6 +1,6 @@
 ﻿@model backend.Models.Vaga
 @{
-    ViewBag.Title = "Cadastrar Vaga";
+    ViewBag.Title = "Editar Vaga";
     var jornadas = ViewData["jornadas"] as List<backend.Models.VagaJornada>;
     var tiposContracao = ViewData["tiposContratacao"] as List<backend.Models.VagaTipo>;
     var vaga = Model;
@@ -8,14 +8,14 @@
 
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
-    <h1 class="page-title"><a href="/Vaga"><</a> Cadastrar vaga</h1>
+    <h1 class="page-title"><a href="/Vaga"><</a> Editar vaga</h1>
     <div class="job-form">
         <form action="/Vaga/EditarAction" method="post" class="jValidator">
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="jornada">Jornada</label>
                     <select name="jornada" id="jornada" data-rules="pick">
-                        <option value="0" selected></option>
+                        <option value="" selected></option>
                         @foreach (var jornada in jornadas) {
                             <option value="@jornada.Id" @(vaga.VagaJornadaId == jornada.Id ? "selected" : "")>@jornada.Descricao</option>
                         }
@@ -24,7 +24,7 @@
                 <div class="input-container">
                     <label for="tipo">Tipo de Contratação</label>
                     <select name="tipo" id="tipo" data-rules="pick">
-                        <option value="0" selected></option>
+                        <option value="" selected></option>
                         @foreach (var tipo in tiposContracao) {
                             <option value="@tipo.Id" @(vaga.VagaTipoId == tipo.Id ? "selected" : "")>@tipo.Descricao</option>
                         }
@@ -34,7 +34,7 @@
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="cargo">Cargo</label>
-                    <input name="cargo" type="text" id="cargo" data-rules="required|min:3|max:40" value="@vaga.Cargo" />
+                    <input name="cargo" type="text" id="cargo" data-rules="required|max:50" value="@vaga.Cargo" />
                 </div>
                 <div class="input-container">
                     <label for="quantidade">Quantidade</label>
@@ -44,12 +44,12 @@
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="cidade">Cidade</label>
-                    <input name="cidade" type="text" id="cidade" data-rules="required|min:3|max:50" value="@vaga.Cidade" />
+                    <input name="cidade" type="text" id="cidade" data-rules="required|max:50" value="@vaga.Cidade" />
                 </div>
                 <div class="input-container">
                     <label for="estado">Estado</label>
                     <select name="estado" id="estado" data-rules="pick">
-                        <option value="0"></option>
+                        <option value=""></option>
                         <option value="SP" selected> São Paulo</option>
                     </select>
                 </div>
@@ -57,31 +57,31 @@
             <div class="double-input-container">
                 <div class="input-container">
                     <label for="empresa">Empresa contratante</label>
-                    <input name="empresa" type="text" id="empresa" data-rules="required|min:3|max:100" value="@vaga.Empresa" />
+                    <input name="empresa" type="text" id="empresa" data-rules="required|max:50" value="@vaga.Empresa" />
                 </div>
                 <div class="input-container">
                     <label for="remuneracao">Remuneração</label>
-                    <input name="remuneracao" type="text" id="remuneracao" value="@vaga.Remuneracao" />
+                    <input name="remuneracao" type="text" id="remuneracao" data-rules="required|max:10" value="@vaga.Remuneracao" />
                 </div>
             </div>
 
             <div class="input-container">
                 <label for="requisitos">Requisitos</label>
-                <textarea name="requisitos" id="requisitos">@vaga.Requisitos</textarea>
+                <textarea name="requisitos" id="requisitos" data-rules="required|max:1000">@vaga.Requisitos</textarea>
             </div>
             <div class="input-container">
                 <label for="atribuicoes">Atribuições</label>
-                <textarea name="atribuicoes" id="atribuicoes">@vaga.Atribuicoes</textarea>
+                <textarea name="atribuicoes" id="atribuicoes" data-rules="required|max:1000">@vaga.Atribuicoes</textarea>
             </div>
 
 
             <div class="input-container">
                 <label for="beneficios">Benefícios</label>
-                <textarea name="beneficios" id="beneficios">@vaga.Beneficios</textarea>
+                <textarea name="beneficios" id="beneficios" data-rules="required|max:500">@vaga.Beneficios</textarea>
             </div>
             <div class="input-container">
                 <label for="observacoes">Observações</label>
-                <textarea name="observacoes" id="observacoes">@vaga.Observacoes</textarea>
+                <textarea name="observacoes" id="observacoes" data-rules="required|max:500">@vaga.Observacoes</textarea>
             </div>
 
             <div class="double-input-container">
