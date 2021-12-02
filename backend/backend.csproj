@@ -159,11 +159,13 @@
     <Content Include="Content\Svg\linkedin.svg" />
     <Content Include="Content\Svg\location.svg" />
     <Content Include="Content\Svg\logout.svg" />
+    <Content Include="Content\Svg\miss.svg" />
     <Content Include="Content\Svg\moon.svg" />
     <Content Include="Content\Svg\moon2.svg" />
     <Content Include="Content\Svg\phone.svg" />
     <Content Include="Content\Svg\plus.svg" />
     <Content Include="Content\Svg\skills.svg" />
+    <Content Include="Content\Svg\studying.svg" />
     <Content Include="Content\Svg\sun.svg" />
     <Content Include="Content\Svg\sun2.svg" />
     <Content Include="Content\Svg\trash.svg" />

@@ -279,3 +279,23 @@ width: 1200px;
   border: 1px solid #cecece;
   max-width: 100%;
 } */
+
+.container-helper {
+    padding: 40px 50px 40px 107px;
+    display: flex;
+    justify-content: center;
+}
+
+.complete-profile-text h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.complete-profile-text p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.complete-profile-text p a {
+    color: #D92E2E;
+}

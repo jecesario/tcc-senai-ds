@@ -56,7 +56,7 @@ namespace backend.Models
             bool resp = false;
             var con = new MySqlConnection(dbConfig);
 
-            if (CursoId.Equals("0")) {
+            if (CursoId.Equals("")) {
                 CursoId = null;
             }
 

@@ -62,7 +62,7 @@
     <script src="~/Content/Js/Helpers/alert-helper.js"></script>
     @if (@TempData["alertSucesso"] != null) {
         <script>
-            successAlertWithButton('@Html.Raw(TempData["alertSuccesso"])', '@Html.Raw(TempData["alertMensagem"])');
+            successAlertWithButton('@Html.Raw(TempData["alertSucesso"])', '@Html.Raw(TempData["alertMensagem"])');
         </script>
     }
     @if (@TempData["alertErro"] != null) {
