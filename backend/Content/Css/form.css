@@ -198,3 +198,7 @@ input.is-invalid, textarea.is-invalid, select.is-invalid {
     width: calc(100% - 20px);
     max-width: none;
 }
+
+.form-experiencia-formacao .input-container > select {
+    width: calc(100% - 20px);
+}
