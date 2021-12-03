@@ -7,38 +7,30 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 
-namespace backend.Controllers
-{
-    public class CurriculoController : Controller
-    {
+namespace backend.Controllers {
+    public class CurriculoController : Controller {
         // GET: Curriculo
-        public ActionResult Index(int pagina = 1)
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Index(int pagina = 1) {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo != 1)
-            {
+            if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
             var curriculos = Curriculo.listar().OrderBy(p => p.Id).ToPagedList(pagina, 3);
-            if (curriculos == null || curriculos.Count == 0)
-            {
+            if (curriculos == null || curriculos.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curriculo cadastrado!";
             }
             return View(curriculos);
         }
 
         public ActionResult MeuCurriculo() {
-            if (Session["usuario"] == null)
-            {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
             // Guardando dados do curriculo do usuário logado 
@@ -49,8 +41,7 @@ namespace backend.Controllers
 
 
             // Se o usuário ainda não tiver cadastrado um currículo, redireciona para a tela que pede para ele cadastrar um currículo
-            if (curriculo == null)
-            {
+            if (curriculo == null) {
                 return View();
             }
 
@@ -68,7 +59,7 @@ namespace backend.Controllers
 
             // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
             var habilidades = new List<Habilidade>();
-            if(listaHabilidades != null) {
+            if (listaHabilidades != null) {
                 foreach (var i in listaHabilidades) {
                     var habilidade = new Habilidade();
                     habilidade.Id = i.HabilidadeId;
@@ -90,15 +81,12 @@ namespace backend.Controllers
             return View(habilidades);
         }
 
-        public ActionResult Cadastrar()
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult Cadastrar() {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
             var habilidades = Habilidade.listar();
@@ -106,16 +94,13 @@ namespace backend.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CadastrarAction()
-        {
+        public ActionResult CadastrarAction() {
             // Vericação de usuário logado
-            if (Session["usuario"] == null)
-            {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
 
@@ -129,12 +114,9 @@ namespace backend.Controllers
             curriculo.Cidade = Request.Form["cidade"];
             curriculo.Estado = Request.Form["estado"];
             curriculo.UsuarioId = Request.Form["usuarioId"];
-            if (curriculo.cadastrar())
-            {
+            if (curriculo.cadastrar()) {
                 TempData["alertSucesso"] = "Curriculo cadastrado com sucesso!";
-            }
-            else
-            {
+            } else {
                 TempData["alertErro"] = "Ocorreu um erro ao cadastrar Curriculo!";
             }
             // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
@@ -144,20 +126,17 @@ namespace backend.Controllers
             habilidadeCurriculo.cadastrar(checks);
 
             curriculo.atualizarDataEdicao();
-            
+
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
 
-        public ActionResult Editar(int id)
-        {
+        public ActionResult Editar(int id) {
             // Vericação de usuário logado
-            if (Session["usuario"] == null)
-            {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
 
@@ -179,27 +158,25 @@ namespace backend.Controllers
 
             // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
             var habilidadesMarcadas = new List<string>();
-            foreach (var i in listaHabilidades)
-            {
-                var habilidade = new Habilidade();
-                habilidade.Id = i.HabilidadeId;
-                habilidadesMarcadas.Add(habilidade.buscarPorId().Id.ToString());
+            if (listaHabilidades != null) {
+                foreach (var i in listaHabilidades) {
+                    var habilidade = new Habilidade();
+                    habilidade.Id = i.HabilidadeId;
+                    habilidadesMarcadas.Add(habilidade.buscarPorId().Id.ToString());
+                }
             }
             ViewBag.Marcadas = habilidadesMarcadas;
             return View(Habilidade.listar());
         }
 
         [HttpPost]
-        public ActionResult EditarAction()
-        {
+        public ActionResult EditarAction() {
             // Vericação de usuário logado
-            if (Session["usuario"] == null)
-            {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
 
@@ -214,14 +191,11 @@ namespace backend.Controllers
             curriculo.Cidade = Request.Form["cidade"];
             curriculo.Estado = Request.Form["estado"];
             curriculo.UsuarioId = Request.Form["usuarioId"];
-            
 
-            if (curriculo.editar())
-            {
+
+            if (curriculo.editar()) {
                 TempData["alertSucesso"] = "Curriculo editado com sucesso!";
-            }
-            else
-            {
+            } else {
                 TempData["alertErro"] = "Ocorreu um erro ao editar Curriculo!";
             }
 
@@ -247,15 +221,12 @@ namespace backend.Controllers
             return View(curriculo.buscarPorHabilidades(habilidades).OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
 
-        public ActionResult AnexarDoc()
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult AnexarDoc() {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
 
@@ -268,13 +239,11 @@ namespace backend.Controllers
 
             var nomeArquivo = usuario.Email + Util.criptografar(DateTime.Now.Millisecond.ToString());
 
-            if (!Directory.Exists(Server.MapPath("~/Content/Uploads")))
-            {
+            if (!Directory.Exists(Server.MapPath("~/Content/Uploads"))) {
                 Directory.CreateDirectory(Server.MapPath("~/Content/Uploads"));
             }
 
-            if (arquivo.ContentLength > 0)
-            {
+            if (arquivo.ContentLength > 0) {
                 var uploadPath = Server.MapPath("~/Content/Uploads");
                 string caminhoArquivo = Path.Combine(@uploadPath,
                     Path.GetFileName(nomeArquivo));
@@ -291,15 +260,12 @@ namespace backend.Controllers
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
 
-        public ActionResult ExcluirDoc()
-        {
-            if (Session["usuario"] == null)
-            {
+        public ActionResult ExcluirDoc() {
+            if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
             }
             var usuario = Session["usuario"] as Usuario;
-            if (usuario.Tipo == 1)
-            {
+            if (usuario.Tipo == 1) {
                 return RedirectToAction("Index", "Curriculo");
             }
 
@@ -310,15 +276,12 @@ namespace backend.Controllers
 
             var arquivo = Server.MapPath("~/Content/Uploads/") + curriculo.Anexo;
             var existe = System.IO.File.Exists(arquivo);
-            if (existe)
-            {
-                try
-                {
+            if (existe) {
+                try {
                     System.IO.File.Delete(arquivo);
                     curriculo.deletarDoc();
                     TempData["alertSucesso"] = "Deletou em " + arquivo;
-                } catch (System.IO.IOException e)
-                {
+                } catch (System.IO.IOException e) {
                     TempData["alertSucesso"] = "Errou em " + e.Message;
                 }
             }
