@@ -74,7 +74,20 @@
                                 </a>
                             </div>
                         </div>
-                        <h2>Product Designer</h2>
+                        <div class="info-cargo">
+                            <h2>Product Designer</h2>
+                            @if (curriculo.Anexo.Equals("")) {
+                            <form action="/Curriculo/AnexarDoc" method="post" enctype="multipart/form-data" id="formanexo">
+                                <label for="anexo">Enviar Currículo</label>
+                                <input type="file" name="anexo" id="anexo" accept=".pdf, .doc, .docx">
+                            </form>
+                            } else {
+                        <div class="download-delete-curriculum">
+                            <a href="~/Content/Uploads/@curriculo.Anexo">Baixar Curriculo</a>
+                            <a href="/Curriculo/ExcluirDoc">X</a>
+                        </div>
+                    }
+                        </div>
                     </div>
 
                     <div class="info-block-bottom">
@@ -309,11 +322,11 @@
         </div>
     }
 }
-
+<script src="~/Content/Js/Helpers/file-helper.js"></script>
 
 @if (@TempData["alertSucesso"] != null) {
     <script>
-            successAlert('@Html.Raw(TempData["alertSucesso"])', '@Html.Raw(TempData["alertMensagem"])');
+        successAlertWithButton('@Html.Raw(TempData["alertSucesso"])', '@Html.Raw(TempData["alertMensagem"])');
     </script>
 }
 @if (@TempData["alertErro"] != null) {

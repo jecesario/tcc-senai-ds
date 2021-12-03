@@ -145,6 +145,7 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Js\Helpers\alert-helper.js" />
     <Content Include="Content\Js\Helpers\darkmode-helper.js" />
+    <Content Include="Content\Js\Helpers\file-helper.js" />
     <Content Include="Content\Js\Helpers\input-helper.js" />
     <Content Include="Content\Js\Helpers\loading.js" />
     <Content Include="Content\Js\sweetalert2.min.js" />

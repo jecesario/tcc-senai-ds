@@ -115,9 +115,11 @@ namespace backend.Controllers {
             curriculo.Estado = Request.Form["estado"];
             curriculo.UsuarioId = Request.Form["usuarioId"];
             if (curriculo.cadastrar()) {
-                TempData["alertSucesso"] = "Curriculo cadastrado com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Curriculo foi cadastrado.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao cadastrar Curriculo!";
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao cadastrar currículo.";
             }
             // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
             var checks = Request.Form["checks"];
@@ -194,9 +196,11 @@ namespace backend.Controllers {
 
 
             if (curriculo.editar()) {
-                TempData["alertSucesso"] = "Curriculo editado com sucesso!";
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Curriculo foi editado.";
             } else {
-                TempData["alertErro"] = "Ocorreu um erro ao editar Curriculo!";
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Ocorreu um erro ao editar currículo.";
             }
 
             // Pegando as habilidades marcadas e cadastrando na tabela de habilidades relacionadas com o curriculo do usuário logado
@@ -255,7 +259,8 @@ namespace backend.Controllers {
                 curriculo.Anexo = nomeArquivo;
                 curriculo.anexarDoc();
 
-                TempData["alertSucesso"] = "Upou em " + caminhoArquivo;
+                TempData["alertSucesso"] = "Sucesso!";
+                TempData["alertMensagem"] = "Anexo salvo no servidor.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
@@ -280,9 +285,11 @@ namespace backend.Controllers {
                 try {
                     System.IO.File.Delete(arquivo);
                     curriculo.deletarDoc();
-                    TempData["alertSucesso"] = "Deletou em " + arquivo;
+                    TempData["alertSucesso"] = "Sucesso!";
+                    TempData["alertMensagem"] = "Anexo removido do servidor.";
                 } catch (System.IO.IOException e) {
-                    TempData["alertSucesso"] = "Errou em " + e.Message;
+                    TempData["alertErro"] = "Erro!";
+                    TempData["alertMensagem"] = "Ocorreu um erro ao deletar anexo.";
                 }
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");

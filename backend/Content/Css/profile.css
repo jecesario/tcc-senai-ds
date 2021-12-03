@@ -300,13 +300,34 @@ width: 1200px;
     color: #D92E2E;
 }
 
-.info-name {
+.info-name, .info-cargo {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 .info-name h1 {
     font-size: 1.5rem;
     font-weight: 800;
     margin-bottom: 15px;
+}
+
+.info-cargo form input[type="file"]{
+    display: none;
+}
+
+.info-cargo form label {
+    background-color: #D92E2E;
+    color: #FEFEFE;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.download-delete-curriculum a {
+    background-color: #D92E2E;
+    color: #FEFEFE;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
 }
