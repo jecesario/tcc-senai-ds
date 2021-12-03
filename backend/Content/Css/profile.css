@@ -299,3 +299,14 @@ width: 1200px;
 .complete-profile-text p a {
     color: #D92E2E;
 }
+
+.info-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.info-name h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
