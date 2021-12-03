@@ -55,29 +55,24 @@ namespace backend.Models
 
             apagarPorCurriculoId();
 
-            try
-            {
-                con.Open();
-                string[] lista = habilidades.Split(',');
-                foreach (var habilidade in lista)
-                {
-                    var query = con.CreateCommand();
-                    query.CommandText = "INSERT INTO habilidades_curriculos (curriculo_id, habilidade_id) VALUES (@curriculoId, @habilidadeId)";
-                    query.Parameters.AddWithValue("@curriculoId", CurriculoId);
-                    query.Parameters.AddWithValue("@habilidadeId", int.Parse(habilidade));
-                    if (query.ExecuteNonQuery() > 0)
-                    {
-                        resp = true;
+            if(habilidades != null) {
+                try {
+                    con.Open();
+                    string[] lista = habilidades.Split(',');
+                    foreach (var habilidade in lista) {
+                        var query = con.CreateCommand();
+                        query.CommandText = "INSERT INTO habilidades_curriculos (curriculo_id, habilidade_id) VALUES (@curriculoId, @habilidadeId)";
+                        query.Parameters.AddWithValue("@curriculoId", CurriculoId);
+                        query.Parameters.AddWithValue("@habilidadeId", int.Parse(habilidade));
+                        if (query.ExecuteNonQuery() > 0) {
+                            resp = true;
+                        }
                     }
+                } catch (Exception e) {
+                    resp = false;
+                } finally {
+                    con.Close();
                 }
-            }
-            catch (Exception e)
-            {
-                resp = false;
-            }
-            finally
-            {
-                con.Close();
             }
 
             return resp;

@@ -68,11 +68,12 @@ namespace backend.Controllers
 
             // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
             var habilidades = new List<Habilidade>();
-            foreach(var i in listaHabilidades)
-            {
-                var habilidade = new Habilidade();
-                habilidade.Id = i.HabilidadeId;
-                habilidades.Add(habilidade.buscarPorId());
+            if(listaHabilidades != null) {
+                foreach (var i in listaHabilidades) {
+                    var habilidade = new Habilidade();
+                    habilidade.Id = i.HabilidadeId;
+                    habilidades.Add(habilidade.buscarPorId());
+                }
             }
 
             // Guardando as experiencias do usuário baseadas pelo id do curriculo
