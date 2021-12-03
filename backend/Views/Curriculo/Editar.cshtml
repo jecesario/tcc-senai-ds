@@ -7,182 +7,67 @@
     var marcadas = ViewData["marcadas"] as List<string>;
 }
 
-<style>
-    ul.ks-cboxtags {
-        list-style: none;
-        padding: 20px;
-    }
-
-        ul.ks-cboxtags li {
-            display: inline;
-        }
-
-            ul.ks-cboxtags li label {
-                display: inline-block;
-                background-color: rgba(255, 255, 255, .9);
-                border: 2px solid rgba(139, 139, 139, .3);
-                color: #adadad;
-                border-radius: 25px;
-                white-space: nowrap;
-                margin: 3px 0px;
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                -webkit-tap-highlight-color: transparent;
-                transition: all .2s;
-            }
-
-            ul.ks-cboxtags li label {
-                padding: 8px 12px;
-                cursor: pointer;
-            }
-
-                ul.ks-cboxtags li label::before {
-                    display: inline-block;
-                    font-style: normal;
-                    font-variant: normal;
-                    text-rendering: auto;
-                    -webkit-font-smoothing: antialiased;
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    font-size: 12px;
-                    padding: 2px 6px 2px 2px;
-                    content: "\f067";
-                    transition: transform .3s ease-in-out;
-                }
-
-            ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
-                content: "\f00c";
-                transform: rotate(-360deg);
-                transition: transform .3s ease-in-out;
-            }
-
-            ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-                border: 2px solid #1bdbf8;
-                background-color: #12bbd4;
-                color: #fff;
-                transition: all .2s;
-            }
-
-            ul.ks-cboxtags li input[type="checkbox"] {
-                display: absolute;
-            }
-
-            ul.ks-cboxtags li input[type="checkbox"] {
-                position: absolute;
-                opacity: 0;
-            }
-
-                ul.ks-cboxtags li input[type="checkbox"]:focus + label {
-                    border: 2px solid #e9a1ff;
-                }
-</style>
-
-<div class="row my-4">
-    <div class="col-md">
-        <h1>Dados Iniciais</h1>
-        <h5>Aqui você vai preencher seus dados pessoais e falar um pouco sobre seu resumo profissional, além de poder selecionar algumas habilidades que serão de grande importância para que seu perfil seja filtrado pelos professores.</h5>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md">
+<link href="~/Content/Css/form.css" rel="stylesheet" />
+<link href="~/Content/Css/checkbox.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/3b2e9ead24.js" crossorigin="anonymous"></script>
+<div id="users-container" class="dashboard-container">
+    <h1 class="page-title"><a href="/Curriculo/MeuCurriculo"><</a> Editar currículo</h1>
+    <div class="job-form">
         <form action="/Curriculo/EditarAction" method="post" class="jValidator">
-            <div class="row">
-                @if (@TempData["alertInfo"] != null)
-                {
-                    <div class="alert alert-info" role="alert">
-                        @TempData["alertInfo"]
-                    </div>
-                }
-                @if (@TempData["alertSucesso"] != null)
-                {
-                    <div class="alert alert-success" role="alert">
-                        @TempData["alertSucesso"]
-                    </div>
-                }
-                @if (@TempData["alertErro"] != null)
-                {
-                    <div class="alert alert-danger" role="alert">
-                        @TempData["alertErro"]
-                    </div>
-                }
-                <div class="col-md">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="telefone" class="form-control" id="floatingInput" placeholder="Telefone" value="@curriculo.Telefone" data-rules="required|min:11|max:11">
-                        <label for="floatingInput">Telefone *</label>
-                    </div>
+            <div class="double-input-container">
+                <div class="input-container">
+                    <label for="linkedin">Linkedin</label>
+                    <input name="linkedin" type="text" id="linkedin" data-rules="required|min:5|max:50" value="@curriculo.Linkedin" />
                 </div>
-                <div class="col-md">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="linkedin" class="form-control" id="floatingInput" placeholder="Linkedin url" value="@curriculo.Linkedin" data-rules="required">
-                        <label for="floatingInput">LinkedIn *</label>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="github" class="form-control" id="floatingInput" placeholder="Github url" value="@curriculo.Github" data-rules="required">
-                        <label for="floatingInput">GitHub *</label>
-                    </div>
+                <div class="input-container">
+                    <label for="github">Github</label>
+                    <input name="github" type="text" id="github" data-rules="required|min:5|max:50" value="@curriculo.Github" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="endereco" class="form-control" id="floatingInput" placeholder="Av. da Saudade, 125" value="@curriculo.Endereco" data-rules="required|min:10">
-                        <label for="floatingInput">Endereço *</label>
-                    </div>
+            <div class="double-input-container">
+                <div class="input-container">
+                    <label for="telefone">Telefone</label>
+                    <input name="telefone" type="text" id="telefone" data-rules="required|max:50" value="@curriculo.Telefone" />
                 </div>
-                <div class="col-md-3">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="cidade" class="form-control" id="floatingInput" placeholder="Campinas" value="@curriculo.Cidade" data-rules="required|max:50">
-                        <label for="floatingInput">Cidade *</label>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-floating mb-3">
-                        <select name="estado" class="form-select" id="floatingSelectGrid" aria-label="Estado"  data-rules="pick">
-                            <option value="" selected>Selecione</option>
-                            <option value="SP" selected>São Paulo</option>
-                        </select>
-                        <label for="floatingSelectGrid">Estado *</label>
-                    </div>
+                <div class="input-container">
+                    <label for="endereco">Endereço</label>
+                    <input name="endereco" type="text" id="endereco" data-rules="required|min:3|max:50" value="@curriculo.Endereco" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md">
-                    <div class="form-floating mb-3">
-                        <textarea name="resumo" class="form-control" placeholder="Fale um pouco sobre você" id="floatingTextarea2" style="height: 200px"  data-rules="required|min:50">@curriculo.Resumo</textarea>
-                        <label for="floatingTextarea2">Resumo Profissional</label>
-                    </div>
+            <div class="double-input-container">
+                <div class="input-container">
+                    <label for="cidade">Cidade</label>
+                    <input name="cidade" type="text" id="cidade" data-rules="required|max:50" value="@curriculo.Cidade" />
+                </div>
+                <div class="input-container">
+                    <label for="estado">Estado</label>
+                    <select name="estado" id="estado" data-rules="pick">
+                        <option value=""></option>
+                        <option value="SP" selected> São Paulo</option>
+                    </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md">
-                    <ul class="ks-cboxtags">
-                        <li>
-                            @foreach (var habilidade in habilidades)
-                            {
-                                <input name="checks" type="checkbox" id="@Html.DisplayFor(id => habilidade.Id)" value="@Html.DisplayFor(id => habilidade.Id)" @(marcadas.Contains(habilidade.Id.ToString()) ? "checked='checked'" : "disgraca")>
-                                <label for="@Html.DisplayFor(id => habilidade.Id)">@Html.DisplayFor(id => habilidade.Nome)</label>
-                            }
-                        </li>
 
-                    </ul>
-                </div>
+            <div class="input-container">
+                <label for="resumo">Resumo profissional</label>
+                <textarea name="resumo" id="resumo" data-rules="required|max:1000">@curriculo.Resumo</textarea>
             </div>
-            <div class="row">
-                <div class="col-md">
-                    <input type="hidden" name="id" value="@curriculo.Id" />
-                </div>
-                <div class="col-md">
-                    <input type="hidden" name="usuarioId" value="@usuario.Id" />
-                </div>
+
+            <div class="input-container">
+                <ul class="ks-cboxtags">
+                    <li>
+                        @foreach (var habilidade in habilidades) {
+                            <input name="checks" type="checkbox" id="@Html.DisplayFor(id => habilidade.Id)" value="@Html.DisplayFor(id => habilidade.Id)" @(marcadas.Contains(habilidade.Id.ToString()) ? "checked='checked'" : "disgraça")>
+                            <label for="@Html.DisplayFor(id => habilidade.Id)">@Html.DisplayFor(id => habilidade.Nome)</label>
+                        }
+                    </li>
+                </ul>
             </div>
-            <button type="submit" class="btn btn-success">Editar Curriculo</button>
+            <input type="hidden" name="usuarioId" value="@usuario.Id" />
+            <input type="hidden" name="id" value="@curriculo.Id" />
+            <button type="submit" class="btn-form">Editar</button>
         </form>
     </div>
 </div>
-<script src="~/Scripts/validator.js"></script>
+<script src="~/Content/Js/Helpers/input-helper.js"></script>
+<script src="~/Content/Js/validator.js"></script>

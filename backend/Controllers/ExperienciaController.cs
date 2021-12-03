@@ -22,12 +22,13 @@ namespace backend.Controllers {
             var experiencia = new Experiencia();
             experiencia.CurriculoId = curriculo.buscarPorUsuarioId().Id;
 
-            if (experiencia.buscarPorCurriculoId().Count >= 3) {
-                TempData["alertErro"] = "Ocorreu um erro!";
-                TempData["alertMensagem"] = "Você só pode cadastrar 3 experiências.";
-                return RedirectToAction("MeuCurriculo", "Curriculo");
-            }
-
+            if (experiencia.buscarPorCurriculoId() != null) {
+                if (experiencia.buscarPorCurriculoId().Count >= 3) {
+                    TempData["alertErro"] = "Ocorreu um erro!";
+                    TempData["alertMensagem"] = "Você só pode cadastrar 3 experiências.";
+                    return RedirectToAction("MeuCurriculo", "Curriculo");
+                }
+            } 
             return View();
         }
 

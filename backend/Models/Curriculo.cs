@@ -202,7 +202,7 @@ namespace backend.Models {
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "INSERT INTO curriculos (github, linkedin, telefone, resumo, endereco, cidade, estado, usuario_id) VALUES (@github, @linkedin, @telefone, @resumo, @endereco, @cidade, @estado, @usuarioId)";
+                query.CommandText = "INSERT INTO curriculos (github, linkedin, telefone, resumo, endereco, cidade, estado, data_edicao, usuario_id) VALUES (@github, @linkedin, @telefone, @resumo, @endereco, @cidade, @estado, @dataEdicao, @usuarioId)";
                 query.Parameters.AddWithValue("@github", Github);
                 query.Parameters.AddWithValue("@linkedin", Linkedin);
                 query.Parameters.AddWithValue("@telefone", Telefone);
@@ -210,6 +210,7 @@ namespace backend.Models {
                 query.Parameters.AddWithValue("@endereco", Endereco);
                 query.Parameters.AddWithValue("@cidade", Cidade);
                 query.Parameters.AddWithValue("@estado", Estado);
+                query.Parameters.AddWithValue("@dataEdicao", DateTime.Now.Date);
                 query.Parameters.AddWithValue("@usuarioId", UsuarioId);
 
                 if (query.ExecuteNonQuery() > 0) {

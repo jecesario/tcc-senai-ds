@@ -102,16 +102,6 @@ namespace backend.Controllers
             }
             var habilidades = Habilidade.listar();
             ViewBag.Habilidades = habilidades;
-            //var habilidadeCurriculo = new HabilidadeCurriculo();
-            //habilidadeCurriculo.CurriculoId = 3;
-            //var resp = habilidadeCurriculo.cadastrar("1,2,3");
-            //if(resp)
-            //{
-            //    TempData["alertInfo"] = "É pra dar certo!";
-            //} else
-            //{
-            //    TempData["alertInfo"] = "Deu errado!";
-            //}
             return View();
         }
         [HttpPost]
@@ -137,7 +127,7 @@ namespace backend.Controllers
             curriculo.Endereco = Request.Form["endereco"];
             curriculo.Cidade = Request.Form["cidade"];
             curriculo.Estado = Request.Form["estado"];
-            curriculo.UsuarioId = Request.Form["id"];
+            curriculo.UsuarioId = Request.Form["usuarioId"];
             if (curriculo.cadastrar())
             {
                 TempData["alertSucesso"] = "Curriculo cadastrado com sucesso!";
