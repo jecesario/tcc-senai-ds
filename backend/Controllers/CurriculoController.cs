@@ -294,5 +294,66 @@ namespace backend.Controllers {
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
+
+        public ActionResult Detalhar(int id) {
+            // Vericação de usuário logado
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo == 0) {
+                return RedirectToAction("MeuCurriculo", "Curriculo");
+            }
+            // Guardando dados do curriculo do usuário logado 
+            var curri = new Curriculo();
+            curri.Id = id;
+            var curriculo = curri.buscarPorId();
+            ViewBag.Curriculo = curriculo;
+
+
+            // Se o usuário ainda não tiver cadastrado um currículo, redireciona para tela de listagem
+            if (curriculo == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Usuário não possui currículo cadastrado.";
+                return RedirectToAction("Index", "Curriculo");
+            }
+
+            ViewBag.UltimaEdicao = Util.dateAgo(DateTime.Parse(curriculo.DataEdicao));
+
+            // Guardando curso do usuário
+            var curso = new Curso();
+            curso.Id = curriculo.Usuario.Id;
+            ViewBag.Curso = curso.buscarPorId();
+
+            // Guardado habilidades do usuário logado
+            var habilidadeCurriculo = new HabilidadeCurriculo();
+            habilidadeCurriculo.CurriculoId = curriculo.Id;
+            var listaHabilidades = habilidadeCurriculo.buscarPorCurriculoId();
+
+            // Pegando cada ID de habilidade encontrado na tabela, buscando informação na tabela de Habilidades e guardando em uma lista para enviar para a View
+            var habilidades = new List<Habilidade>();
+            if (listaHabilidades != null) {
+                foreach (var i in listaHabilidades) {
+                    var habilidade = new Habilidade();
+                    habilidade.Id = i.HabilidadeId;
+                    habilidades.Add(habilidade.buscarPorId());
+                }
+            }
+
+            // Guardando as experiencias do usuário baseadas pelo id do curriculo
+            var experiencia = new Experiencia();
+            experiencia.CurriculoId = curriculo.Id;
+            ViewBag.Experiencias = experiencia.buscarPorCurriculoId();
+
+            // Guardando as formações do usuário baseadas pelo id do curriculo
+            var formacao = new Formacao();
+            formacao.CurriculoId = curriculo.Id;
+            ViewBag.Formacoes = formacao.buscarPorCurriculoId();
+
+
+            ViewBag.Usuario = curriculo.Usuario;
+
+            return View(habilidades);
+        }
     }
 }

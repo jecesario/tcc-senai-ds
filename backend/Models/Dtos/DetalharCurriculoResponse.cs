@@ -16,6 +16,7 @@ namespace backend.Models.Dtos
         public string Localidade { get; set; }
         public string DataEdicao { get; set; }
         public string Curso { get; set; }
+        public string Anexo { get; set; }
         public Usuario Usuario { get; set; }
         public List<Experiencia> Experiencias { get; set; }
         public List<Formacao> Formacoes { get; set; }

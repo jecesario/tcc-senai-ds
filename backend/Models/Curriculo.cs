@@ -147,6 +147,10 @@ namespace backend.Models {
                         curriculo.Localidade = dados["cidade"].ToString() + "-" + dados["estado"].ToString();
                         curriculo.DataEdicao = dados.GetDateTime("data_edicao").ToString();
 
+                        if(dados["anexo"] != System.DBNull.Value) {
+                            curriculo.Anexo = dados.GetString("anexo");
+                        }                        
+
                         // Preenchendo usuário
                         var usuario = new Usuario();
                         usuario.Id = int.Parse(dados["usuario_id"].ToString());
