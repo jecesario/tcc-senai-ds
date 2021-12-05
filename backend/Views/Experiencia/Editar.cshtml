@@ -22,9 +22,9 @@
             </div>
             <div class="input-container">
                 <label for="demissao">Demissão</label>
-                <input name="demissao" type="text" id="demissao" value="@experiencia.Demissao" />
+                <input name="demissao" type="text" id="demissao" value="@(experiencia.Admissao == experiencia.Demissao ? "" : experiencia.Demissao)" @(experiencia.Admissao == experiencia.Demissao ? "disabled='disabled'" : "") />
                 <div class="checkbox-container">
-                    <input name="empregoAtual" type="checkbox" id="empregoAtual" onchange="checkToggle()" />
+                    <input name="empregoAtual" type="checkbox" id="empregoAtual" onchange="checkToggle()" @(experiencia.Admissao == experiencia.Demissao ? "checked='checked'" : "disgraça") />
                     <label for="empregoAtual">Emprego atual</label>
                 </div>
             </div>
@@ -39,3 +39,22 @@
 </div>
 <script src="~/Content/Js/validator.js"></script>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
+<script src="~/Content/Js/imask.js"></script>
+<script>
+    var admissao2 = IMask(
+        document.getElementById('admissao'),
+        {
+            mask: Date,
+            min: new Date(1990, 0, 1),
+            max: new Date(3000, 0, 1),
+            lazy: false
+        });
+    var demissao2 = IMask(
+        document.getElementById('demissao'),
+        {
+            mask: Date,
+            min: new Date(1990, 0, 1),
+            max: new Date(3000, 0, 1),
+            lazy: false
+        });
+</script>

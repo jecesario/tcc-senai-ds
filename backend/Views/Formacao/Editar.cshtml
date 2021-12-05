@@ -44,3 +44,22 @@
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
 <script src="~/Content/Js/validator.js"></script>
+<script src="~/Content/Js/imask.js"></script>
+<script>
+    var inicio = IMask(
+        document.getElementById('inicio'),
+        {
+            mask: Date,
+            min: new Date(1990, 0, 1),
+            max: new Date(3000, 0, 1),
+            lazy: false
+        });
+    var conclusao = IMask(
+        document.getElementById('conclusao'),
+        {
+            mask: Date,
+            min: new Date(1990, 0, 1),
+            max: new Date(3000, 0, 1),
+            lazy: false
+        });
+</script>
