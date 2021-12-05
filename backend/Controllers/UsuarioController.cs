@@ -46,7 +46,6 @@ namespace backend.Controllers {
             usuario.Id = int.Parse(Request.Form["id"]);
             usuario.Nome = Request.Form["nome"];
             usuario.Email = Request.Form["email"];
-            usuario.Senha = Request.Form["senha"];
             usuario.Turma = Request.Form["turma"];
             usuario.Ano = Request.Form["ano"];
             usuario.Tipo = (Request.Form["tipo"] == null) ? 0 : int.Parse(Request.Form["tipo"]);
@@ -55,18 +54,15 @@ namespace backend.Controllers {
             var emailAntigo = usuario.buscarPorId().Email;
 
             // Verificando se é o próprio usuário se editando ou se é um admin
-            //if(usuario.Id == logado.Id)
-            //{
             if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo) {
                 if (usuario.editar()) {
+                    if (!Request.Form["senha"].Equals("")) {
+                        usuario.Senha = Request.Form["senha"];
+                        usuario.atualizarSenha();
+                    }
                     TempData["alertSucesso"] = "Sucesso!";
                     TempData["alertMensagem"] = "O usuário foi editado corretamente.";
                     if (logado.Tipo == 1) {
-
-                        //if (logado.Id == usuario.Id)
-                        //{
-                        //    return RedirectToAction("Sair", "Home");
-                        //}
                         return RedirectToAction("Index", "Usuario");
                     } else {
                         Session["usuario"] = usuario;
@@ -81,26 +77,6 @@ namespace backend.Controllers {
                 TempData["alertSucesso"] = "Erro!";
                 TempData["alertMensagem"] = "E-mail já cadastrado por outro usuário.";
             }
-            //} else
-            //{
-            //    if (usuario.buscarPorEmail() == null || usuario.buscarPorEmail().Email == emailAntigo)
-            //    {
-            //        if (usuario.editar())
-            //        {
-            //            TempData["alertSucesso"] = "Usuário editado com sucesso!";
-            //            return RedirectToAction("Index", "Usuario");
-
-            //        }
-            //        else
-            //        {
-            //            TempData["alertErro"] = "Ocorreu um erro ao editar Usuário!";
-            //        }
-            //    }
-            //    else
-            //    {
-            //        TempData["alertErro"] = "E-mail já cadastrado por outro usuário!";
-            //    }
-            //}
 
             return RedirectToAction("Editar/" + usuario.Id, "Usuario");
 

@@ -148,6 +148,7 @@
     <Content Include="Content\Js\Helpers\file-helper.js" />
     <Content Include="Content\Js\Helpers\input-helper.js" />
     <Content Include="Content\Js\Helpers\loading.js" />
+    <Content Include="Content\Js\imask.js" />
     <Content Include="Content\Js\sweetalert2.min.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Svg\courses.svg" />

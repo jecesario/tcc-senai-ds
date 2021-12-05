@@ -24,7 +24,6 @@ const inputEntries = [
       blur: function (label) {
         inputEntry.addEventListener("blur", function(e) {
             e.preventDefault();
-            console.log(inputEntry.value);
           if (!inputEntry.value && inputEntry.id === label.htmlFor) {
             label.classList.remove("focus-input");
           }

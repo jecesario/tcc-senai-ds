@@ -155,10 +155,9 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "UPDATE usuarios SET nome = @nome, email = @email, senha = @senha, turma = @turma, ano = @ano, tipo = @tipo, curso_id = @cursoId WHERE id = @id";
+                query.CommandText = "UPDATE usuarios SET nome = @nome, email = @email, turma = @turma, ano = @ano, tipo = @tipo, curso_id = @cursoId WHERE id = @id";
                 query.Parameters.AddWithValue("@nome", Nome);
                 query.Parameters.AddWithValue("@email", Email);
-                query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
                 query.Parameters.AddWithValue("@turma", Turma);
                 query.Parameters.AddWithValue("@ano", Ano);
                 query.Parameters.AddWithValue("@tipo", Tipo);
@@ -169,13 +168,35 @@ namespace backend.Models
                     resp = true;
                 }
 
-
             } catch (Exception e) {
                 resp = false;
             } finally {
                 con.Close();
             }
 
+            return resp;
+        }
+
+        public bool atualizarSenha() {
+            var con = new MySqlConnection(dbConfig);
+            bool resp = false;
+
+            try {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "UPDATE usuarios SET senha = @senha WHERE id = @id";
+                query.Parameters.AddWithValue("@senha", Util.criptografar(Senha));
+                query.Parameters.AddWithValue("@id", Id);
+
+                if (query.ExecuteNonQuery() > 0) {
+                    resp = true;
+                }
+
+            } catch (Exception e) {
+                resp = false;
+            } finally {
+                con.Close();
+            }
 
             return resp;
         }

@@ -80,7 +80,7 @@
                         }
                         break;
                     case 'min':
-                        if (input.value.trim().length < rulesDetails[1]) {
+                        if (input.value.trim().length > 0 && input.value.trim().length < rulesDetails[1]) {
                             return 'O campo precisa ter pelo menos ' + rulesDetails[1] + ' caracteres';
                         }
                         break;

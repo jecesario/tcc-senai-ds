@@ -30,7 +30,7 @@
 
             <div class="input-container">
                 <label for="password">Senha</label>
-                <input name="senha" type="password" id="password" data-rules="required|min:8|max:20" value="@Model.Senha" />
+                <input name="senha" type="password" id="password" data-rules="min:8|max:20" />
             </div>
 
             <div class="input-container">
@@ -52,6 +52,15 @@
                 <label for="year">Ano</label>
                 <input name="ano" type="text" id="year" value="@Model.Ano" />
             </div>
+            @if (Model.Tipo == 1) {
+                <div class="input-container">
+                    <label for="tipo">Tipo de Usuário</label>
+                    <select name="tipo" id="tipo">
+                        <option value="0" @(Model.Tipo == 0 ? "selected" : "")>Aluno</option>
+                        <option value="1" @(Model.Tipo == 1 ? "selected" : "")>Administrador</option>
+                    </select>
+                </div>
+            }
             <input type="hidden" name="id" value="@Model.Id" />
             <button type="submit" class="btn-form">Editar</button>
         </form>
