@@ -116,7 +116,13 @@ namespace backend.Controllers.admin.vagas
                 return RedirectToAction("Entrar", "Home");
             }
             var vagaTipo = new VagaTipo();
-            return View(vagaTipo.buscarPorDescricao(descricao).OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            var resp = vagaTipo.buscarPorDescricao(descricao);
+            if (resp == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
+                return RedirectToAction("Index");
+            }
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }

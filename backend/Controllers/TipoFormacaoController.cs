@@ -115,7 +115,13 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var tipoFormacao = new TipoFormacao();
-            return View(tipoFormacao.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            var resp = tipoFormacao.buscarPorNome(nome);
+            if (resp == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
+                return RedirectToAction("Index");
+            }
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }

@@ -119,7 +119,13 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var habilidade = new Habilidade();
-            return View(habilidade.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            var resp = habilidade.buscarPorNome(nome);
+            if (resp == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
+                return RedirectToAction("Index");
+            }
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }

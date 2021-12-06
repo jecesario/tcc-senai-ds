@@ -123,7 +123,13 @@ namespace backend.Controllers
                 return RedirectToAction("Entrar", "Home");
             }
             var curso = new Curso();
-            return View(curso.buscarPorNome(nome).OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            var resp = curso.buscarPorNome(nome);
+            if (resp == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
+                return RedirectToAction("Index");
+            }
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
     }
 }

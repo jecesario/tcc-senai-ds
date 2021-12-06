@@ -18,11 +18,12 @@ namespace backend.Controllers {
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var curriculos = Curriculo.listar().OrderBy(p => p.Id).ToPagedList(pagina, 3);
+            var curriculos = Curriculo.listar();
             if (curriculos == null || curriculos.Count == 0) {
-                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum curriculo cadastrado!";
+                return View();
             }
-            return View(curriculos);
+
+            return View(curriculos.OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
 
         public ActionResult MeuCurriculo() {
@@ -222,7 +223,13 @@ namespace backend.Controllers {
                 return RedirectToAction("Entrar", "Home");
             }
             var curriculo = new Curriculo();
-            return View(curriculo.buscarPorHabilidades(habilidades).OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            var resp = curriculo.buscarPorHabilidades(habilidades);
+            if(resp == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
+                return RedirectToAction("Index", "Curriculo");
+            }
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
         }
 
         public ActionResult AnexarDoc() {
