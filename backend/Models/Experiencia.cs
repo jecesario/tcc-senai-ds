@@ -152,8 +152,7 @@ namespace backend.Models {
                     }
                 } else {
                     experiencia = null;
-                }
-
+                }                                          
             } catch (Exception e) {
                 experiencia = null;
             } finally {

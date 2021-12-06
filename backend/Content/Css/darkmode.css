@@ -85,7 +85,7 @@ mark,
 audio,
 video {
     transition: all 0.6s ease-in-out;
-    color: #fdfdfd;
+    color: #fdfdfd !important;
 }
 
 #sidemenu {
@@ -94,7 +94,7 @@ video {
 }
 
 .profile-body {
-    background: #3B4D5C;
+    background: #3B4D5C !important;
     transition: all 0.6s ease-in-out;
 }
 
@@ -122,9 +122,9 @@ video {
     border-radius: 7px;
 }
 
-.experience-card {
-    background: #27343D;
-    border: 1px solid #1D262D;
+.experience-card, .formation-card {
+    background: #27343D !important;
+    border: 1px solid #1D262D !important;
 }
 
 .experience-card .card-header {
@@ -164,4 +164,35 @@ video {
 }
 .formation-card .card-header .top-header .controlls a:last-child path {
     fill: #fff;
+}
+
+.swal2-title, .swal2-html-container {
+    color: #595959 !important;
+}
+
+.swal2-icon-content {
+    color: #facea8 !important;
+}
+
+label {
+    color: #cecece !important;
+}
+
+.job-item-header {
+    background: #1D262D !important;
+}
+
+.card-header {
+    background: #1D262D !important;
+}
+
+.skill-block {
+    background: #1D262D !important;
+}
+#formanexo label {
+    background: #3B4D5C !important;
+}
+
+#formanexo label:hover {
+    background: #1D262D !important;
 }

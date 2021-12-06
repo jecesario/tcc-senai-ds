@@ -3,6 +3,7 @@
     ViewBag.Title = "Editar Usuario";
     var cursos = (List<backend.Models.Curso>)ViewData["cursos"];
     var cursoId = 0;
+    var logado = (backend.Models.Usuario)Session["usuario"];
     if (!Model.CursoId.Equals("")) {
         cursoId = int.Parse(Model.CursoId);
     }
@@ -10,8 +11,8 @@
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
     <h1 class="page-title">
-        @if (Model.Tipo == 1) {
-            <a href="/Usuarios">< </a>
+        @if (logado.Tipo == 1) {
+            <a href="/Usuario">< </a>
         } else {
             <a href="/Curriculo/MeuCurriculo">< </a>
         } Editar usuário
