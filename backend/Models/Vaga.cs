@@ -126,11 +126,12 @@ namespace backend.Models
                         vaga.Cidade = dados.GetString("cidade");
                         vaga.Estado = dados.GetString("estado");
                         vaga.Empresa = dados.GetString("empresa");
+                        vaga.Remuneracao = dados.GetDouble("remuneracao");
                         vaga.Requisitos = dados.GetString("requisitos");
                         vaga.Atribuicoes = dados.GetString("atribuicoes");
                         vaga.Beneficios = dados.GetString("beneficios");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
-                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("yyyy-MM-dd");
+                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("dd/MM/yyyy");
                         vaga.Observacoes = dados.GetString("observacoes");
                         vaga.VagaJornadaId = dados.GetInt32("id_vagas_modalidades");
                         vaga.VagaTipoId = dados.GetInt32("id_vagas_tipos");

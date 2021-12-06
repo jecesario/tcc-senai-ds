@@ -63,24 +63,24 @@
                 </div>
             </div>
 
-                <div class="input-container">
-                    <label for="requisitos">Requisitos</label>
-                    <textarea name="requisitos" id="requisitos" data-rules="required|max:1000"></textarea>
-                </div>
-                <div class="input-container">
-                    <label for="atribuicoes">Atribuições</label>
-                    <textarea name="atribuicoes" id="atribuicoes" data-rules="required|max:1000"></textarea>
-                </div>
+            <div class="input-container">
+                <label for="requisitos">Requisitos</label>
+                <textarea name="requisitos" id="requisitos" data-rules="required|max:1000"></textarea>
+            </div>
+            <div class="input-container">
+                <label for="atribuicoes">Atribuições</label>
+                <textarea name="atribuicoes" id="atribuicoes" data-rules="required|max:1000"></textarea>
+            </div>
 
 
-                <div class="input-container">
-                    <label for="beneficios">Benefícios</label>
-                    <textarea name="beneficios" id="beneficios" data-rules="required|max:500"></textarea>
-                </div>
-                <div class="input-container">
-                    <label for="observacoes">Observações</label>
-                    <textarea name="observacoes" id="observacoes" data-rules="required|max:500"></textarea>
-                </div>
+            <div class="input-container">
+                <label for="beneficios">Benefícios</label>
+                <textarea name="beneficios" id="beneficios" data-rules="required|max:500"></textarea>
+            </div>
+            <div class="input-container">
+                <label for="observacoes">Observações</label>
+                <textarea name="observacoes" id="observacoes" data-rules="required|max:500"></textarea>
+            </div>
 
             <div class="double-input-container">
 
@@ -95,3 +95,14 @@
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
 <script src="~/Content/Js/validator.js"></script>
+<script src="~/Content/Js/imask.js"></script>
+<script>
+    var admissao2 = IMask(
+        document.getElementById('dataLimite'),
+        {
+            mask: Date,
+            min: new Date(),
+            max: new Date(3000, 0, 1),
+            lazy: false
+        });
+</script>
