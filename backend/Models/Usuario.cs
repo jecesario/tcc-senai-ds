@@ -284,9 +284,15 @@ namespace backend.Models
                         var usuario = new Usuario();
                         usuario.Id = dados.GetInt32("id");
                         usuario.Nome = dados.GetString("nome");
-                        usuario.Turma = dados.GetString("turma");
-                        usuario.Ano = dados.GetString("ano");
-                        usuario.Email = dados.GetString("email");
+                        if(dados["turma"] != System.DBNull.Value) {
+                            usuario.Turma = dados.GetString("turma");
+                        }
+                        if(dados["ano"] != System.DBNull.Value) {
+                            usuario.Ano = dados.GetString("ano");
+                        }
+                        if(dados["email"] != System.DBNull.Value) {
+                            usuario.Email = dados.GetString("email");
+                        }
                         usuarios.Add(usuario);
                     }
                 } else {
