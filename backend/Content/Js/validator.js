@@ -130,6 +130,8 @@
     checkProfessionalExperienceDate: () => {
         let admissionDate = document.querySelector('#admissao');
         let resignationDate = document.querySelector('#demissao');
+        admissionDate = new Date(admissionDate);
+        resignationDate = new Date(resignationDate);
         if (resignationDate.value !== '') {
             if (resignationDate.value < admissionDate.value) {
                 jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
@@ -140,6 +142,8 @@
     checkStartConclusionFormationDate: () => {
         let startDate = document.querySelector('#inicio');
         let conclusionDate = document.querySelector('#conclusao');
+        startDate = new Date(startDate);
+        conclusionDate = new Date(conclusionDate);
         if (conclusionDate.value < startDate.value) {
             jValidator.showError(conclusionDate, 'A data de conclusão não pode ser anterior a data de inicio');
             return true;
