@@ -44,11 +44,15 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager(Model,
+    @if(curriculos.Count > 10) {
+        <div>
+            @Html.PagedListPager(Model,
                          pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "habilidades", Request.Params["habilidades"] } }),
                          new PagedListRenderOptions {
                              LiElementClasses = new string[] { "page-item" }
                          })
+        </div>
+    }
 </div>
 
 <script src="~/Content/Js/Helpers/input-helper.js"></script>

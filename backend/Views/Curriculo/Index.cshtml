@@ -48,12 +48,14 @@
             }
         </tbody>
     </table>
-    @if (curriculos != null) {
-        Html.PagedListPager(Model,
-                    pagina => Url.Action("Index", new { pagina }),
-                    new PagedListRenderOptions {
-                        LiElementClasses = new string[] { "page-item" }
-                    });
+    @if (curriculos.Count > 10) {
+        <div>
+            @Html.PagedListPager(Model,
+            pagina => Url.Action("Index", new { pagina }),
+            new PagedListRenderOptions {
+            LiElementClasses = new string[] { "page-item" }
+            })
+        </div>
     }
 </div>
 

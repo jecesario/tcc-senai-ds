@@ -19,11 +19,11 @@ namespace backend.Controllers {
                 return RedirectToAction("Entrar", "Home");
             }
             var curriculos = Curriculo.listar();
-            if (curriculos == null || curriculos.Count == 0) {
+            if (curriculos == null) {
                 return View();
             }
 
-            return View(curriculos.OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            return View(curriculos.OrderBy(p => p.Id).ToPagedList(pagina, 10));
         }
 
         public ActionResult MeuCurriculo() {
@@ -224,12 +224,17 @@ namespace backend.Controllers {
             }
             var curriculo = new Curriculo();
             var resp = curriculo.buscarPorHabilidades(habilidades);
+
+            if(habilidades.Equals("")) {
+                return RedirectToAction("Index", "Curriculo");
+            }
+
             if(resp == null) {
                 TempData["alertErro"] = "Erro!";
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index", "Curriculo");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 10));
         }
 
         public ActionResult AnexarDoc() {
