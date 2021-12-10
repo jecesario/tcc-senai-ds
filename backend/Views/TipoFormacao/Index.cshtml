@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Listar Tipos de Formação";
     var tiposFormacao = Model;
+    var itensPorPagina = backend.Models.Util.ITENS_POR_PAGINA;
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/Content/Css/sweetalert2.min.css" />
@@ -79,11 +80,15 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager(Model,
-                    pagina => Url.Action("Index", new { pagina }),
-                    new PagedListRenderOptions {
-                        LiElementClasses = new string[] { "page-item" }
-                    })
+    @if(tiposFormacao.TotalItemCount > itensPorPagina) {
+    <div>
+        @Html.PagedListPager(Model,
+                pagina => Url.Action("Index", new { pagina }),
+                new PagedListRenderOptions {
+                    LiElementClasses = new string[] { "page-item" }
+                })
+    </div>
+    }
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
 @if (@TempData["alertSucesso"] != null) {

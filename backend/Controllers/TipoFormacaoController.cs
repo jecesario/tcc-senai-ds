@@ -20,7 +20,7 @@ namespace backend.Controllers
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var tipoFormacao = TipoFormacao.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
+            var tipoFormacao = TipoFormacao.listar().OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA);
             if (tipoFormacao == null || tipoFormacao.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de formação cadastrado!";
             }
@@ -121,7 +121,7 @@ namespace backend.Controllers
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
     }
 }
