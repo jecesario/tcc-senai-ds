@@ -44,7 +44,7 @@
             }
         </tbody>
     </table>
-    @if(curriculos.Count > 10) {
+    @if(curriculos.TotalItemCount > 10) {
         <div>
             @Html.PagedListPager(Model,
                          pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "habilidades", Request.Params["habilidades"] } }),

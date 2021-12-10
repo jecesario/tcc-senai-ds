@@ -48,7 +48,7 @@
             }
         </tbody>
     </table>
-    @if (curriculos.Count > 10) {
+    @if (curriculos.TotalItemCount > 10) {
         <div>
             @Html.PagedListPager(Model,
             pagina => Url.Action("Index", new { pagina }),

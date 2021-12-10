@@ -79,11 +79,15 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager(Model,
-                    pagina => Url.Action("Index", new { pagina }),
-                    new PagedListRenderOptions {
-                        LiElementClasses = new string[] { "page-item" }
-                    })
+    @if (cursos.TotalItemCount > 10) {
+        <div>
+        @Html.PagedListPager(Model,
+                pagina => Url.Action("Index", new { pagina }),
+                new PagedListRenderOptions {
+                    LiElementClasses = new string[] { "page-item" }
+                })
+        </div>
+    }
 </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
 @if (@TempData["alertSucesso"] != null) {
