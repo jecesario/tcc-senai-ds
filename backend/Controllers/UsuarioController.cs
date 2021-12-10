@@ -17,10 +17,8 @@ namespace backend.Controllers {
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var usuarios = Usuario.listar().OrderBy(p => p.Id).ToPagedList(pagina, 3);
-            if (usuarios == null || usuarios.Count == 0) {
-                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum usuário cadastrado!";
-            }
+            var usuarios = Usuario.listar().OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA);
+
             return View(usuarios);
         }
 
@@ -118,7 +116,7 @@ namespace backend.Controllers {
                 TempData["alertMensagem"] = "Nenhum usuário foi encontrado.";
                 return RedirectToAction("Index");
             }
-            return View(usuarioList.OrderBy(p => p.Id).ToPagedList(pagina, 3));
+            return View(usuarioList.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
     }
 }

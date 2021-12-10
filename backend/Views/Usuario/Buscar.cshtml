@@ -3,13 +3,14 @@
 @{
     ViewBag.Title = "Buscar Usuarios";
     var usuarios = Model;
+    var itensPorPagina = backend.Models.Util.ITENS_POR_PAGINA;
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/Content/Css/sweetalert2.min.css" />
 <script src="~/Content/Js/sweetalert2.min.js"></script>
 <script src="~/Content/Js/Helpers/alert-helper.js"></script>
 <div id="users-container" class="dashboard-container">
-    <h1 class="page-title"><a href="/Usuarios"><</a> Buscar usuário</h1>
+    <h1 class="page-title"><a href="/Usuario"><</a> Buscar usuário</h1>
     <div class="search">
         <form action="/Usuario/Buscar" method="get">
             <div class="input-container">
@@ -84,10 +85,14 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager(Model,
-                     pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "nome", Request.Params["nome"] } }),
-                     new PagedListRenderOptions {
-                         LiElementClasses = new string[] { "page-item" }
-                     })
-</div>
+    @if (usuarios.TotalItemCount > itensPorPagina) {
+        <div>
+            @Html.PagedListPager(Model,
+                              pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "nome", Request.Params["nome"] } }),
+                              new PagedListRenderOptions {
+                                  LiElementClasses = new string[] { "page-item" }
+                              })
+        </div>
+    }
+    </div>
 <script src="~/Content/Js/Helpers/input-helper.js"></script>
