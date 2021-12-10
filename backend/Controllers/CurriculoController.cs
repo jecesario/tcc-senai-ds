@@ -23,7 +23,7 @@ namespace backend.Controllers {
                 return View();
             }
 
-            return View(curriculos.OrderBy(p => p.Id).ToPagedList(pagina, 10));
+            return View(curriculos.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
 
         public ActionResult MeuCurriculo() {
@@ -234,7 +234,7 @@ namespace backend.Controllers {
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index", "Curriculo");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 10));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
 
         public ActionResult AnexarDoc() {

@@ -21,7 +21,7 @@ namespace backend.Controllers
             {
                 return RedirectToAction("Entrar", "Home");
             }
-            var cursos = Curso.listar().OrderBy(p => p.Id).ToPagedList(pagina, 10);
+            var cursos = Curso.listar().OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA);
             if (cursos == null) {
                 return View();
             }
@@ -129,7 +129,7 @@ namespace backend.Controllers
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 10));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
     }
 }

@@ -9,6 +9,9 @@ namespace backend.Models
 {
     public class Util
     {
+        // Configuração de paginação - Itens por página
+        public const int ITENS_POR_PAGINA = 5;
+
         public static string criptografar(string value)
         {
             var UE = new UnicodeEncoding();

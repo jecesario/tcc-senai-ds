@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Listar Curriculos";
     var curriculos = Model;
+    var itensPorPagina = backend.Models.Util.ITENS_POR_PAGINA;
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <div id="users-container" class="dashboard-container">
@@ -44,7 +45,7 @@
             }
         </tbody>
     </table>
-    @if(curriculos.TotalItemCount > 10) {
+    @if(curriculos.TotalItemCount > itensPorPagina) {
         <div>
             @Html.PagedListPager(Model,
                          pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "habilidades", Request.Params["habilidades"] } }),

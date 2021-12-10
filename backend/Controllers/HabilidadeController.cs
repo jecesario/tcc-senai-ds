@@ -18,9 +18,9 @@ namespace backend.Controllers
             if(usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var habilidades = Habilidade.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
-            if (habilidades == null || habilidades.Count == 0) {
-                TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhuma habilidade cadastrada!";
+            var habilidades = Habilidade.listar().OrderBy(p => p.Id).ToPagedList(pagina, Util.ITENS_POR_PAGINA);
+            if (habilidades == null) {
+                return View();
             }
             return View(habilidades);
         }
@@ -125,7 +125,7 @@ namespace backend.Controllers
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, Util.ITENS_POR_PAGINA));
         }
     }
 }

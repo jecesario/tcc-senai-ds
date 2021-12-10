@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Buscar Curso";
     var cursos = Model;
+    var itensPorPagina = backend.Models.Util.ITENS_POR_PAGINA;
 }
 <link href="~/Content/Css/form.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/Content/Css/sweetalert2.min.css" />
@@ -80,7 +81,7 @@
             }
         </tbody>
     </table>
-    @if(cursos.TotalItemCount > 10) {
+    @if(cursos.TotalItemCount > itensPorPagina) {
         <div>
         @Html.PagedListPager(Model,
                         pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "nome", Request.Params["nome"] } }),
