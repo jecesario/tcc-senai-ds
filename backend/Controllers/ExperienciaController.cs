@@ -55,7 +55,7 @@ namespace backend.Controllers {
             experiencia.CurriculoId = curriculo.Id;
             if (experiencia.cadastrar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Experiencia foi cadastrada.";
+                TempData["alertMensagem"] = "Experiência foi cadastrada.";
                 curriculo.atualizarDataEdicao();
             } else {
                 TempData["alertErro"] = "Erro!";
@@ -101,7 +101,7 @@ namespace backend.Controllers {
             experiencia.Id = int.Parse(Request.Form["id"]);
             if (experiencia.editar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Experiencia foi editada.";
+                TempData["alertMensagem"] = "Experiência foi editada.";
                 curriculo.atualizarDataEdicao();
             } else {
                 TempData["alertErro"] = "Erro!";
@@ -128,7 +128,7 @@ namespace backend.Controllers {
             experiencia.Id = id;
             if (experiencia.apagar()) {
                 TempData["alertSucesso"] = "Sucesso!";
-                TempData["alertMensagem"] = "Experiencia foi apagada.";
+                TempData["alertMensagem"] = "Experiência foi apagada.";
                 curriculo.atualizarDataEdicao();
             } else {
                 TempData["alertErro"] = "Erro!";
