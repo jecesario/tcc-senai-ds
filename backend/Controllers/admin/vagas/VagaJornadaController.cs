@@ -19,7 +19,7 @@ namespace backend.Controllers.admin.vagas
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var vagaJornadas = VagaJornada.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
+            var vagaJornadas = VagaJornada.listar().OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA);
             if (vagaJornadas == null || vagaJornadas.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de Jornada cadastrado!";
             }
@@ -122,7 +122,7 @@ namespace backend.Controllers.admin.vagas
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
     }
 }
