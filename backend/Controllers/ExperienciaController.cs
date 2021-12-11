@@ -59,7 +59,7 @@ namespace backend.Controllers {
                 curriculo.atualizarDataEdicao();
             } else {
                 TempData["alertErro"] = "Erro!";
-                TempData["alertMensagem"] = "Ocorreu um erro ao cadastrar experiencia.";
+                TempData["alertMensagem"] = "Ocorreu um erro ao cadastrar experiência.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
@@ -105,7 +105,7 @@ namespace backend.Controllers {
                 curriculo.atualizarDataEdicao();
             } else {
                 TempData["alertErro"] = "Erro!";
-                TempData["alertMensagem"] = "Ocorreu um erro ao editar experiencia.";
+                TempData["alertMensagem"] = "Ocorreu um erro ao editar experiência.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
@@ -132,7 +132,7 @@ namespace backend.Controllers {
                 curriculo.atualizarDataEdicao();
             } else {
                 TempData["alertErro"] = "Erro!";
-                TempData["alertMensagem"] = "Ocorreu um erro ao apagar experiencia.";
+                TempData["alertMensagem"] = "Ocorreu um erro ao apagar experiência.";
             }
             return RedirectToAction("MeuCurriculo", "Curriculo");
         }
