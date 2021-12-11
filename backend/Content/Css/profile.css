@@ -242,6 +242,11 @@ body {
   padding: 20px;
 }
 
+.experience-card .card-body p,
+.formation-card .card-body p {
+    word-wrap: break-word;
+}
+
 .profile-body .formations {
   margin-top: 30px;
 }
