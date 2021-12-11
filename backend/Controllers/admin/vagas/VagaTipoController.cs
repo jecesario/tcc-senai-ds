@@ -20,7 +20,7 @@ namespace backend.Controllers.admin.vagas
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            var tipoVagas = VagaTipo.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
+            var tipoVagas = VagaTipo.listar().OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA);
             if (tipoVagas == null || tipoVagas.Count == 0) {
                 TempData["alertInfo"] = "Epa, perai! Parece que não tem nenhum tipo de vaga cadastrado!";
             }
@@ -122,7 +122,7 @@ namespace backend.Controllers.admin.vagas
                 TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
                 return RedirectToAction("Index");
             }
-            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, 2));
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
     }
 }
