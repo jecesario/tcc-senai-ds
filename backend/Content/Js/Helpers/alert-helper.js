@@ -43,7 +43,7 @@ function errorAlert(title, message) {
 function deleteAlert(url) {
     Swal.fire({
         title: 'Você tem certeza?',
-        text: "Esta ação é irreverssível!",
+        text: "Esta ação é irreversível!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d90204',
