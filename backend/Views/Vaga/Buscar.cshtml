@@ -1,7 +1,7 @@
 ﻿@using PagedList.Mvc;
 @model PagedList.PagedList<backend.Models.Dtos.ListarVagasResponse>
 @{
-    ViewBag.Title = "Vagas - Listar";
+    ViewBag.Title = "Buscar Vaga";
     var vagas = Model;
     var itensPorPagina = backend.Models.Util.ITENS_POR_PAGINA;
 }
@@ -11,7 +11,7 @@
 <script src="~/Content/Js/sweetalert2.min.js"></script>
 <script src="~/Content/Js/Helpers/alert-helper.js"></script>
 <div id="users-container" class="dashboard-container">
-    <h1 class="page-title">Vagas</h1>
+    <h1 class="page-title"><a href="/Vaga"><</a> Buscar vagas</h1>
     <div class="search">
         <form action="/Vaga/Buscar" method="get">
             <div class="input-container">
@@ -21,14 +21,14 @@
         </form>
         <a href="/Vaga/Cadastrar" class="btn-green">Adicionar vaga</a>
     </div>
-
+    <h2 class="search-word">Você buscou por: <span>@Request.Params["requisito"]</span></h2>
     @foreach (var vaga in vagas) {
         <div class="jobs-list">
             <div class="job-item">
                 <div class="job-item-header">
                     <div class="job-item-info">
                         <h2 class="job-item-title">@vaga.Cargo - @vaga.Contratante</h2>
-                            <h3 class="job-item-location">
+                        <h3 class="job-item-location">
                             <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.49992 1.58337C6.44013 1.58337 3.95825 4.06525 3.95825 7.12504C3.95825 11.2813 9.49992 17.4167 9.49992 17.4167C9.49992 17.4167 15.0416 11.2813 15.0416 7.12504C15.0416 4.06525 12.5597 1.58337 9.49992 1.58337ZM9.49992 9.10421C8.40742 9.10421 7.52075 8.21754 7.52075 7.12504C7.52075 6.03254 8.40742 5.14587 9.49992 5.14587C10.5924 5.14587 11.4791 6.03254 11.4791 7.12504C11.4791 8.21754 10.5924 9.10421 9.49992 9.10421Z" fill="#A30101" />
                             </svg> @vaga.Localidade
@@ -95,13 +95,13 @@
         </div>
     }
 
-    @if(vagas.TotalItemCount > itensPorPagina) {
+    @if (vagas.TotalItemCount > itensPorPagina) {
         <div>
             @Html.PagedListPager(Model,
-                    pagina => Url.Action("Index", new { pagina }),
-                    new PagedListRenderOptions {
-                        LiElementClasses = new string[] { "page-item" }
-                    })
+                         pagina => Url.Action("Buscar", new RouteValueDictionary { { "pagina", pagina }, { "requisito", Request.Params["requisito"] } }),
+                         new PagedListRenderOptions {
+                             LiElementClasses = new string[] { "page-item" }
+                         })
         </div>
     }
 </div>
@@ -116,3 +116,4 @@
             errorAlertWithButton('@Html.Raw(TempData["alertErro"])', '@Html.Raw(TempData["alertMensagem"])');
     </script>
 }
+

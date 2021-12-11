@@ -22,7 +22,7 @@ namespace backend.Controllers.admin.vagas
                 return RedirectToAction("Entrar", "Home");
             }
 
-            var vagas = Vaga.listar().OrderBy(p => p.Id).ToPagedList(pagina, 2);
+            var vagas = Vaga.listar().OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA);
 
             return View(vagas);
         }
@@ -189,6 +189,23 @@ namespace backend.Controllers.admin.vagas
             var vagaDetalhada = new DetalharVagaResponse();
             vagaDetalhada = vaga.buscarPorId().toDetalhar();
             return View(vagaDetalhada);
+        }
+        public ActionResult Buscar(string requisito, int pagina = 1) {
+            if (Session["usuario"] == null) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var usuario = Session["usuario"] as Usuario;
+            if (usuario.Tipo != 1) {
+                return RedirectToAction("Entrar", "Home");
+            }
+            var vaga = new Vaga();
+            var resp = vaga.buscarPorRequisito(requisito);
+            if (resp == null) {
+                TempData["alertErro"] = "Erro!";
+                TempData["alertMensagem"] = "Nenhuma informação foi encontrada.";
+                return RedirectToAction("Index");
+            }
+            return View(resp.OrderBy(p => p.Id).ToPagedList(pagina, backend.Models.Util.ITENS_POR_PAGINA));
         }
     }
 }

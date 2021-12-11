@@ -270,6 +270,7 @@
     <Content Include="Views\Vaga\Detalhar.cshtml" />
     <Content Include="Views\Curriculo\Buscar.cshtml" />
     <Content Include="Views\Curriculo\Detalhar.cshtml" />
+    <Content Include="Views\Vaga\Buscar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

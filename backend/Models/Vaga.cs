@@ -69,6 +69,48 @@ namespace backend.Models
             return vagas;
         }
 
+        public List<ListarVagasResponse> buscarPorRequisito(string requisito) {
+            var con = new MySqlConnection(dbConfig);
+            var vagas = new List<ListarVagasResponse>();
+
+            try {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, id_vagas_tipos, id_vagas_modalidades FROM vagas WHERE requisitos LIKE @requisitos";
+                query.Parameters.AddWithValue("@requisitos", '%' + requisito + '%');
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows) {
+                    while (dados.Read()) {
+                        var vaga = new ListarVagasResponse();
+                        vaga.Id = dados.GetInt32("id");
+                        vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
+                        vaga.Cargo = dados.GetString("cargo");
+                        vaga.Localidade = dados.GetString("cidade") + "/" + dados.GetString("estado");
+                        vaga.Contratante = dados.GetString("empresa");
+                        vaga.Remuneracao = dados.GetDouble("remuneracao");
+                        vaga.Beneficios = dados.GetString("beneficios");
+                        vaga.Requisitos = dados.GetString("requisitos");
+                        vaga.Atribuicoes = dados.GetString("atribuicoes");
+                        var vagaTipo = new VagaTipo();
+                        vagaTipo.Id = dados.GetInt32("id_vagas_tipos");
+                        vaga.Tipo = vagaTipo.buscarPorId().Descricao;
+                        var vagaJorndada = new VagaJornada();
+                        vagaJorndada.Id = dados.GetInt32("id_vagas_modalidades");
+                        vaga.Jornada = vagaJorndada.buscarPorId().Descricao;
+                        vagas.Add(vaga);
+                    }
+                }
+
+            } catch (Exception e) {
+                vagas = null;
+            } finally {
+                con.Close();
+            }
+
+            return vagas;
+        }
+
         public bool cadastrar() {
             var con = new MySqlConnection(dbConfig);
             bool resp = false;
