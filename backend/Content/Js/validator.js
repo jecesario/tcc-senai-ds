@@ -130,10 +130,10 @@
     checkProfessionalExperienceDate: () => {
         let admissionDate = document.querySelector('#admissao');
         let resignationDate = document.querySelector('#demissao');
-        admissionDate = new Date(admissionDate);
-        resignationDate = new Date(resignationDate);
-        if (resignationDate.value !== '') {
-            if (resignationDate.value < admissionDate.value) {
+        admissionDate = dateHelper(admissionDate.value);
+        let newResignationDate = dateHelper(resignationDate.value);
+        if (newResignationDate != 'Invalid Date') {
+            if (newResignationDate < admissionDate) {
                 jValidator.showError(resignationDate, 'A data de demissão não pode ser anterior a data de admissão');
                 return true;
             }
@@ -142,9 +142,15 @@
     checkStartConclusionFormationDate: () => {
         let startDate = document.querySelector('#inicio');
         let conclusionDate = document.querySelector('#conclusao');
-        startDate = new Date(startDate);
-        conclusionDate = new Date(conclusionDate);
-        if (conclusionDate.value < startDate.value) {
+        let newStartDate = dateHelper(startDate.value);
+        let newConclusionDate = dateHelper(conclusionDate.value);
+        if (newStartDate == 'Invalid Date') {
+            jValidator.showError(startDate, 'A data de inicio deve ser uma data válida');
+        }
+        if (newConclusionDate == 'Invalid Date') {
+            jValidator.showError(conclusionDate, 'A data de conclusão deve ser uma data válida');
+        }
+        if (newConclusionDate < newStartDate) {
             jValidator.showError(conclusionDate, 'A data de conclusão não pode ser anterior a data de inicio');
             return true;
         }
@@ -169,4 +175,10 @@ function checkToggle() {
         demissao.removeAttribute('disabled', 'disabled');
         demissao.setAttribute('data-rules', 'required');
     }
+}
+
+function dateHelper(date) {
+    let helper = date.split('.');
+    date = helper[2] + '-' + helper[1] + '-' + helper[0];
+    return new Date(date);
 }
