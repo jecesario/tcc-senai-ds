@@ -90,3 +90,11 @@ a.btn-green {
 .job-item-qualifications-text {
     margin-bottom: 20px;
 }
+
+.job-item-body-date-info {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 14px;
+}

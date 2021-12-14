@@ -35,7 +35,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, id_vagas_tipos, id_vagas_modalidades FROM vagas";
+                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, data_limite, id_vagas_tipos, id_vagas_modalidades FROM vagas";
                 var dados = query.ExecuteReader();
 
                 if (dados.HasRows) {
@@ -43,6 +43,7 @@ namespace backend.Models
                         var vaga = new ListarVagasResponse();
                         vaga.Id = dados.GetInt32("id");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
+                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("dd/MM/yyyy");
                         vaga.Cargo = dados.GetString("cargo");
                         vaga.Localidade = dados.GetString("cidade") + "/" + dados.GetString("estado");
                         vaga.Contratante = dados.GetString("empresa");
@@ -76,7 +77,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, id_vagas_tipos, id_vagas_modalidades FROM vagas WHERE requisitos LIKE @requisitos";
+                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, data_limite, id_vagas_tipos, id_vagas_modalidades FROM vagas WHERE requisitos LIKE @requisitos";
                 query.Parameters.AddWithValue("@requisitos", '%' + requisito + '%');
                 var dados = query.ExecuteReader();
 
@@ -85,6 +86,7 @@ namespace backend.Models
                         var vaga = new ListarVagasResponse();
                         vaga.Id = dados.GetInt32("id");
                         vaga.DataPostagem = dados.GetDateTime("data_postagem").ToString("dd/MM/yyyy");
+                        vaga.DataLimite = dados.GetDateTime("data_limite").ToString("dd/MM/yyyy");
                         vaga.Cargo = dados.GetString("cargo");
                         vaga.Localidade = dados.GetString("cidade") + "/" + dados.GetString("estado");
                         vaga.Contratante = dados.GetString("empresa");

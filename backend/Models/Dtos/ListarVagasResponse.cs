@@ -9,6 +9,7 @@ namespace backend.Models.Dtos
     {
         public int Id { get; set; }
         public string DataPostagem { get; set; }
+        public string DataLimite { get; set; }
         public string Cargo { get; set; }
         public string Localidade { get; set; }
         public string Contratante { get; set; }

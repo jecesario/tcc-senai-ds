@@ -100,12 +100,28 @@
 <script src="~/Content/Js/validator.js"></script>
 <script src="~/Content/Js/imask.js"></script>
 <script>
-    var admissao2 = IMask(
+    var dataLimite = IMask(
         document.getElementById('dataLimite'),
         {
             mask: Date,
             min: new Date(),
             max: new Date(3000, 0, 1),
             lazy: false
+        });
+    var remuneracao = IMask(
+        document.getElementById('remuneracao'),
+        {
+            mask: Number,
+            min: 0,
+            max: 10000000,
+            thousandsSeparator: '.'
+        });
+    var quantidade = IMask(
+        document.getElementById('quantidade'),
+        {
+            mask: Number,
+            min: 0,
+            max: 10000,
+            thousandsSeparator: '.'
         });
 </script>
