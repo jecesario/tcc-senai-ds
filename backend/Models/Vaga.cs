@@ -35,7 +35,7 @@ namespace backend.Models
             try {
                 con.Open();
                 var query = con.CreateCommand();
-                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, data_limite, id_vagas_tipos, id_vagas_modalidades FROM vagas";
+                query.CommandText = "SELECT id, cargo, cidade, estado, empresa, requisitos, atribuicoes, remuneracao, beneficios, data_postagem, data_limite, id_vagas_tipos, id_vagas_modalidades FROM vagas WHERE data_limite > now()";
                 var dados = query.ExecuteReader();
 
                 if (dados.HasRows) {

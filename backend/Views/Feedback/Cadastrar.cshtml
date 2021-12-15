@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Enviar Feedback";
+}
+<link href="~/Content/Css/form.css" rel="stylesheet" />
+<div id="users-container" class="dashboard-container">
+    <h1 class="page-title"><a href="/MeuCurriculo"><</a> Enviar Feedback</h1>
+    <div class="search">
+        <form action="/Feedback/CadastrarAction" method="post" class="form-single jValidator">
+            <div class="input-container">
+                <div class="input-container">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea name="mensagem" id="mensagem" data-rules="required|max:500"></textarea>
+                </div>
+                <button type="submit" class="btn-form">Enviar mensagem</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/Content/Js/validator.js"></script>
+<script src="~/Content/Js/Helpers/input-helper.js"></script>

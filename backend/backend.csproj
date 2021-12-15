@@ -194,6 +194,7 @@
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\api\HabilidadeController.cs" />
     <Compile Include="Controllers\ExperienciaController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\FormacaoController.cs" />
     <Compile Include="Controllers\HabilidadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\Dtos\UsuarioLoginRequest.cs" />
     <Compile Include="Models\Dtos\UsuarioLoginResponse.cs" />
     <Compile Include="Models\Experiencia.cs" />
+    <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Formacao.cs" />
     <Compile Include="Models\Habilidade.cs" />
     <Compile Include="Models\HabilidadeCurriculo.cs" />
@@ -271,6 +273,8 @@
     <Content Include="Views\Curriculo\Buscar.cshtml" />
     <Content Include="Views\Curriculo\Detalhar.cshtml" />
     <Content Include="Views\Vaga\Buscar.cshtml" />
+    <Content Include="Views\Feedback\Cadastrar.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
