@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace backend.Controllers
     public class FeedbackController : Controller
     {
         // GET: Feedback
-        public ActionResult Index()
+        public ActionResult Index(int pagina = 1)
         {
             if (Session["usuario"] == null) {
                 return RedirectToAction("Entrar", "Home");
@@ -19,7 +20,11 @@ namespace backend.Controllers
             if (usuario.Tipo != 1) {
                 return RedirectToAction("Entrar", "Home");
             }
-            return View();
+            var feedbacks = Feedback.listar().OrderBy(p => p.Id).ToPagedList(pagina, 12);
+            if (feedbacks == null) {
+                return View();
+            }
+            return View(feedbacks);
         }
 
         public ActionResult Cadastrar() {

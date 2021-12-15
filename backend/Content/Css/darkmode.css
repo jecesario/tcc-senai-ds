@@ -196,3 +196,12 @@ label {
 #formanexo label:hover {
     background: #1D262D !important;
 }
+
+.feedback-item-header {
+    background-color: #1D262D !important;
+}
+
+.feedback-item-body {
+    background-color: #27343D !important;
+    border-color: #212121 !important;
+}

@@ -1,7 +1,34 @@
-﻿
+﻿@using PagedList.Mvc;
+@model PagedList.PagedList<backend.Models.Dtos.ListarFeedbackResponse>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Feedbacks";
+    var feedbacks = Model;
+    var itensPorPagina = 12;
 }
 
-<h2>Index</h2>
+<link href="~/Content/Css/feedback.css" rel="stylesheet" />
+<div id="users-container" class="dashboard-container">
+    <h1 class="page-title">Feedbacks</h1>
+    @if (feedbacks != null) {
+        <div class="feedback-list">
+            @foreach (var feedback in feedbacks) {
+                <div class="feedback-item">
+                    <div class="feedback-item-header">@feedback.Usuario.Nome - @feedback.Usuario.Turma</div>
+                    <div class="feedback-item-body">
+                        @feedback.Mensagem
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @if (feedbacks.TotalItemCount > itensPorPagina) {
+        <div>
+            @Html.PagedListPager(Model,
+                    pagina => Url.Action("Index", new { pagina }),
+                    new PagedListRenderOptions {
+                        LiElementClasses = new string[] { "page-item" }
+                    })
+        </div>
+    }
+</div>
 

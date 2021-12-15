@@ -131,6 +131,7 @@
     <Content Include="Content\Css\darkmode.css" />
     <Content Include="Content\Css\dashboard\main.css" />
     <Content Include="Content\Css\dashboard\table.css" />
+    <Content Include="Content\Css\feedback.css" />
     <Content Include="Content\Css\form.css" />
     <Content Include="Content\Css\jobs.css" />
     <Content Include="Content\Css\login-and-signup.css" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\Dtos\DetalharCurriculoResponse.cs" />
     <Compile Include="Models\Dtos\ListarCurriculoResponse.cs" />
     <Compile Include="Models\Dtos\DetalharVagaResponse.cs" />
+    <Compile Include="Models\Dtos\ListarFeedbackResponse.cs" />
     <Compile Include="Models\Dtos\ListarVagasResponse.cs" />
     <Compile Include="Models\Dtos\UsuarioLoginRequest.cs" />
     <Compile Include="Models\Dtos\UsuarioLoginResponse.cs" />

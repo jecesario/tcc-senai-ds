@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using backend.Models.Dtos;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -33,6 +34,37 @@ namespace backend.Models {
             }
 
             return resp;
+        }
+
+        public static List<ListarFeedbackResponse> listar() {
+            var con = new MySqlConnection(dbConfig);
+            var feedbacks = new List<ListarFeedbackResponse>();
+
+            try {
+                con.Open();
+                var query = con.CreateCommand();
+                query.CommandText = "SELECT * FROM feedbacks ORDER BY id DESC";
+                var dados = query.ExecuteReader();
+
+                if (dados.HasRows) {
+                    while (dados.Read()) {
+                        var feedback = new ListarFeedbackResponse();
+                        feedback.Id = dados.GetInt32("id");
+                        feedback.Mensagem = dados.GetString("mensagem");
+                        var usuario = new Usuario();
+                        usuario.Id = dados.GetInt32("usuario_id");
+                        feedback.Usuario = usuario.buscarPorId();
+                        feedbacks.Add(feedback);
+                    }
+                }
+
+            } catch (Exception e) {
+                feedbacks = null;
+            } finally {
+                con.Close();
+            }
+
+            return feedbacks;
         }
     }
 }
