@@ -49,14 +49,16 @@
             }
         </tbody>
     </table>
-    @if (curriculos.TotalItemCount > itensPorPagina) {
-        <div>
-            @Html.PagedListPager(Model,
-            pagina => Url.Action("Index", new { pagina }),
-            new PagedListRenderOptions {
-            LiElementClasses = new string[] { "page-item" }
-            })
-        </div>
+    @if (curriculos != null) {
+        if (curriculos.TotalItemCount > itensPorPagina) {
+            <div>
+                @Html.PagedListPager(Model,
+                pagina => Url.Action("Index", new { pagina }),
+                new PagedListRenderOptions {
+                LiElementClasses = new string[] { "page-item" }
+                })
+            </div>
+        }
     }
 </div>
 
